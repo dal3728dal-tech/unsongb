@@ -143,8 +143,8 @@ returns boolean language sql security definer stable as $$
 $$;
 
 -- DB 마이그레이션 기록 (자동 반영용)
-create schema if not exists bb_ops;
-create table if not exists bb_ops.migrations (
+create schema if not exists us_ops;
+create table if not exists us_ops.migrations (
   filename text primary key,
   applied_at timestamptz not null default now(),
   success boolean not null default true,

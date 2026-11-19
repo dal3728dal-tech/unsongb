@@ -1,6 +1,6 @@
 /* GET/POST /api/eeum-billing — 이음B 구독·결제 기준 관리 (공통 꼴 2026-11-19)
    세 묶음: plans(요금제) → discount(기간 할인) → options(운송B만의 것)
-   값의 원본 = 운송B DB plans · app_config. service_role로 bb_billing_get · bb_billing_apply만 부름 */
+   값의 원본 = 운송B DB plans · app_config. service_role로 us_billing_get · us_billing_apply만 부름 */
 import { verifyEeumCall } from './sso-verify.js';
 
 const AUD = 'unsong.bid';
@@ -180,7 +180,7 @@ export async function handleBilling(request, env) {
     await logJti(env, request.headers.get('authorization'), 'eeum-billing:' + request.method);
 
     // DB 읽기
-    const db = await rpc(env, 'bb_billing_get');
+    const db = await rpc(env, 'us_billing_get');
     const cur = shape(db);
     const rev = await revOf(cur.values);
 
@@ -248,11 +248,11 @@ export async function handleBilling(request, env) {
     }
 
     if (Object.keys(log).length) {
-      await rpc(env, 'bb_billing_apply', { p_plans: plans, p_config: conf, p_changes: log, p_by: 'eeum-admin' });
+      await rpc(env, 'us_billing_apply', { p_plans: plans, p_config: conf, p_changes: log, p_by: 'eeum-admin' });
     }
 
     // 바뀐 뒤 다시 읽기
-    const db2 = await rpc(env, 'bb_billing_get');
+    const db2 = await rpc(env, 'us_billing_get');
     const s2 = shape(db2);
     return json({ rev: await revOf(s2.values), groups: s2.groups, fields: s2.fields, values: s2.values, log: db2.log || [] });
 

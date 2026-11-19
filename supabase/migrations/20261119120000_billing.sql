@@ -1,6 +1,6 @@
 -- 운송B 구독·결제 기준 관리 (이음B 공통 꼴)
 -- billing_log: 이음B 관리자가 바꾼 기록
--- bb_billing_get / bb_billing_apply: service_role 전용 RPC
+-- us_billing_get / us_billing_apply: service_role 전용 RPC
 
 -- plans에 pay 칸 추가 (결제 방법)
 alter table public.plans add column if not exists pay text not null default 'bank';
@@ -24,7 +24,7 @@ grant all on public.billing_log to service_role;
 grant usage, select on sequence public.billing_log_id_seq to service_role;
 
 -- 읽기: plans + app_config + 최근 기록
-create or replace function public.bb_billing_get()
+create or replace function public.us_billing_get()
 returns jsonb language plpgsql security definer stable as $$
 begin
   return jsonb_build_object(
@@ -39,7 +39,7 @@ end;
 $$;
 
 -- 쓰기: plans 칸 · app_config 칸 · 기록
-create or replace function public.bb_billing_apply(
+create or replace function public.us_billing_apply(
   p_plans jsonb default '{}'::jsonb,
   p_config jsonb default '{}'::jsonb,
   p_changes jsonb default '{}'::jsonb,
@@ -80,8 +80,8 @@ begin
 end;
 $$;
 
-grant execute on function public.bb_billing_get() to service_role;
-grant execute on function public.bb_billing_apply(jsonb, jsonb, jsonb, text) to service_role;
+grant execute on function public.us_billing_get() to service_role;
+grant execute on function public.us_billing_apply(jsonb, jsonb, jsonb, text) to service_role;
 
 -- app_config에 updated_at 칸이 없으면 추가
 do $$ begin

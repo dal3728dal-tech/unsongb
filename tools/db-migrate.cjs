@@ -18,7 +18,7 @@ async function main() {
   if (!files.length) { console.log('DB 반영: 파일 없음'); return; }
 
   // 이미 넣은 목록 가져오기
-  const applied = await query("select filename from bb_ops.migrations order by filename");
+  const applied = await query("select filename from us_ops.migrations order by filename");
   const done = new Set((applied || []).map(r => r.filename));
 
   let count = 0;
@@ -28,11 +28,11 @@ async function main() {
     console.log('DB 반영:', f);
     try {
       await query(sql);
-      await query(`insert into bb_ops.migrations (filename) values ('${f}')`);
+      await query(`insert into us_ops.migrations (filename) values ('${f}')`);
       count++;
     } catch (e) {
       console.error('DB 반영 실패:', f, e.message || e);
-      await query(`insert into bb_ops.migrations (filename, success, message) values ('${f}', false, '${String(e.message || e).slice(0, 500).replace(/'/g, "''")}')`).catch(() => {});
+      await query(`insert into us_ops.migrations (filename, success, message) values ('${f}', false, '${String(e.message || e).slice(0, 500).replace(/'/g, "''")}')`).catch(() => {});
       process.exit(1);
     }
   }
