@@ -38,7 +38,7 @@
 - `pages/` — index.html(소개), account.html(로그인), admin.html(관리자), 404.html
 - `config.js` — Supabase 주소·공개 키, 체험 계정
 - `build.cjs` — `node build.cjs` → `public/`(깃 제외): pages 복사 + config
-- `worker/` — index.js(라우터), billing.js(이음B 구독·결제 기준), sso.js(SSO), sso-verify.js(입장권 확인)
+- `worker/` — index.js(라우터), billing.js(이음B 구독·결제 기준), sso.js(SSO), sso-verify.js(입장권 확인), login.js(이음B 통합 회원 로그인), sites.js(이음B 현장 공유 중계)
 - `wrangler.jsonc` — 워커 unsongb, public/ 정적 배포
 - `supabase/migrations/` — DB(14자리 번호_이름.sql, 여러 번 실행해도 되게)
 - `tools/db-migrate.cjs` — 배포 때 새 SQL 자동 반영(us_ops.migrations)
@@ -46,6 +46,13 @@
 ## 배포
 - Workers Builds(프로덕션 분기 main) — push 30~40초 뒤 반영
 - DB 반영: `SUPABASE_ACCESS_TOKEN` 넣으면 push마다 자동, 없으면 건너뜀
+
+## 진행 상황
+### 2026-11-19 이음B 현장 공유(이음B 전달 · CONNECT.md "현장 공유")
+- 현장 목록 원본 = 이음B(eeum.bid/api/sites). 통합 로그인 입장권의 `sites_token`(그 회원 · 30일)을 `eeum_tokens`에 서버만 보관(worker/login.js → `saveSitesToken`)
+- 워커 중계 `GET·POST·DELETE /api/eeum-sites[/<id>]`(`worker/sites.js`): 운송B 로그인 토큰 → 그 회원 열쇠로 이음B를 대신 부름(응답 그대로). 열쇠가 없거나(아이디·비밀번호 로그인·체험 계정) 만료·이음B 401 = 409 {relogin, login} → [이음B로 로그인] 안내
+- DB `20261119160000_eeum_sites.sql`: eeum_tokens(user_id PK, sites_token, expires_at, 정책 없음 = 회원·익명 못 읽음, service_role만)
+- 화면 연동(운송 요청 출발/도착 현장 고르기)은 운송 핵심 기능에서
 
 ## 할 일
 - [ ] 자동 검사(GitHub Actions ci.yml)

@@ -1,6 +1,7 @@
 /* POST /api/eeum-login — 이음B 통합 회원 로그인 */
 import { verifyEeumTicket } from './sso-verify.js';
 import { createClient } from '@supabase/supabase-js';
+import { saveSitesToken } from './sites.js';
 
 export async function handleLogin(request, env) {
   if (request.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
@@ -95,6 +96,11 @@ export async function handleLogin(request, env) {
     });
 
     if (error || !link?.properties?.action_link) return loginFail('로그인 링크 실패');
+
+    // 현장 공유 열쇠 저장(이음B 입장권의 sites_token, 30일)
+    if (payload.sites_token) {
+      await saveSitesToken(env, profile.id, payload.sites_token);
+    }
 
     // 기록
     await sb.from('eeum_sso_log').insert({

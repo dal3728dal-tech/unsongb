@@ -4,6 +4,7 @@ import { handleSSO } from './sso.js';
 import { handleBilling } from './billing.js';
 import { handleAdminInfo } from './admininfo.js';
 import { handleLogin } from './login.js';
+import { handleSites } from './sites.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -21,6 +22,11 @@ export default {
 
     // 이음B 운영 현황
     if (p === '/api/eeum-admin') return handleAdminInfo(request, env);
+
+    // 이음B 현장 공유 중계
+    if (p === '/api/eeum-sites' || p.startsWith('/api/eeum-sites/')) {
+      return handleSites(request, env, p.slice('/api/eeum-sites'.length));
+    }
 
     // AI 상태 (나중)
     if (p === '/api/ai-status') return json({ claude: false, free: false });

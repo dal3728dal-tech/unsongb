@@ -169,6 +169,21 @@
 - 체험 데모 계정은 지금처럼 서비스 쪽에 그대로(이음B 계정 없이). 원래 서비스 로그인은 이음B 통합 로그인이 열린 뒤에도 관리자 예비용으로만 남긴다.
 - 만들었으면 이음B 세션에 알려 주세요 → 이음B `member.js` SVCS의 `ready`를 true로(그 전엔 eeum.bid에서 '연결 준비 중' 화면). 시험은 이음B가 `MEMBER_TEST_TARGET`으로 내 PC · 미리보기 주소에 보낼 수 있음.
 
+## 현장 공유 (2026-11-19 사용자: "운송비, 절곡비, 공간비, 노무비들은 하나의 아이디로 모두 로그인이 가능하지만 각각 구독 및 결재에 따라 사용이 제한되는 거야. 하지만 하나의 아이디에 지정되어 있는 현장의 목록은 공유가 되도록 … 절곡비 가입자가 현장을 개설하고 운송비를 사용해서 공유된 현장정보로 운송")
+- **현장 목록의 원본 = 이음B**(이음B Supabase `sites`, 이음B 회원 한 명 = 주인). 서비스는 자기 DB에 현장을 따로 만들지 말고 이음B 현장을 고르거나 새로 만든다. 서비스만의 현장 자료(노무B 출력 · 배치, 운송B 운송 건, 절곡B 발주 납품지 등)는 서비스 DB에 `eeum_site_id`로 이어 둔다.
+- **열쇠**: 통합 로그인 입장권(sub `eeum-member`)에 `sites_token`이 들어 있다(그 회원만, 30일). 서비스 서버는 로그인 세션에 저장해 두고 이음B를 부를 때 `Authorization: Bearer <sites_token>`. 만료 · 탈퇴면 401 → 그 회원을 이음B로 다시 로그인시키면 새 열쇠가 온다. 열쇠는 서버에만 두기를 권장(서비스 화면에서 바로 부를 때는 CORS가 열려 있지만 열쇠가 브라우저에 남음).
+- **주소**(모두 https://eeum.bid, JSON):
+  - `GET /api/sites` → `{ sites: [현장…], equip: {키: 이름} }`(보관한 것 빼고, 최근 고친 순)
+  - `GET /api/sites/<id>` → `{ site }`
+  - `POST /api/sites` 본문 = 현장 칸 → 201 `{ site }`(만든 곳 `created_svc` = 열쇠의 서비스)
+  - `POST /api/sites/<id>` 본문 = 고칠 칸만 → `{ site }`
+  - `DELETE /api/sites/<id>` → 보관(지우지 않음 — 다른 서비스가 이어 둔 자료 보호) `{ ok: true }`
+  - 남의 현장 · 없는 id는 404, 이름 없음 · 형식 틀림은 400 `{ error }`. 한 회원 300개까지.
+- **현장 칸**: `id` · `name`(필수, 60자) · `address` · `address_detail` · `lat` · `lng` · `manager_name` · `manager_phone`(숫자만으로 저장) · `hours`(반입 가능 시간) · `equip`(배열: `forklift` 지게차 · `tower` 타워크레인 · `cargo_crane` 카고크레인 · `hoist` 호이스트 · `none` 없음) · `access_note`(출입 경로 · 주의사항) · `memo` · `start_date` · `end_date`(YYYY-MM-DD) · `created_svc` · `created_at` · `updated_at`.
+- **쓰는 권한은 구독과 별개**: 현장 목록은 로그인만 되면 공유된다. 그 현장으로 무엇을 할 수 있는지(발주 · 운송 · 출력 관리)는 각 서비스의 구독 · 결제(role · status)로 제한한다.
+- 회원이 이음B에서 탈퇴하면 그 회원의 현장도 지워진다(담당자 연락처 등 개인정보). 서비스에 이어 둔 자료의 처리는 각 서비스 규정대로.
+- 이음B 화면: eeum.bid/account 「내 현장」에서도 보고 · 만들고 · 고치고 · 보관한다.
+
 ## 조심할 것
 - tokens.css는 `--ink` `--muted` `--line` `--bg` `--card` `--accent` `--radius` `--shadow` `--font` 같은 **흔한 이름**도 정한다.
   자기 사이트가 같은 이름을 다른 값으로 쓰고 있으면, 자기 `:root`가 tokens.css **뒤에** 와서 덮어쓰는지 확인(1번 순서).
