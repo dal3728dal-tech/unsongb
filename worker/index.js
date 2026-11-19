@@ -25,6 +25,9 @@ export default {
     // AI 상태 (나중)
     if (p === '/api/ai-status') return json({ claude: false, free: false });
 
+    // /favicon.ico → eeum.bid 파비콘
+    if (p === '/favicon.ico') return Response.redirect('https://eeum.bid/brand/favicon/unsong.ico', 301);
+
     // 정적 자산은 ASSETS가 처리
     return env.ASSETS.fetch(request);
   }

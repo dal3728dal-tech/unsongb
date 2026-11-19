@@ -11,7 +11,7 @@
   "vars": {
     "SUPABASE_URL": "https://vxiehnzccxntctyjyzuf.supabase.co",
     "SUPABASE_KEY": "sb_publishable_-xFSOAUFZsfTi82n-5FY4w_O5ep9DB2",
-    "EEUM_SSO_JWK_X": "",
+    "EEUM_SSO_JWK_X": "MpC8ZPMjyWVNW41Sw6flVXCQ1YxgwDYenUrP9Sopt78",
     "EEUM_SSO_ADMIN": "dal106@admin.unsong.bid",
     "VAPID_PUBLIC": "",
     "STORAGE_DRIVER": "supabase",
@@ -19,6 +19,6 @@
     "NAS_WEBDAV_USER": "unsongb"
   },
   "build": {
-    "command": "node tools/db-migrate.cjs || true; node build.cjs"
+    "command": "node tools/db-migrate.cjs; node build.cjs"
   }
 }

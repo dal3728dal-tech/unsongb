@@ -29,7 +29,7 @@
   - 이음B가 멈추면 새 로그인이 막히므로: 서비스는 이미 로그인한 세션을 자기 쪽에서 유지하고, 서비스 관리자 예비 로그인은 남긴다.
   - 자세한 주고받는 방법은 CONNECT.md "회원 통합 로그인"(이음B가 만들면서 적는다).
   - 노무B DB(2026-11-10 사용자 "여기에 노무비를 넣자"): Supabase 프로젝트 `nomub`(ref jjgixqmamsgkhyelfyxv, 서울 ap-northeast-2, Nano, 무료)를 **사용자 개인 Supabase 계정 dal3728@gmail.com**(조직 '김형달')에 만듦 — 브릿지플랫폼 조직 gongganb는 무료 프로젝트 2개(절곡B · 공간B)가 차서. 유료로 바꿀 때 gongganb 조직으로 옮긴다(Transfer project, 기본료 $25를 한 번만). 상민에스디 계정 아님.
-  - 운송B(2026-11-19 사용자 "이음비에 운송B를 추가해"): 다섯째 서비스, 폴더 `unsongb`, 색 `--us-*` · `.wm.us`, 역할 화주(orderer) · 생산자(producer) · 화물기사(driver) · 현장(site). 저장소 · 도메인 · Supabase는 아직 없음(만들기는 사용자 확인 뒤). 로그인은 이음B 통합 회원, 요금 · 운영 현황은 CONNECT.md 규격대로 운송B 서버가 만든다.
+  - 운송B(2026-11-19 사용자 "이음비에 운송B를 추가해"): 다섯째 서비스, 폴더 `unsongb`, 색 `--us-*` · `.wm.us`, 역할 화주(orderer) · 생산자(producer) · 화물기사(driver) · 현장(site). 11/19 저장소 dal3728dal-tech/unsongb · Supabase(skeng3728@naver.com 조직 eeum.bid) · 워커 unsongb 만듦, 도메인 unsong.bid 예정 · 아직 배포 전. 로그인은 이음B 통합 회원, 요금 · 운영 현황은 CONNECT.md 규격대로 운송B 서버가 만든다.
   - 이음B Supabase(2026-11-19 사용자 가입): 계정 skeng3728@naver.com, 조직 `eeum.bid`(무료). 프로젝트 1개(ref kknqrllsffzywquskunb, 서울). **이음B 전용**(사용자): 통합 회원(계정 · 로그인)과 이음B 자체 자료. 서비스의 구독 · 업무 자료는 넣지 않는다. 이음B 코드 연결 전.
 - **관리자 로그인만 이음B 하나로**(2026-11-08 사용자 "각각의 비의 관리자 로그인 기능을 이음비에서 한번에" → 진짜 한 번 로그인 선택): eeum.bid/admin에 로그인한 뒤 [공간B] · [절곡B] · [노무B] 단추로 각 서비스 관리자 화면에 바로 들어간다. 이음B가 1분짜리 1회용 입장권에 서명(Ed25519)하고, 서비스는 공개 열쇠로 확인한다. 방법은 CONNECT.md "관리자 한 번 로그인". 각 서비스의 원래 관리자 로그인은 이음B가 멈췄을 때를 위한 예비로 남겨 둔다.
 

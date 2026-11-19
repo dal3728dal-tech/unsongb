@@ -99,6 +99,41 @@
   - 바꾼 기록(시각 · 칸 · 전 값 → 새 값)을 서비스 DB에 남긴다. 금액은 원 단위 정수.
 - 이음B는 서비스가 만들었다고 알리면 `worker.js` BILLING 표를 true로 바꾼다. 그 전엔 탭에 "연결 준비 중" + 그 서비스 관리자 단추.
 
+### 구독 · 결제 공통 꼴 (2026-11-19 사용자 "각각의 비가 기본적으로 구독, 요금제는 동일한 형태로 관리되게 하고 공간비처럼 보기 금액처럼 제한되는 옵션만 밑에 설정하는 칸")
+모든 서비스가 **같은 세 묶음**을 이 순서로 내려 준다. 이음B 화면은 요금제를 요금제 하나에 두 줄(이름 · 판매 / 금액 · 기간 · 결제 · 대상 역할)로, 미리보기는 요금제 카드로 그린다.
+1. 묶음 `plans` "요금제" — 요금제마다 아래 칸(`<id>`는 그 서비스가 정함, 예: 노무B worker · leader · manager · manager_year)
+| 칸(key) | type | 뜻 |
+|---|---|---|
+| `plans.<id>.name` | text | 요금제 이름(회원에게 보이는 이름) |
+| `plans.<id>.on` | bool | 판매 중(끄면 새로 가입 못 함, 기존 구독은 그대로) |
+| `plans.<id>.price` | money | 금액(원, 부가세 포함) — `applies`(예: 다음 신청부터) 적기 |
+| `plans.<id>.period` | select | `month` 월 · `year` 연 · `once` 1회 |
+| `plans.<id>.pay` | select | `play` 앱 결제(Google Play) · `card` 카드(웹) · `invoice` 세금계산서 · `bank` 계좌입금 |
+| `plans.<id>.role` | select | 대상 역할(`all` 또는 통합 회원 역할 키) — 없어도 됨 |
+| `plans.<id>.invoice` | bool | **세금계산서로도 살 수 있음**(사업자, 앱 밖 결제 · 입금 확인 뒤 사용 중) |
+| `plans.<id>.invoice_price` | money | 세금계산서 금액(원, 부가세 포함) |
+| `plans.<id>.invoice_period` | select | `year` 연 · `month` 월 |
+| `plans.<id>.opt.<이름>` | 자유 | **이 요금제에 따른 옵션**(예: 현장 수 · 팀원 수 · 출력 한도 · 보기 횟수). 서비스마다 따로 정함 |
+| `plans.trial_days` | days | 무료 체험 기간(일) — 서비스에 하나 |
+- (2026-11-19 사용자 "요금제도 우선 기본은 다 똑같은 방식 … 구독, 세금 계산서, 할인 기간, 할인 명칭, 설정을 각각 비마다 다르게 할 수 있으면 되는 거야. 그리고 각각의 비마다 별도 요금제에 따른 옵션은 각각 따로따로 설정 … 보이는 화면도 … 같은 스타일로 통일") → 요금제 하나 = **구독**(price · period · pay) + **세금계산서**(invoice · invoice_price · invoice_period) + **이 요금제 옵션**(opt.*). 같은 요금제를 연간 세금계산서용으로 따로 만들지 않는다(예: 노무B manager_year → manager의 invoice 칸). 요금제와 상관없는 서비스 전체 제한만 `options`.
+- 이음B 관리자 화면은 요금제마다 '이름 · 판매 · 대상 / 구독 / 세금계산서 / 이 요금제 옵션' 네 줄로 똑같이 그린다(서비스마다 칸이 없으면 그 줄만 빠짐).
+2. 묶음 `discount` "기간 할인" — 아래 "기간 할인 공통 칸" 그대로.
+3. 묶음 `options` "서비스 옵션 · 제한" — **그 서비스만의 제한 · 옵션**(예: 공간B 견적 보기 금액 · 열람 기간, 절곡B 출력 한도 · AI 토큰, 노무B 체험 현장 수). 칸 이름은 `options.` 으로 시작, type은 자유. 입금 계좌 · 환불 규정 같은 결제 안내도 여기(또는 묶음을 하나 더 두되 `plans` · `discount` 뒤에).
+- 옛 칸 이름(예: `tier.free.trialDays`, `plans.worker.price`만 있는 꼴)을 쓰던 서비스는 이 꼴로 옮긴다 — 옮길 때 DB 값도 같이 옮기고, 결제 코드가 새 칸에서 읽게.
+
+### 기간 할인 공통 칸 (2026-11-19 사용자 "이음비 관리자 화면에서 기간 할인 설정해서 할 수도 있도록")
+모든 서비스가 같은 칸 이름으로 내려 주면 이음B [구독 · 결제] 탭에서 똑같이 고친다(이음B 화면은 고칠 것 없음 — 위 fields 목록대로 그림). 묶음 id `discount`, 제목 "기간 할인". 여러 개면 `discount2.*` · `discount3.*`.
+| 칸(key) | type | 뜻 |
+|---|---|---|
+| `discount.on` | bool | 할인 켜기 |
+| `discount.label` | text | 화면에 보일 이름(예: 출시 기념 할인) |
+| `discount.pct` | percent | 할인율(0~90) |
+| `discount.from` · `discount.to` | date | 시작일 · 끝나는 날(그날 끝까지, 한국 시간) |
+| `discount.target` | select | 적용 대상: `all` 전체 또는 그 서비스의 요금제 · 역할 키(예: 노무B `worker` · `leader` · `manager` · `manager_year`) |
+| `discount.who` | select | `new` 새로 구독하는 사람만 · `all` 기존 구독 갱신 포함 |
+- 서비스는 결제 금액을 낼 때 오늘이 from~to 안이고 on이면 `원래 금액 × (1 − pct/100)`을 원 단위로 내림. 화면에는 원래 금액 줄 긋기 + 할인 금액 + 끝나는 날.
+- **안드로이드 앱 안 구독(Google Play 결제)은 서버 값만으로 값이 바뀌지 않는다**: Play 콘솔(또는 Android Publisher API)의 기본 요금제 · 혜택(offer)으로 만들어야 결제창 금액이 바뀜. 서비스는 이 칸이 바뀌면 Play 혜택을 맞추거나(API), 못 하면 이음B 화면 `help`에 "앱 결제는 Play 콘솔에서도 같이 바꿔야 함"을 적는다. 웹 결제 · 세금계산서 결제는 서비스 값 그대로.
+
 ## 운영 현황 · 관리 기능 연결 (2026-11-08 사용자: "각각의 비들의 관리자가 할수있는 기능과 정보를 연결")
 이음B 관리자 [운영 현황] 탭(관리자 화면 첫 탭)이 세 서비스의 숫자 · 처리할 일 · 최근 목록 · 관리 메뉴를 한 화면에 보여 준다. 항목을 누르면 관리자 한 번 로그인으로 **그 서비스 관리자의 바로 그 화면**이 열린다.
 - `GET /api/eeum-admin` — 입장권은 구독 · 결제와 같은 꼴, `sub`=`eeum-info` · `act`=`info-read`. 확인: `verifyEeumCall(머리값, {aud, jwk, used, method:'GET', sub:'eeum-info', act:'info-read'})`.
@@ -120,14 +155,14 @@
 
 ## 회원 통합 로그인 (2026-11-19 사용자: "이음비 · 노무비 · 공간비 · 절곡비 모두 하나의 통합회원", "가입하고 권한에 따라 각각의 비를 사용" — 공통 규칙 1)
 가입 · 로그인은 **eeum.bid 한 곳**(카카오 · 네이버 · 구글). 회원 원본과 **서비스별 권한**(역할 · 상태)은 이음B Supabase에 있다. 서비스는 아래 두 가지만 하면 된다.
-1. **[로그인] · [회원가입] 단추** → `https://eeum.bid/login?svc=<gg|bb|nm>&next=<돌아올 경로>` (next는 `/`로 시작하는 자기 사이트 경로, 없어도 됨)
+1. **[로그인] · [회원가입] 단추** → `https://eeum.bid/login?svc=<gg|bb|nm|us>&next=<돌아올 경로>` (next는 `/`로 시작하는 자기 사이트 경로, 없어도 됨)
 2. **받는 쪽** `POST /api/eeum-login` (폼 칸 `t`, Content-Type `application/x-www-form-urlencoded`, Origin `https://eeum.bid`). GET은 405.
 - 입장권 꼴 · 공개 열쇠 · 확인 방법은 "관리자 한 번 로그인"과 같다(`verifyEeumTicket()` 그대로) — 다른 점: **`sub`=`eeum-member`**(관리자 `eeum-admin` 입장권으로 일반 로그인되면 안 되고, 반대도 안 됨).
 - 입장권 안 값:
   - `uid` 이음B 회원 번호(uuid) — **서비스 DB의 회원과 이을 열쇠**. 서비스 회원 표에 `eeum_uid`(유일) 칸을 두고, 처음 오면 새로 만들고 다음부터는 그 줄로 로그인.
   - `name` · `email` · `phone`(숫자만, 없으면 빈 글자) — 이음B가 가진 값. 서비스가 화면에 쓰거나 처음 만들 때 채움.
   - `role` 그 서비스에서 회원이 고른 역할, `status` `trial`(체험 이용) | `active`(사용 중) | `blocked`(정지 — 이음B가 보내지 않지만 오면 거절), `until` 사용 기한(YYYY-MM-DD 또는 빈 글자), `next`(있으면 로그인 뒤 그 경로로 303).
-  - 역할 이름(이음B `member.js` SVCS): 공간B `consumer` 소비자 · `biz` 인테리어 업체 / 절곡B `orderer` 발주자 · `maker` 생산자 · `supplier` 원판 납품 / 노무B `worker` 팀원 · `leader` 작업반장 · `manager` 업체 관리자. 역할을 늘리거나 바꾸려면 이음B 세션에 알린다.
+  - 역할 이름(이음B `member.js` SVCS): 공간B `consumer` 소비자 · `biz` 인테리어 업체 / 절곡B `orderer` 발주자 · `maker` 생산자 · `supplier` 원판 납품 / 노무B `worker` 팀원 · `leader` 작업팀장 · `manager` 업체 관리자. 역할을 늘리거나 바꾸려면 이음B 세션에 알린다.
 - **권한은 들어올 때마다 새로 받는다**: 서비스는 입장권의 role · status로 자기 회원 줄을 맞추고(덮어쓰기), 그 값으로 화면 · 기능을 막고 연다. `trial`이면 체험 범위 + 구독 안내, `active`면 전부.
 - 구독 · 결제가 끝나 `active`로 바꿔야 할 때: 지금은 이음B 관리자가 바꾼다(이음B 관리자 화면 회원 탭 — 만드는 중). 서비스가 직접 알리는 길(서명 요청)은 다음에 이 문서에 더한다.
 - 로그아웃: 서비스는 자기 세션만 지운다. 이음B 로그인까지 끊으려면 `https://eeum.bid/account`에서.

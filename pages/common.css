@@ -51,9 +51,9 @@ a:hover { text-decoration: underline; }
 .header nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
 .header nav a {
   color: rgba(255,255,255,0.85);
-  font-size: 13.5px;
+  font-size: var(--btn-fs-sm, 13.5px);
   padding: 6px 14px;
-  border-radius: var(--btn-radius, 6px);
+  border-radius: var(--btn-r, 999px);
   transition: background 0.15s;
 }
 .header nav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
@@ -69,11 +69,12 @@ button, .button {
   justify-content: center;
   gap: 6px;
   font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--btn-fs, 14px);
+  font-weight: var(--btn-fw, 600);
   border: none;
-  border-radius: var(--btn-radius, 6px);
-  padding: 10px 20px;
+  border-radius: var(--btn-r, 999px);
+  padding: 0 var(--btn-px, 20px);
+  height: var(--btn-h, 46px);
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
   text-decoration: none;
@@ -94,9 +95,9 @@ button.outline:hover, .button.outline:hover {
   background: var(--us-panel-soft);
 }
 button.large, .button.large {
-  font-size: 16px;
-  padding: 14px 32px;
-  border-radius: 999px;
+  font-size: var(--btn-fs-lg, 16px);
+  height: var(--btn-h-lg, 54px);
+  padding: 0 32px;
 }
 
 /* 카드 */

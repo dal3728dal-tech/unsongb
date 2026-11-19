@@ -61,7 +61,7 @@ function shape(db) {
   // ── 2. discount ──
   const disc = C.discount || {};
   const planOpts = [{ v: 'all', t: '전체 요금제' }, ...(db.plans || []).map(p => ({ v: p.id, t: p.name || p.id }))];
-  groups.push({ id: 'discount', title: '기간 할인', note: '할인 기간(한국 날짜)에 결제하면 할인(10원 아래 버림)' });
+  groups.push({ id: 'discount', title: '기간 할인', note: '할인 기간(한국 날짜)에 결제하면 할인(원 단위 내림)' });
   add({ key: 'discount.on',     group: 'discount', label: '할인 켜기',       type: 'bool',    applies: APPLY.discount }, !!disc.on);
   add({ key: 'discount.label',  group: 'discount', label: '화면에 보일 이름', type: 'text',    applies: APPLY.discount }, disc.label || '');
   add({ key: 'discount.pct',    group: 'discount', label: '할인율',          type: 'percent', unit: '%', min: 0, max: 90, step: 1, applies: APPLY.discount }, Number(disc.pct || 0));
