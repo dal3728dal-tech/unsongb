@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관리자 — 운송B</title>
+<link rel="icon" href="/unsong.ico" sizes="32x32">
+<link rel="icon" href="/unsong.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/unsong-180.png">
+<link rel="stylesheet" href="https://eeum.bid/brand/tokens.css">
+<link rel="stylesheet" href="/common.css">
+<style>
+.page { max-width: 900px; margin: 32px auto; padding: 0 20px; }
+.page h1 { font-size: 1.3rem; color: var(--us-ink); margin-bottom: 20px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.stat { background: #fff; border: 1px solid var(--us-border); border-radius: 10px; padding: 16px; }
+.stat .label { font-size: 12px; color: var(--us-muted); }
+.stat .value { font-size: 1.5rem; font-weight: 700; color: var(--us-ink); }
+.tabs { display: flex; gap: 2px; border-bottom: 2px solid var(--us-border); margin-bottom: 20px; }
+.tabs button {
+  background: none; border: none; padding: 10px 16px;
+  font-family: inherit; font-size: 13.5px; color: var(--us-muted); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+}
+.tabs button.on { color: var(--us-ink); font-weight: 600; border-bottom-color: var(--us-btn); }
+.tab-content { display: none; }
+.tab-content.on { display: block; }
+.placeholder { text-align: center; padding: 60px 20px; color: var(--us-muted); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span> <span style="font-weight:400;font-size:13px;opacity:0.7">관리자</span></a>
+  <nav><a href="/">첫 화면</a> <a href="/account">내 계정</a></nav>
+</div>
+
+<div class="page">
+  <h1>운송B 관리자</h1>
+  <div class="stats" id="stats"></div>
+  <div class="tabs" id="tabs">
+    <button class="on" data-tab="members">회원</button>
+    <button data-tab="shipments">운송</button>
+    <button data-tab="settlements">정산</button>
+    <button data-tab="settings">설정</button>
+  </div>
+  <div class="tab-content on" id="tab-members">
+    <div class="placeholder">회원 관리 (준비 중)</div>
+  </div>
+  <div class="tab-content" id="tab-shipments">
+    <div class="placeholder">운송 현황 (준비 중)</div>
+  </div>
+  <div class="tab-content" id="tab-settlements">
+    <div class="placeholder">정산 관리 (준비 중)</div>
+  </div>
+  <div class="tab-content" id="tab-settings">
+    <div class="placeholder">요금 설정 (준비 중)</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/config.js"></script>
+<script src="/common.js"></script>
+<script>
+document.getElementById('tabs').addEventListener('click', function (e) {
+  const btn = e.target.closest('button[data-tab]');
+  if (!btn) return;
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('tab-' + btn.dataset.tab).classList.add('on');
+});
+
+(async function () {
+  const user = await US.getUser();
+  if (!user) return location.href = '/account';
+  const profile = await US.getProfile(user.id);
+  if (!profile || profile.role !== 'admin') return location.href = '/';
+  document.getElementById('stats').innerHTML =
+    '<div class="stat"><div class="label">전체 회원</div><div class="value">0</div></div>' +
+    '<div class="stat"><div class="label">유료 이용 중</div><div class="value">0</div></div>' +
+    '<div class="stat"><div class="label">이번 달 운송</div><div class="value">0</div></div>' +
+    '<div class="stat"><div class="label">이번 달 정산</div><div class="value">0원</div></div>';
+})();
+</script>
+</body>
+</html>

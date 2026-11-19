@@ -1,0 +1,122 @@
+/* 운송B 공통 — tokens.css 뒤에 */
+:root {
+  /* tokens.css에서 오는 값: --us, --us-ink, --us-soft, --us-line, --us-tag, --us-tag-ink, --us-btn */
+  --us-panel: var(--us);
+  --us-panel-soft: var(--us-soft);
+  --us-bg: #f8fafa;
+  --us-text: #1a1a1a;
+  --us-border: var(--us-line);
+  --us-muted: #6b8a82;
+  --brand: var(--us-ink);
+  --brand2: var(--us-btn);
+  --tint: var(--us-soft);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+  color: var(--us-text);
+  background: var(--us-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--us-btn); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* 머리줄 */
+.header {
+  background: var(--us-ink);
+  color: #fff;
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header .logo {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.header .logo .wm { font-weight: 800; }
+.header nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.header nav a {
+  color: rgba(255,255,255,0.85);
+  font-size: 13.5px;
+  padding: 6px 14px;
+  border-radius: var(--btn-radius, 6px);
+  transition: background 0.15s;
+}
+.header nav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+.header nav a.primary {
+  background: var(--us-btn);
+  color: #fff;
+}
+
+/* 단추 */
+button, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--btn-radius, 6px);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  text-decoration: none;
+}
+button:active, .button:active { transform: scale(0.97); }
+button.primary, .button.primary {
+  background: var(--us-btn);
+  color: #fff;
+}
+button.primary:hover, .button.primary:hover { background: var(--us-ink); }
+button.outline, .button.outline {
+  background: transparent;
+  border: 1.5px solid var(--us-border);
+  color: var(--us-ink);
+}
+button.outline:hover, .button.outline:hover {
+  border-color: var(--us-btn);
+  background: var(--us-panel-soft);
+}
+button.large, .button.large {
+  font-size: 16px;
+  padding: 14px 32px;
+  border-radius: 999px;
+}
+
+/* 카드 */
+.card {
+  background: #fff;
+  border: 1px solid var(--us-border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* 아이콘 크기 */
+.ico { width: 24px; height: 24px; display: inline-block; vertical-align: middle; }
+.ico.sm { width: 18px; height: 18px; }
+
+/* 반응형 */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+@media (max-width: 768px) {
+  html { font-size: 14px; }
+  .header { padding: 0 14px; height: 48px; }
+  .header nav a { font-size: 12.5px; padding: 5px 10px; }
+  .container { padding: 0 16px; }
+}

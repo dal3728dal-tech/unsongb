@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내 계정 — 운송B</title>
+<link rel="icon" href="/unsong.ico" sizes="32x32">
+<link rel="icon" href="/unsong.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/unsong-180.png">
+<link rel="stylesheet" href="https://eeum.bid/brand/tokens.css">
+<link rel="stylesheet" href="/common.css">
+<style>
+.page { max-width: 440px; margin: 60px auto; padding: 0 20px; }
+.page h1 { font-size: 1.5rem; color: var(--us-ink); margin-bottom: 24px; text-align: center; }
+.login-box { background: #fff; border: 1px solid var(--us-border); border-radius: 12px; padding: 32px 28px; }
+.login-box .eeum-btn {
+  display: block; width: 100%; padding: 14px; text-align: center;
+  background: var(--us-btn); color: #fff; border-radius: 8px;
+  font-size: 15px; font-weight: 600; margin-bottom: 20px; cursor: pointer; border: none;
+}
+.login-box .eeum-btn:hover { background: var(--us-ink); }
+.divider { text-align: center; color: var(--us-muted); font-size: 13px; margin: 16px 0; position: relative; }
+.divider::before, .divider::after {
+  content: ''; position: absolute; top: 50%; width: 38%; height: 1px; background: var(--us-border);
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 13px; color: var(--us-muted); margin-bottom: 4px; }
+.form-group input {
+  width: 100%; padding: 10px 12px; border: 1.5px solid var(--us-border);
+  border-radius: 8px; font-size: 14px; font-family: inherit;
+  transition: border-color 0.15s;
+}
+.form-group input:focus { outline: none; border-color: var(--us-btn); }
+.login-box button[type=submit] {
+  width: 100%; padding: 12px; background: var(--us-ink); color: #fff;
+  border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+  cursor: pointer; margin-top: 8px;
+}
+.msg { text-align: center; margin-top: 16px; font-size: 13px; color: var(--us-muted); }
+.msg a { color: var(--us-btn); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></a>
+  <nav><a href="/">첫 화면</a></nav>
+</div>
+
+<div class="page">
+  <h1 id="pageTitle">로그인</h1>
+  <div class="login-box">
+    <button class="eeum-btn" onclick="US.eeumLogin(location.pathname)">이음B 계정으로 로그인</button>
+    <div class="divider">또는</div>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <div class="form-group">
+        <label>이메일</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label>비밀번호</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit">로그인</button>
+    </form>
+    <p class="msg" id="signupMsg"><a href="/account?signup=1">회원가입</a></p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/config.js"></script>
+<script src="/common.js"></script>
+<script>
+async function handleLogin(e) {
+  e.preventDefault();
+  const sb = US.initSupabase();
+  if (!sb) return alert('설정 오류');
+  let email = document.getElementById('email').value.trim();
+  if (!email.includes('@')) email += '@admin.unsong.bid';
+  const pw = document.getElementById('password').value;
+  const { error } = await sb.auth.signInWithPassword({ email, password: pw });
+  if (error) return alert(error.message);
+  location.href = '/';
+}
+
+const params = new URLSearchParams(location.search);
+if (params.get('signup') === '1') {
+  document.getElementById('pageTitle').textContent = '회원가입';
+  document.getElementById('signupMsg').innerHTML = '<a href="/account">이미 계정이 있으신가요?</a>';
+}
+</script>
+</body>
+</html>

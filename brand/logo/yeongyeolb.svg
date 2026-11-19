@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" font-family="Pretendard Variable, Pretendard, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7f9a7e"/><stop offset=".55" stop-color="#b5774c"/><stop offset="1" stop-color="#6e8193"/></linearGradient></defs>
+  <rect x="4" y="6" width="44" height="44" rx="13" fill="#ffffff" stroke="#4b5a6b" stroke-opacity=".45"/>
+  <g transform="translate(12 14) scale(1.17)" fill="none" stroke="#4b5a6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17h20"/><path d="M3 13c3.5-5.5 14.5-5.5 18 0"/><path d="M5 17v-4.6M19 17v-4.6M9 17v-6.6M15 17v-6.6M12 17V9.8"/></g>
+  <text x="60" y="38" font-size="28" font-weight="800" letter-spacing="-0.6"><tspan fill="#1f2933">이음</tspan><tspan fill="url(#g)">B</tspan></text>
+</svg>

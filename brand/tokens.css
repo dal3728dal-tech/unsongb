@@ -1,0 +1,90 @@
+/* 이음B 공통 디자인 값 (원본: D:\OneDrive\AI PROJECT\yeongyeolb\brand\tokens.css)
+   - 원본만 고친다. 각 서비스 폴더의 brand\tokens.css는 sync-brand.cjs로 복사한 것.
+   - 쓰는 법: <link rel="stylesheet" href="brand/tokens.css"> 뒤에 자기 서비스 값을 덮어씀.
+     예) 절곡B 화면이면 :root{ --accent:var(--bb); --accent-ink:var(--bb-ink); --accent-soft:var(--bb-soft); } */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+:root{
+  /* 글꼴 */
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+
+  /* 공통 바탕·글자 (이음B) */
+  --ink:#1f2933;      /* 본문 글자 */
+  --muted:#667085;    /* 설명 글자 */
+  --faint:#a0a8b5;    /* 흐린 글자 */
+  --line:#e6e3dc;     /* 선 */
+  --bg:#fbfaf7;       /* 바탕 */
+  --bg1:#f8f6f1;      /* 첫 화면 바탕 위 */
+  --bg2:#eef3f8;      /* 첫 화면 바탕 아래 */
+  --card:#ffffff;
+  --hub:#4b5a6b;      /* 이음B 마크 선 */
+
+  /* B 글자 그라데이션 (세 서비스 색을 하나로: 공간 초록 → 구리 → 절곡 강철) */
+  --b1:#7f9a7e; --b2:#b5774c; --b3:#6e8193;            /* B 글자 세 색 */
+  --bd1:#cfe0c8; --bd2:#f1cba8; --bd3:#d5dfea;         /* 진한 단추 위 B 글자 세 색 */
+  --b-grad:linear-gradient(135deg,var(--b1) 0%,var(--b2) 55%,var(--b3) 100%);
+  --b-grad-on-dark:linear-gradient(135deg,var(--bd1) 0%,var(--bd2) 55%,var(--bd3) 100%);
+
+  /* 모양 */
+  --radius:18px;      /* 큰 카드 */
+  --radius-sm:12px;   /* 아이콘 칸·작은 카드 */
+  --pill:999px;       /* 단추·태그 */
+  --shadow:0 18px 50px rgba(31,41,51,.10);
+  --icon-stroke:1.6;  /* 선 아이콘 굵기 */
+
+  /* 단추 (네 사이트 공통 · 관리자 화면 '색 · 단추'에서 고침) */
+  --btn-h:46px;       /* 단추 높이 */
+  --btn-h-sm:38px;    /* 작은 단추 높이 */
+  --btn-h-lg:54px;    /* 큰 단추 높이 */
+  --btn-px:20px;      /* 단추 좌우 여백 */
+  --btn-fs:15px;      /* 단추 글자 크기 */
+  --btn-fs-sm:14px;   /* 작은 단추 글자 */
+  --btn-fs-lg:16px;   /* 큰 단추 글자 */
+  --btn-r:999px;      /* 단추 모서리(999 = 알약) */
+  --btn-r-sq:12px;    /* 네모 단추 모서리 */
+  --btn-fw:700;       /* 단추 글자 굵기 */
+
+  /* 공간B — 깊은 초록 · 세이지 */
+  --gg-name:#253d33;  /* 이름 글자(공간) */
+  --gg:#7f9a7e; --gg-ink:#2c4234; --gg-soft:#edf1e7; --gg-glow:#dfe8d6;
+  --gg-btn:#5f7c60;   /* 단추(대표색을 조금 진하게) */
+
+  /* 절곡B — 흑연 · 브러시드 스틸 · 구리 포인트 */
+  --bb-name:#3f86cf;  /* 이름 글자(절곡) */
+  --bb:#6e8193; --bb-ink:#2a3542; --bb-soft:#eceff2; --bb-glow:#e2e6ea;
+  --bb-btn:#2f6db0;   /* 단추(이름 글자색을 조금 진하게) */
+  --copper:#b5774c; --copper-soft:#f4e9df;
+  /*   절곡B 안 두 갈래 (절곡B 앱에서 이미 쓰는 구분: 판넬 = 파랑, 스텐창호(Bar) = 초록) */
+  --bb-panel:#3f86cf; --bb-panel-soft:#eaf2fb;   /* 3D 판넬 발주 */
+  --bb-sus:#4f8a6a;   --bb-sus-soft:#e9f3ec;     /* 스텐창호 발주 */
+
+  /* 노무B — 안전모 황토 */
+  --nm-name:#7a5a22;  /* 이름 글자(노무) */
+  --nm:#a07a35; --nm-ink:#7a5a22; --nm-soft:#f6efe0; --nm-line:#dcc59a;
+  --nm-tag:#f3e6c9; --nm-tag-ink:#8a6a2c;
+  --nm-btn:#8a6a2c;   /* 단추 */
+
+  /* 운송B — 청록 (2026-11-19 사용자 "이음비에 운송B를 추가해", 대표 · 잉크 · 옅은 바탕 · 단추는 운송B 세션 확정값, 선 · 꼬리표는 같은 색에서 뽑음) */
+  --us-name:#2d5f6f;  /* 이름 글자(운송) */
+  --us:#4a8a8a; --us-ink:#2d5f6f; --us-soft:#e6f2f0; --us-line:#a9cfca;
+  --us-tag:#d6ebe8; --us-tag-ink:#3a7575;
+  --us-btn:#3a7575;   /* 단추 */
+
+  /* 기본 강조색 = 이음B (각 서비스가 덮어씀) */
+  --accent:var(--hub); --accent-ink:#1f2933; --accent-soft:#eef1f4;
+}
+
+/* 이름 표기: <span class="wm nm"><span class="w">노무</span><span class="B">B</span></span> */
+.wm{white-space:nowrap;font-weight:800;letter-spacing:-.02em}
+.wm .B{background:var(--b-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm.yb .w{color:var(--ink)}
+.wm.gg .w{color:var(--gg-name)}
+.wm.bb .w{color:var(--bb-name)}
+.wm.nm .w{color:var(--nm-name)}
+.wm.us .w{color:var(--us-name)}
+.on-dark .wm .w{color:inherit}
+.on-dark .wm .B{background:var(--b-grad-on-dark);-webkit-background-clip:text;background-clip:text}
+
+/* 선 아이콘 공통 */
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:var(--icon-stroke);stroke-linecap:round;stroke-linejoin:round}
