@@ -31,6 +31,9 @@ export default {
     // AI 상태 (나중)
     if (p === '/api/ai-status') return json({ claude: false, free: false });
 
+    // /delete-account → /account#delete
+    if (p === '/delete-account') return Response.redirect('https://unsong.bid/account#delete', 301);
+
     // /favicon.ico → eeum.bid 파비콘
     if (p === '/favicon.ico') return Response.redirect('https://eeum.bid/brand/favicon/unsong.ico', 301);
 

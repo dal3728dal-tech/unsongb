@@ -8,15 +8,14 @@ export async function handleAdminInfo(request, env) {
   const jwkX = env.EEUM_SSO_JWK_X;
   if (!jwkX) return json({ error: '준비 중' }, 503);
 
-  const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!serviceKey) return json({ error: '준비 중' }, 503);
-
   try {
     const auth = request.headers.get('Authorization') || '';
 
+    // 입장권 확인을 먼저 — 엉터리 입장권은 비밀값 없어도 401
     const used = {
       async check(jti) {
-        const sb = createClient(env.SUPABASE_URL, serviceKey, { auth: { persistSession: false } });
+        if (!env.SUPABASE_SERVICE_ROLE_KEY) return false;
+        const sb = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
         const { data } = await sb.from('eeum_sso_log').select('jti').eq('jti', jti).maybeSingle();
         return !!data;
       }
@@ -30,6 +29,9 @@ export async function handleAdminInfo(request, env) {
       sub: 'eeum-info',
       act: 'info-read'
     });
+
+    const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!serviceKey) return json({ error: '준비 중' }, 503);
 
     const sb = createClient(env.SUPABASE_URL, serviceKey, { auth: { persistSession: false } });
     const { data: info } = await sb.rpc('us_admin_info');

@@ -19,10 +19,7 @@ export async function handleSSO(request, env) {
     const jwkX = env.EEUM_SSO_JWK_X;
     if (!jwkX) return new Response('준비 중', { status: 503 });
 
-    const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
-    if (!serviceKey) return new Response('준비 중', { status: 503 });
-
-    // jti 1회용 기록
+    // 입장권 확인을 먼저 — 엉터리 입장권은 비밀값 없어도 401
     const used = jtiChecker(env);
 
     const payload = await verifyEeumTicket(t, {
@@ -32,6 +29,9 @@ export async function handleSSO(request, env) {
     });
 
     if (payload.sub !== 'eeum-admin') return ssoFail('관리자 입장권 아님');
+
+    const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!serviceKey) return new Response('준비 중', { status: 503 });
 
     // 최고관리자 확인
     const adminEmail = env.EEUM_SSO_ADMIN || 'dal106@admin.unsong.bid';

@@ -19,13 +19,11 @@ export async function handleLogin(request, env) {
     const jwkX = env.EEUM_SSO_JWK_X;
     if (!jwkX) return new Response('준비 중', { status: 503 });
 
-    const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
-    if (!serviceKey) return new Response('준비 중', { status: 503 });
-
-    // jti 1회용
+    // 입장권 확인을 먼저 — 엉터리 입장권은 비밀값 없어도 401
     const used = {
       async check(jti) {
-        const sb = createClient(env.SUPABASE_URL, serviceKey, { auth: { persistSession: false } });
+        if (!env.SUPABASE_SERVICE_ROLE_KEY) return false;
+        const sb = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
         const { data } = await sb.from('eeum_sso_log').select('jti').eq('jti', jti).maybeSingle();
         return !!data;
       }
@@ -38,6 +36,9 @@ export async function handleLogin(request, env) {
     });
 
     if (payload.sub !== 'eeum-member') return loginFail('회원 입장권 아님');
+
+    const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!serviceKey) return new Response('준비 중', { status: 503 });
     if (payload.status === 'blocked') return loginFail('정지된 계정입니다');
 
     const sb = createClient(env.SUPABASE_URL, serviceKey, { auth: { persistSession: false } });

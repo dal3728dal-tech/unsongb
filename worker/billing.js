@@ -165,14 +165,17 @@ async function logJti(env, authHeader, label) {
 export async function handleBilling(request, env) {
   if (request.method !== 'GET' && request.method !== 'POST') return json({ error: 'GET · POST만 됩니다' }, 405);
 
-  const SR = env.SUPABASE_SERVICE_ROLE_KEY, X = env.EEUM_SSO_JWK_X;
-  if (!SR || !X) return json({ error: '준비 중' }, 503);
+  const X = env.EEUM_SSO_JWK_X;
+  if (!X) return json({ error: '준비 중' }, 503);
 
   const rawBody = request.method === 'POST' ? await request.text() : '';
 
   try {
+    // 입장권 확인을 먼저 — 엉터리 입장권은 비밀값 없어도 401
     const used = {
       async check(jti) {
+        const SR = env.SUPABASE_SERVICE_ROLE_KEY;
+        if (!SR) return false;
         const H = { apikey: SR, authorization: 'Bearer ' + SR, accept: 'application/vnd.pgrst.object+json' };
         const r = await fetch(env.SUPABASE_URL + '/rest/v1/eeum_sso_log?jti=eq.' + jti, { headers: H });
         return r.ok && r.status !== 406;
@@ -184,6 +187,9 @@ export async function handleBilling(request, env) {
       sub: 'eeum-billing',
       act: request.method === 'GET' ? 'billing-read' : 'billing-write'
     });
+
+    const SR = env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!SR) return json({ error: '준비 중' }, 503);
 
     await logJti(env, request.headers.get('authorization'), 'eeum-billing:' + request.method);
 
