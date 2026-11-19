@@ -7,5 +7,8 @@
     "build": "node build.cjs",
     "dev": "node build.cjs && node test/serve.cjs 8782",
     "deploy": "npx wrangler deploy"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.1"
   }
 }
