@@ -1,5 +1,5 @@
-/* GET/POST /api/eeum-billing — 이음B 구독·결제 기준 관리 (공통 꼴 2026-11-19)
-   세 묶음: plans(요금제) → discount(기간 할인) → options(운송B만의 것)
+/* GET/POST /api/eeum-billing — 이음B 구독·결제 기준 관리 (공통 꼴 2판 2026-11-19)
+   세 묶음: plans(요금제 = 구독 + 세금계산서 + opt) → discount(기간 할인) → options(서비스 전체 제한)
    값의 원본 = 운송B DB plans · app_config. service_role로 us_billing_get · us_billing_apply만 부름 */
 import { verifyEeumCall } from './sso-verify.js';
 
@@ -36,6 +36,8 @@ function shape(db) {
   for (const p of db.plans || []) {
     const k = 'plans.' + p.id + '.';
     const nm = p.name || p.id;
+
+    // 구독
     add({ key: k + 'name',   group: 'plans', label: nm + ' — 이름',      type: 'text',   applies: APPLY.plan }, nm);
     add({ key: k + 'on',     group: 'plans', label: nm + ' — 판매 중',   type: 'bool',   applies: APPLY.active }, !!p.active);
     add({ key: k + 'price',  group: 'plans', label: nm + ' — 금액',      type: 'money',  unit: '원', min: 0, max: 10000000, step: 100, applies: APPLY.plan }, p.price || 0);
@@ -43,6 +45,16 @@ function shape(db) {
     add({ key: k + 'pay',    group: 'plans', label: nm + ' — 결제 방법',  type: 'select', options: PAYS, applies: APPLY.plan }, p.pay || 'bank');
     const role = (p.member_types?.length === 1) ? p.member_types[0] : 'all';
     add({ key: k + 'role',   group: 'plans', label: nm + ' — 대상 역할',  type: 'select', options: ROLES, applies: APPLY.plan }, role);
+
+    // 세금계산서
+    add({ key: k + 'invoice',        group: 'plans', label: nm + ' — 세금계산서',      type: 'bool',   applies: APPLY.plan, help: '세금계산서로도 살 수 있음(사업자, 입금 확인 뒤)' }, !!p.invoice);
+    add({ key: k + 'invoice_price',  group: 'plans', label: nm + ' — 세금계산서 금액', type: 'money',  unit: '원', min: 0, max: 10000000, step: 100, applies: APPLY.plan }, p.invoice_price || 0);
+    add({ key: k + 'invoice_period', group: 'plans', label: nm + ' — 세금계산서 기간', type: 'select', options: PERIODS, applies: APPLY.plan }, p.invoice_period || 'year');
+
+    // 이 요금제 옵션 (opt.*)
+    const opt = p.opt || {};
+    add({ key: k + 'opt.fee_per_trip', group: 'plans', label: nm + ' — 건당 수수료',       type: 'money',   unit: '원', min: 0, max: 1000000, step: 100, applies: APPLY.option, help: '이 요금제 운송 건마다 붙는 수수료(0 = 없음)' }, Number(opt.fee_per_trip || 0));
+    add({ key: k + 'opt.rate_pct',     group: 'plans', label: nm + ' — 운임 중개 수수료율', type: 'percent', unit: '%', min: 0, max: 50, step: 1, applies: APPLY.option, help: '이 요금제 운임의 몇 %를 수수료로(0 = 없음)' }, Number(opt.rate_pct || 0));
   }
   add({ key: 'plans.trial_days', group: 'plans', label: '무료 체험 기간', type: 'days', unit: '일', min: 0, max: 365, step: 1, applies: APPLY.trial }, Number(C.trial_days || 0));
 
@@ -58,11 +70,8 @@ function shape(db) {
   add({ key: 'discount.target', group: 'discount', label: '적용 대상',       type: 'select',  options: planOpts, applies: APPLY.discount }, disc.target || 'all');
   add({ key: 'discount.who',    group: 'discount', label: '대상',            type: 'select',  options: WHO, applies: APPLY.discount }, disc.who || 'new');
 
-  // ── 3. options ──
-  const opt = C.options || {};
-  groups.push({ id: 'options', title: '서비스 옵션', note: '운송B만의 수수료·제한' });
-  add({ key: 'options.fee_per_trip', group: 'options', label: '건당 수수료',       type: 'money',   unit: '원', min: 0, max: 1000000, step: 100, applies: APPLY.option, help: '운송 건마다 붙는 수수료(0 = 없음)' }, Number(opt.fee_per_trip || 0));
-  add({ key: 'options.rate_pct',     group: 'options', label: '운임 중개 수수료율', type: 'percent', unit: '%', min: 0, max: 50, step: 1, applies: APPLY.option, help: '운임의 몇 %를 수수료로(0 = 없음)' }, Number(opt.rate_pct || 0));
+  // ── 3. options (서비스 전체 제한만) ──
+  groups.push({ id: 'options', title: '서비스 옵션', note: '운송B 전체 제한(요금제별 수수료는 요금제 옵션에)' });
 
   // ── bank ──
   const bk = C.bank || {};
@@ -162,7 +171,6 @@ export async function handleBilling(request, env) {
   const rawBody = request.method === 'POST' ? await request.text() : '';
 
   try {
-    // 입장권 확인
     const used = {
       async check(jti) {
         const H = { apikey: SR, authorization: 'Bearer ' + SR, accept: 'application/vnd.pgrst.object+json' };
@@ -179,7 +187,6 @@ export async function handleBilling(request, env) {
 
     await logJti(env, request.headers.get('authorization'), 'eeum-billing:' + request.method);
 
-    // DB 읽기
     const db = await rpc(env, 'us_billing_get');
     const cur = shape(db);
     const rev = await revOf(cur.values);
@@ -210,8 +217,8 @@ export async function handleBilling(request, env) {
       if (nv === cur.values[k]) continue;
       log[k] = [cur.values[k], nv];
 
-      // plans.<id>.<col>
-      const pm = /^plans\.([^.]+)\.(name|on|price|period|pay|role)$/.exec(k);
+      // plans.<id>.<col> (구독 + 세금계산서)
+      const pm = /^plans\.([^.]+)\.(name|on|price|period|pay|role|invoice|invoice_price|invoice_period)$/.exec(k);
       if (pm) {
         const [, pid, col] = pm;
         const po = plans[pid] = plans[pid] || {};
@@ -221,6 +228,17 @@ export async function handleBilling(request, env) {
         else po[col] = nv;
         continue;
       }
+
+      // plans.<id>.opt.<name> (요금제별 옵션)
+      const om2 = /^plans\.([^.]+)\.opt\.(.+)$/.exec(k);
+      if (om2) {
+        const [, pid, optKey] = om2;
+        const po = plans[pid] = plans[pid] || {};
+        const curPlan = (db.plans || []).find(p => p.id === pid);
+        po.opt = { ...(curPlan?.opt || {}), ...(po.opt || {}), [optKey]: nv };
+        continue;
+      }
+
       if (k === 'plans.trial_days') { conf.trial_days = nv; continue; }
 
       // discount.*
@@ -241,7 +259,6 @@ export async function handleBilling(request, env) {
       conf[k] = nv;
     }
 
-    // 할인 끝일 < 시작일 거절
     if (conf.discount) {
       const d = conf.discount;
       if (d.from && d.to && d.from > d.to) return json({ error: '기간 할인: 끝나는 날이 시작일보다 앞입니다' }, 400);
@@ -251,7 +268,6 @@ export async function handleBilling(request, env) {
       await rpc(env, 'us_billing_apply', { p_plans: plans, p_config: conf, p_changes: log, p_by: 'eeum-admin' });
     }
 
-    // 바뀐 뒤 다시 읽기
     const db2 = await rpc(env, 'us_billing_get');
     const s2 = shape(db2);
     return json({ rev: await revOf(s2.values), groups: s2.groups, fields: s2.fields, values: s2.values, log: db2.log || [] });
