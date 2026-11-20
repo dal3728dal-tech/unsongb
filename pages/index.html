@@ -81,10 +81,15 @@ section{padding:72px 0}
 .cta-bottom .button.outline:hover{background:rgba(255,255,255,.1)}
 
 /* 바닥줄 */
-footer{padding:28px 20px;text-align:center;font-size:13px;color:var(--us-muted);border-top:1px solid var(--us-border)}
-footer a{color:var(--us-btn)}
-footer .links{margin-bottom:6px}
-footer .links a{margin:0 8px}
+footer{padding:36px 20px 28px;font-size:13px;color:var(--us-muted);border-top:1px solid var(--us-border);max-width:1100px;margin:0 auto}
+footer a{color:var(--us-btn);text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .foot-row{display:flex;gap:40px;margin-bottom:16px;flex-wrap:wrap}
+footer .foot-col h4{font-size:12px;font-weight:700;color:var(--us-ink);margin:0 0 8px;letter-spacing:.3px}
+footer .foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 16px}
+footer .foot-col li{line-height:1.7}
+footer .foot-col .here{color:var(--us-ink);font-weight:600}
+footer .copy{color:var(--us-muted);opacity:.7;font-size:12px}
 
 @media (max-width:900px){
   .role-grid{grid-template-columns:repeat(2,1fr)}
@@ -112,7 +117,7 @@ footer .links a{margin:0 8px}
 <body>
 
 <div class="header">
-  <a href="/" class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></a>
+  <a href="/" class="logo on-dark"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></a>
   <nav class="on-dark">
     <a class="b-intro" href="https://eeum.bid/unsong">소개</a>
     <a class="b-login us" href="https://eeum.bid/login?svc=us">로그인</a>
@@ -312,11 +317,26 @@ footer .links a{margin:0 8px}
 </section>
 
 <footer>
-  <div class="links">
-    <a href="https://eeum.bid">이음B</a>
-    <a href="/privacy">개인정보 처리 안내</a>
+  <div class="foot-row">
+    <div class="foot-col">
+      <h4>이음B 서비스</h4>
+      <ul>
+        <li><a href="https://eeum.bid/">이음B</a></li>
+        <li><a href="https://gonggan.bid/">공간B</a></li>
+        <li><a href="https://bending.bid/">절곡B</a></li>
+        <li><a href="https://nomu.bid/">노무B</a></li>
+        <li><span class="here">운송B</span></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>이용 안내</h4>
+      <ul>
+        <li><a href="/privacy">개인정보 처리방침</a></li>
+        <li><a href="https://eeum.bid/terms">이용약관</a></li>
+      </ul>
+    </div>
   </div>
-  <span>운송B &middot; unsong.bid</span>
+  <div class="copy">운송B &middot; unsong.bid</div>
 </footer>
 
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
