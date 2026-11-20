@@ -49,21 +49,6 @@ a:hover { text-decoration: underline; }
 }
 .header .logo .wm { font-weight: 800; }
 .header nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
-.header nav a {
-  color: rgba(255,255,255,0.85);
-  font-size: var(--btn-fs-sm, 13.5px);
-  padding: 6px 14px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--btn-r, 999px);
-  transition: background 0.15s;
-}
-.header nav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
-.header nav a.primary {
-  background: var(--us-btn);
-  color: #fff;
-}
 
 /* 단추 */
 button, .button {
@@ -121,6 +106,5 @@ button.large, .button.large {
 @media (max-width: 768px) {
   html { font-size: 14px; }
   .header { padding: 0 14px; height: 48px; }
-  .header nav a { font-size: 12.5px; padding: 5px 10px; }
   .container { padding: 0 16px; }
 }
