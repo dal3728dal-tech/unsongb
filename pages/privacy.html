@@ -17,7 +17,12 @@
 <script src="https://eeum.bid/brand/login-popup.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="in"><a class="logo on-dark" href="/"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span><small>unsong.bid</small></a><nav><a href="/account">내 계정</a></nav></div></header>
+<header class="b-head b-wide us">
+  <a class="b-eeum" href="https://eeum.bid/" title="이음B 홈페이지로">이음B</a>
+  <a class="b-logo" href="/"><span class="b-mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span><span class="wm us"><span class="w">운송</span><span class="B">B</span></span><small>unsong.bid</small></a>
+  <nav id="nav" class="b-nav"></nav>
+  <span id="navTail" class="b-tail"></span>
+</header>
 <main class="doc">
   <div class="card">
     <h1 style="font-size:22px;margin:0 0 6px">운송B 개인정보 처리 안내</h1>
@@ -58,6 +63,9 @@
   </div>
 </main>
 <footer><div class="in"><div>운송비 · unsong.bid · <a href="/privacy">개인정보 처리 안내</a></div><div class="biz"></div></div></footer>
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/config.js"></script>
 <script src="/common.js"></script>
+<script>US.applyNav();</script>
 </body>
 </html>

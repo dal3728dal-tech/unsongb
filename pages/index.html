@@ -112,7 +112,6 @@ footer .copy{color:var(--us-muted);opacity:.7;font-size:12px}
   .feat-grid{grid-template-columns:1fr}
   .flow-steps{flex-direction:column;gap:24px;align-items:center}
   .flow-step+.flow-step::before{display:none}
-  .header nav .b-intro{display:none}
   .cta-bottom h2{font-size:22px}
 }
 
@@ -163,14 +162,12 @@ footer .copy{color:var(--us-muted);opacity:.7;font-size:12px}
 </head>
 <body>
 
-<div class="header">
-  <a href="/" class="logo on-dark"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></a>
-  <nav class="on-dark">
-    <a class="b-intro" href="https://eeum.bid/unsong">소개</a>
-    <a class="b-login us" href="https://eeum.bid/login?svc=us">로그인</a>
-    <a class="b-try us" href="/#try" target="_blank" rel="noopener">체험해보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg></a>
-  </nav>
-</div>
+<header class="b-head b-wide us">
+  <a class="b-eeum" href="https://eeum.bid/" title="이음B 홈페이지로">이음B</a>
+  <a class="b-logo" href="/"><span class="b-mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span><span class="wm us"><span class="w">운송</span><span class="B">B</span></span><small>unsong.bid</small></a>
+  <nav id="nav" class="b-nav"><a href="#roles" data-go="0">화주</a><a href="#roles" data-go="1">생산자</a><a href="#roles" data-go="2">화물기사</a><a href="#roles" data-go="3">현장</a><a href="#price">요금</a></nav>
+  <span id="navTail" class="b-tail"><a class="b-intro" href="https://eeum.bid/unsong">소개</a><a class="b-login us" href="https://eeum.bid/login?svc=us">로그인</a><a class="b-try us" href="/#try" target="_blank" rel="noopener">체험해보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg></a></span>
+</header>
 
 <!-- 역할 소개 -->
 <section class="showcase" id="roles">

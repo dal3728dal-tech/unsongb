@@ -31,10 +31,12 @@
 </head>
 <body>
 
-<div class="header">
-  <a href="/" class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span> <span style="font-weight:400;font-size:13px;opacity:0.7">관리자</span></a>
-  <nav><a href="/">첫 화면</a> <a href="/account">내 계정</a></nav>
-</div>
+<header class="b-head b-wide us">
+  <a class="b-eeum" href="https://eeum.bid/" title="이음B 홈페이지로">이음B</a>
+  <a class="b-logo" href="/"><span class="b-mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span><span class="wm us"><span class="w">운송</span><span class="B">B</span></span><small>unsong.bid</small></a>
+  <nav id="nav" class="b-nav"></nav>
+  <span id="navTail" class="b-tail"></span>
+</header>
 
 <div class="page">
   <h1>운송B 관리자</h1>
@@ -71,6 +73,8 @@ document.getElementById('tabs').addEventListener('click', function (e) {
   btn.classList.add('on');
   document.getElementById('tab-' + btn.dataset.tab).classList.add('on');
 });
+
+US.applyNav();
 
 (async function () {
   const user = await US.getUser();

@@ -45,10 +45,12 @@
 </head>
 <body>
 
-<div class="header">
-  <a href="/" class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></a>
-  <nav><a href="/">첫 화면</a></nav>
-</div>
+<header class="b-head b-wide us">
+  <a class="b-eeum" href="https://eeum.bid/" title="이음B 홈페이지로">이음B</a>
+  <a class="b-logo" href="/"><span class="b-mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span><span class="wm us"><span class="w">운송</span><span class="B">B</span></span><small>unsong.bid</small></a>
+  <nav id="nav" class="b-nav"></nav>
+  <span id="navTail" class="b-tail"></span>
+</header>
 
 <div class="page">
   <h1 id="pageTitle">로그인</h1>
@@ -87,6 +89,8 @@ async function handleLogin(e) {
   if (error) return alert(error.message);
   location.href = '/';
 }
+
+US.applyNav();
 
 const params = new URLSearchParams(location.search);
 if (params.get('signup') === '1') {

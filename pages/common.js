@@ -42,6 +42,26 @@ US.typeChip = function (type) {
   return '<span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;background:' + (colors[type] || '#888') + '">' + label + '</span>';
 };
 
+US.navTail = function (logged) {
+  return '<a class="b-intro" href="https://eeum.bid/unsong">소개</a>' +
+    (logged
+      ? '<a class="b-login us" href="/account"' + (location.pathname === '/account' ? ' aria-current="page"' : '') + '>내 계정</a><a class="b-intro" href="#" data-logout>로그아웃</a>'
+      : '<a class="b-login us" href="https://eeum.bid/login?svc=us">로그인</a><a class="b-try us" href="/#try" target="_blank" rel="noopener">체험해보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg></a>');
+};
+
+US.applyNav = async function () {
+  var tail = document.getElementById('navTail');
+  if (!tail) return;
+  var user = await US.getUser();
+  tail.innerHTML = US.navTail(!!user);
+  var lo = tail.querySelector('[data-logout]');
+  if (lo) lo.addEventListener('click', function (e) {
+    e.preventDefault();
+    var sb = US.initSupabase();
+    if (sb) sb.auth.signOut().then(function () { location.href = '/'; });
+  });
+};
+
 US.formatDate = function (d) {
   if (!d) return '';
   const dt = new Date(d);
