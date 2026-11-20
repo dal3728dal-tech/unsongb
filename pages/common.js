@@ -7,9 +7,9 @@ US.supabase = null;
 
 US.initSupabase = function () {
   if (US.supabase) return US.supabase;
-  if (!window.USConfig) return null;
+  if (!window.US_CONFIG || !window.supabase) return null;
   const { createClient } = window.supabase;
-  US.supabase = createClient(USConfig.supabaseUrl, USConfig.supabaseKey);
+  US.supabase = createClient(US_CONFIG.supabaseUrl, US_CONFIG.supabaseKey);
   return US.supabase;
 };
 
