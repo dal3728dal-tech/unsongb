@@ -2,7 +2,7 @@
   "name": "unsongb",
   "version": "1.0.0",
   "private": true,
-  "description": "운송B — 이음B 아래 자재 운송 연결 서비스",
+  "description": "운쏭B — 이음B 아래 자재 운송 연결 서비스",
   "scripts": {
     "build": "node build.cjs",
     "dev": "node build.cjs && node test/serve.cjs 8782",

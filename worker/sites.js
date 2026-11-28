@@ -1,6 +1,6 @@
 // 이음B 현장 공유 중계(11/19, CONNECT.md "현장 공유")
 //  현장 목록 원본 = 이음B(eeum.bid/api/sites)
-//  운송B 화면 → /api/eeum-sites[/<id>] (머리값 Authorization: Bearer <운송B 로그인 토큰>)
+//  운쏭B 화면 → /api/eeum-sites[/<id>] (머리값 Authorization: Bearer <운쏭B 로그인 토큰>)
 //   → 워커가 그 회원의 이음B 열쇠(eeum_tokens.sites_token)로 이음B를 대신 부름
 //  열쇠가 없거나(아이디·비밀번호 로그인·체험 계정) 만료·이음B 401이면 409 {relogin} → 이음B로 다시 로그인
 import { createClient } from '@supabase/supabase-js';

@@ -1,4 +1,4 @@
-/* 운송B 워커 — Cloudflare Workers */
+/* 운쏭B 워커 — Cloudflare Workers */
 
 import { handleSSO } from './sso.js';
 import { handleBilling } from './billing.js';

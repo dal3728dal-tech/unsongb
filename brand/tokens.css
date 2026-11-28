@@ -65,8 +65,8 @@
   --nm-tag:#f3e6c9; --nm-tag-ink:#8a6a2c;
   --nm-btn:#8a6a2c;   /* 단추 */
 
-  /* 운송B — 청록 (2026-11-19 사용자 "이음비에 운송B를 추가해", 대표 · 잉크 · 옅은 바탕 · 단추는 운송B 세션 확정값, 선 · 꼬리표는 같은 색에서 뽑음) */
-  --us-name:#2d5f6f;  /* 이름 글자(운송) */
+  /* 운쏭B — 청록 (2026-11-19 사용자 "이음비에 운쏭B를 추가해", 대표 · 잉크 · 옅은 바탕 · 단추는 운쏭B 세션 확정값, 선 · 꼬리표는 같은 색에서 뽑음) */
+  --us-name:#2d5f6f;  /* 이름 글자(운쏭) */
   --us:#4a8a8a; --us-ink:#2d5f6f; --us-soft:#e6f2f0; --us-line:#a9cfca;
   --us-tag:#d6ebe8; --us-tag-ink:#3a7575;
   --us-btn:#3a7575;   /* 단추 */
@@ -88,3 +88,68 @@
 
 /* 선 아이콘 공통 */
 .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:var(--icon-stroke);stroke-linecap:round;stroke-linejoin:round}
+
+/* 머리줄 오른쪽 끝 공통 (2026-11-20 사용자 "모든 비들도 소개, 로그인을 같은 디자인과 순서로" ·
+   "공간비처럼 각각의 비 첫화면에 체험해보기는 로그인 오른쪽으로 이동하고 아이콘 크기를 공간비처럼 줄여")
+   다섯 사이트 모두 같은 순서: [소개] [로그인] [체험해보기↗](맨 오른쪽, 새 창). 회원가입 단추는 두지 않음.
+   <a class="b-intro" href="https://eeum.bid/gonggan">소개</a>
+   <a class="b-login gg" href="https://eeum.bid/login?svc=gg">로그인</a>
+   <a class="b-try gg" href="/#try" target="_blank" rel="noopener">체험해보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg></a>
+   크기는 공간B 머리줄과 같게 — 보이는 높이 34px · 글자 13px(누르는 칸은 ::before로 44px 유지).
+   지도 · 게임 같은 머리줄 아이콘 단추는 30px 칸 · 그림 18px(.b-ico).
+   소개 페이지 자신에서는 b-intro에 aria-current="page". 진한 머리줄이면 부모에 .on-dark */
+.b-intro,.b-login,.b-try{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:4px;height:34px;border-radius:999px;font-family:inherit;font-size:13px;line-height:1;white-space:nowrap;text-decoration:none;flex:none;box-sizing:border-box}
+.b-intro:before,.b-login:before,.b-try:before,.b-ico:before{content:"";position:absolute;inset:-5px -2px}
+.b-intro{padding:0 10px;font-weight:600;color:inherit;opacity:.78}
+.b-intro:hover{opacity:1;background:rgba(127,127,127,.12)}
+.b-intro[aria-current]{opacity:1;font-weight:700}
+.b-login{padding:0 14px;font-weight:700;color:#fff;background:var(--b-login,var(--hub));border:0}
+.b-login:hover{filter:brightness(1.08)}
+.b-try{padding:0 14px;font-weight:700;color:#fff;border:0;background:linear-gradient(90deg,var(--b-try-a,var(--ink)),var(--b-try-b,var(--hub)))}
+.b-try:hover{filter:brightness(1.08)}
+.b-try svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.b-ico{position:relative;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;color:inherit;flex:none}
+.b-ico svg,.b-ico img{width:18px;height:18px}
+.b-ico:hover{background:rgba(127,127,127,.12)}
+.b-intro:focus-visible,.b-login:focus-visible,.b-try:focus-visible,.b-ico:focus-visible{outline:2px solid var(--b-login,var(--hub));outline-offset:2px}
+.b-login.yb{--b-login:var(--hub)}
+.b-login.gg,.b-try.gg{--b-login:var(--gg-btn)}
+.b-login.bb,.b-try.bb{--b-login:var(--bb-btn)}
+.b-login.nm,.b-try.nm{--b-login:var(--nm-btn)}
+.b-login.us,.b-try.us{--b-login:var(--us-btn)}
+.b-try.gg{--b-try-a:#253d33;--b-try-b:#4f7a57}
+.b-try.bb{--b-try-a:var(--bb-ink);--b-try-b:var(--bb-btn)}
+.b-try.nm{--b-try-a:var(--nm-ink);--b-try-b:var(--nm-btn)}
+.b-try.us{--b-try-a:var(--us-ink);--b-try-b:var(--us-btn)}
+.on-dark .b-login{background:#fff;color:var(--b-login,var(--hub))}
+.on-dark .b-login:hover{filter:none;background:rgba(255,255,255,.88)}
+.on-dark .b-try{background:linear-gradient(90deg,var(--b-login,var(--hub)),color-mix(in srgb,var(--b-login,var(--hub)) 65%,#fff));box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.on-dark .b-intro:focus-visible,.on-dark .b-login:focus-visible,.on-dark .b-try:focus-visible,.on-dark .b-ico:focus-visible{outline-color:#fff}
+
+/* 머리줄 전체 모양 공통 = 이음B 첫 화면 머리줄 (2026-11-20 사용자 "모든 비들의 홈페이지 첫화면 헤더 디자인을 이음비 디자인으로 꾸며줘 글자 간격, 크기등 디자인을 맞춰줘")
+   <header class="b-head b-wide gg">
+     <a class="b-eeum" href="https://eeum.bid/">이음B</a>                     ← 서비스만(이음B로 가는 작은 글자, 없어도 됨)
+     <a class="b-logo" href="/"><span class="b-mk"><svg …선 아이콘…/></span><span class="wm gg"><span class="w">공간</span><span class="B">B</span></span><small>gonggan.bid</small></a>
+     <nav class="b-nav"><a href="#…">메뉴</a> …</nav>                            ← 폰(720 이하)에서는 숨김
+     (아이콘 단추 .b-ico) [소개 .b-intro] [로그인 .b-login gg] [체험해보기 .b-try gg]
+   </header>
+   높이 72 · 바탕 없음(페이지 바탕 그대로) · 로고 칸 34(모서리 11, 흰 바탕 · 선) · 이름 20px 800 자간 -.02em · 작은 글 12px 자간 .08em · 메뉴 14px 알약 */
+.b-head{display:flex;align-items:center;gap:6px;height:72px;box-sizing:border-box;background:transparent;color:var(--ink)}
+.b-head.b-wide{width:min(1180px,100% - 32px);margin:0 auto}
+.b-head a{text-decoration:none}
+.b-head .b-eeum{display:inline-flex;align-items:center;min-height:34px;padding:0 10px 0 0;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:-.01em;flex:none}
+.b-head .b-eeum:before{content:"‹";margin-right:5px;font-size:16px;line-height:1;opacity:.7}
+.b-head .b-eeum:hover{color:var(--ink)}
+.b-logo{display:flex;align-items:center;gap:10px;margin-right:auto;font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;flex:none}
+.b-logo .b-mk{width:34px;height:34px;border-radius:11px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--b-mk,var(--hub));flex:none;box-sizing:border-box}
+.b-logo .b-mk svg,.b-logo .b-mk img{width:20px;height:20px}
+.b-logo small{font-weight:500;font-size:12px;color:var(--faint);letter-spacing:.08em;margin-left:2px}
+.b-nav{display:flex;gap:6px;margin-right:8px}
+.b-nav a{font-size:14px;color:var(--muted);padding:7px 12px;border-radius:999px;white-space:nowrap}
+.b-nav a:hover{background:rgba(255,255,255,.7);color:var(--ink)}
+.b-head.gg{--b-mk:var(--gg-ink)} .b-head.bb{--b-mk:var(--bb-ink)} .b-head.nm{--b-mk:var(--nm-ink)} .b-head.us{--b-mk:var(--us-ink)}
+@media (max-width:720px){
+  .b-nav{display:none}
+  /* 서비스 머리줄(gg · bb · nm · us)은 폰에서 작은 글 · [소개]를 숨겨 [로그인] · [체험해보기](로그인 뒤 [내 계정] · 로그아웃)가 들어가게 */
+  .b-head:is(.gg,.bb,.nm,.us) .b-logo small,.b-head:is(.gg,.bb,.nm,.us) .b-intro:not([data-logout]){display:none}   /* 로그아웃 단추는 <a class="b-intro" data-logout> — 폰에서도 보임 */
+}

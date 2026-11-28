@@ -1,11 +1,11 @@
-# 운송B (unsong.bid) — 작업 메모
+# 운쏭B (unsong.bid) — 작업 메모
 
 > **공통 규칙은 `brand/RULES.md`를 먼저 따른다**(원본 = 이음B `D:\OneDrive\AI PROJECT\yeongyeolb\brand\RULES.md`, 부딪히면 공통 규칙이 이김).
-> 계정·분리, 폴더 위치, 자동 배포, 폰 원격 작업, 비밀값, 디자인(색·○○B 이름 표기·선 아이콘·이모지 안 씀), 말투, 먼저 묻는 것은 거기에 있다. 이 파일에는 **운송B만의 내용**만 적는다.
+> 계정·분리, 폴더 위치, 자동 배포, 폰 원격 작업, 비밀값, 디자인(색·○○B 이름 표기·선 아이콘·이모지 안 씀), 말투, 먼저 묻는 것은 거기에 있다. 이 파일에는 **운쏭B만의 내용**만 적는다.
 
 건축 자재 운송 연결 서비스. 웹(unsong.bid) + 안드로이드 앱(나중). 이음B(eeum.bid) 아래 서비스.
 
-## 운송B 기본값
+## 운쏭B 기본값
 | 항목 | 값 |
 |---|---|
 | 저장소 | GitHub `dal3728dal-tech/unsongb`(비공개), main push = unsong.bid 운영 반영 |
@@ -27,12 +27,12 @@
 ## 회원 종류
 - 화주(orderer) · 생산자(producer) · 화물기사(driver) · 현장(site)
 
-## 디자인 (운송B만의 것 — 나머지는 공통 규칙)
+## 디자인 (운쏭B만의 것 — 나머지는 공통 규칙)
 - 모든 페이지가 https://eeum.bid/brand/tokens.css를 자기 CSS보다 먼저 불러옴
-- 운송B 색은 공통 이름: --us-ink · --us-btn · --us-panel-soft 등(tokens.css)
+- 운쏭B 색은 공통 이름: --us-ink · --us-btn · --us-panel-soft 등(tokens.css)
 - 단추 모양 = 공통 단추 값 `--btn-*`(tokens.css, 알약 모양 --btn-r:999px)
 - 파비콘 = eeum.bid 주소(https://eeum.bid/brand/favicon/unsong-*.png · unsong.svg)
-- 로고 = `.wm us` 운송B
+- 로고 = `.wm us` 운쏭B
 
 ## 구조
 - `pages/` — index.html(소개), account.html(로그인), admin.html(관리자), 404.html
@@ -50,7 +50,7 @@
 ## 진행 상황
 ### 2026-11-19 이음B 현장 공유(이음B 전달 · CONNECT.md "현장 공유")
 - 현장 목록 원본 = 이음B(eeum.bid/api/sites). 통합 로그인 입장권의 `sites_token`(그 회원 · 30일)을 `eeum_tokens`에 서버만 보관(worker/login.js → `saveSitesToken`)
-- 워커 중계 `GET·POST·DELETE /api/eeum-sites[/<id>]`(`worker/sites.js`): 운송B 로그인 토큰 → 그 회원 열쇠로 이음B를 대신 부름(응답 그대로). 열쇠가 없거나(아이디·비밀번호 로그인·체험 계정) 만료·이음B 401 = 409 {relogin, login} → [이음B로 로그인] 안내
+- 워커 중계 `GET·POST·DELETE /api/eeum-sites[/<id>]`(`worker/sites.js`): 운쏭B 로그인 토큰 → 그 회원 열쇠로 이음B를 대신 부름(응답 그대로). 열쇠가 없거나(아이디·비밀번호 로그인·체험 계정) 만료·이음B 401 = 409 {relogin, login} → [이음B로 로그인] 안내
 - DB `20261119160000_eeum_sites.sql`: eeum_tokens(user_id PK, sites_token, expires_at, 정책 없음 = 회원·익명 못 읽음, service_role만)
 - 화면 연동(운송 요청 출발/도착 현장 고르기)은 운송 핵심 기능에서
 

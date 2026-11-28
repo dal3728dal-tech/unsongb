@@ -1,4 +1,4 @@
-/* 운송B 공통 JS */
+/* 운쏭B 공통 JS */
 'use strict';
 
 window.US = window.US || {};

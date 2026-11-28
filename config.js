@@ -1,8 +1,8 @@
-/* 운송B 설정 — 비밀값은 여기에 없음(워커 비밀값 · Supabase 대시보드) */
+/* 운쏭B 설정 — 비밀값은 여기에 없음(워커 비밀값 · Supabase 대시보드) */
 window.US_CONFIG = {
   supabaseUrl: 'https://vxiehnzccxntctyjyzuf.supabase.co',
   supabaseKey: 'sb_publishable_-xFSOAUFZsfTi82n-5FY4w_O5ep9DB2',
-  siteName: '운송B',
+  siteName: '운쏭B',
   siteUrl: 'https://unsong.bid',
   brand: {
     color: '#4a8a8a',

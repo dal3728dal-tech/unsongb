@@ -1,4 +1,4 @@
--- 운송B 구독·결제 기준 관리 (이음B 공통 꼴)
+-- 운쏭B 구독·결제 기준 관리 (이음B 공통 꼴)
 -- billing_log: 이음B 관리자가 바꾼 기록
 -- us_billing_get / us_billing_apply: service_role 전용 RPC
 

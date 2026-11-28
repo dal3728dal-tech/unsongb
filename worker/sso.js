@@ -69,7 +69,7 @@ export async function handleSSO(request, env) {
 }
 
 function ssoFail(msg) {
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>운송B 관리자</title></head>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>운쏭B 관리자</title></head>
 <body style="font-family:Pretendard,sans-serif;text-align:center;padding:60px 20px">
 <h2>관리자 로그인 실패</h2><p>${msg}</p>
 <p><a href="https://unsong.bid/account">관리자 로그인</a></p></body></html>`;

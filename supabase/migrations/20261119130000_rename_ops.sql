@@ -1,4 +1,4 @@
--- bb_ops → us_ops 이름 바꾸기 (운송B 접두어)
+-- bb_ops → us_ops 이름 바꾸기 (운쏭B 접두어)
 -- 여러 번 실행해도 되게: bb_ops가 있으면 바꾸고, 없으면 us_ops 확인
 do $$
 begin

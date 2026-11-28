@@ -1,6 +1,6 @@
 /* GET/POST /api/eeum-billing — 이음B 구독·결제 기준 관리 (공통 꼴 2판 2026-11-19)
    세 묶음: plans(요금제 = 구독 + 세금계산서 + opt) → discount(기간 할인) → options(서비스 전체 제한)
-   값의 원본 = 운송B DB plans · app_config. service_role로 us_billing_get · us_billing_apply만 부름 */
+   값의 원본 = 운쏭B DB plans · app_config. service_role로 us_billing_get · us_billing_apply만 부름 */
 import { verifyEeumCall } from './sso-verify.js';
 
 const AUD = 'unsong.bid';
@@ -32,7 +32,7 @@ function shape(db) {
   const add = (f, v) => { fields.push({ help: '', readonly: false, ...f }); values[f.key] = v; };
 
   // ── 1. plans ──
-  groups.push({ id: 'plans', title: '요금제', note: '금액은 부가세 포함(원). 요금제 추가·삭제는 운송B 관리자에서' });
+  groups.push({ id: 'plans', title: '요금제', note: '금액은 부가세 포함(원). 요금제 추가·삭제는 운쏭B 관리자에서' });
   for (const p of db.plans || []) {
     const k = 'plans.' + p.id + '.';
     const nm = p.name || p.id;
@@ -71,7 +71,7 @@ function shape(db) {
   add({ key: 'discount.who',    group: 'discount', label: '대상',            type: 'select',  options: WHO, applies: APPLY.discount }, disc.who || 'new');
 
   // ── 3. options (서비스 전체 제한만) ──
-  groups.push({ id: 'options', title: '서비스 옵션', note: '운송B 전체 제한(요금제별 수수료는 요금제 옵션에)' });
+  groups.push({ id: 'options', title: '서비스 옵션', note: '운쏭B 전체 제한(요금제별 수수료는 요금제 옵션에)' });
 
   // ── bank ──
   const bk = C.bank || {};

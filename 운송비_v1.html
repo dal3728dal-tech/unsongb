@@ -1,0 +1,1776 @@
+<!doctype html><html lang="ko"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>운쏭B 시제품</title>
+<link rel="stylesheet" href="https://eeum.bid/brand/tokens.css">
+<style>
+/* tokens.css fallback — CDN 못 받을 때 최소 변수 */
+:root{--font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+--bg:#f4f6f5;--card:#ffffff;--ink:#1f2933;--muted:#7b8794;--line:#d9e2ec}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111614;--card:#181d1b;--ink:#dde5e0;--muted:#8a9e96;--line:#2e3d38}}
+:root{
+  --us:#4a8a8a; --us-ink:#2d5f6f; --us-soft:#e6f2f0; --us-btn:#3a7575; --us-name:#2d5f6f;
+  --surface:var(--card); --surface2:var(--us-soft);
+  --accent:var(--us-btn); --accent-ink:#ffffff; --accent-soft:var(--us-soft);
+  --mark:var(--us); --mark-soft:var(--us-soft); --ok:#5f7c60; --ok-soft:#edf1e7; --bad:#a14f3d; --bad-soft:#f8ece6;
+  --warn:#b5774c; --warn-soft:#f4e9df;
+  --f-display:var(--font); --f-body:var(--font); --f-num:"Pretendard Variable",Pretendard,ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111614; --surface:#181d1b; --surface2:#1e2926; --ink:#dde5e0; --muted:#8a9e96; --line:#2e3d38;
+  --accent:#6ab8a8; --accent-ink:#111614; --accent-soft:#1e3530;
+  --mark:#6ab8a8; --mark-soft:#1e3530; --ok:#7fab80; --ok-soft:#1c2e1d; --bad:#e08070; --bad-soft:#3c1e1b;
+  --warn:#d4a754; --warn-soft:#3a3018; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111614; --surface:#181d1b; --surface2:#1e2926; --ink:#dde5e0; --muted:#8a9e96; --line:#2e3d38;
+  --accent:#6ab8a8; --accent-ink:#111614; --accent-soft:#1e3530;
+  --mark:#6ab8a8; --mark-soft:#1e3530; --ok:#7fab80; --ok-soft:#1c2e1d; --bad:#e08070; --bad-soft:#3c1e1b;
+  --warn:#d4a754; --warn-soft:#3a3018; color-scheme:dark}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html,body{overscroll-behavior-x:none}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body)}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0);z-index:10;background:var(--surface);pointer-events:none}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header.top{position:sticky;top:env(safe-area-inset-top,0);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+header.top .wrap{padding-block:10px;display:flex;flex-direction:column;gap:10px}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-size:24px;letter-spacing:.02em;line-height:1}
+.logo .w{color:var(--us-name)}
+.logo small{font-family:var(--f-body);font-size:11px;font-weight:600;color:var(--muted);margin-left:6px;letter-spacing:.06em}
+.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{flex:1;border:0;background:transparent;color:var(--muted);font:600 13px var(--f-body);padding:7px 10px;border-radius:7px;cursor:pointer;white-space:nowrap;min-width:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-bottom:-11px}
+nav.tabs button{border:0;background:transparent;color:var(--muted);font:600 14px var(--f-body);padding:8px 10px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+main .wrap{padding-block:16px 48px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.card h2{margin:0;font-size:16px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.card h3{margin:0;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.lbl{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.05em}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.big{font-family:var(--f-num);font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.big small{font-size:16px;font-weight:500;margin-left:2px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--surface2);color:var(--muted);border:1px solid var(--line);white-space:nowrap}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.mark{background:var(--mark-soft);color:var(--mark);border-color:transparent}
+.chip.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.chip.acc{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--surface2);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--f-num);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.list{display:flex;flex-direction:column}
+.item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);min-width:0}
+.item:first-child{border-top:0}
+.item .grow{flex:1;min-width:0}
+.item .t{font-weight:600}
+.item .s{font-size:13px;color:var(--muted)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 14px var(--f-body);padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.sm{padding:5px 10px;font-size:13px}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,select:focus-visible,input:focus-visible,.seg button:focus-visible,nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+form.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+form.f label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+form.f .full{grid-column:1/-1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th{background:var(--surface2);color:var(--muted);font-weight:600;font-size:12px;position:sticky;top:0}
+td{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left;font-family:var(--f-body)}
+tr.tot td{font-weight:700;background:var(--surface2)}
+tbody tr:last-child td{border-bottom:0}
+.note{font-size:13px;color:var(--muted);margin:0}
+.warn-box{font-size:13px;background:var(--warn-soft);color:var(--ink);border-radius:8px;padding:10px 12px;margin:0}
+.empty-s{padding:18px;text-align:center;color:var(--muted);font-size:14px}
+.sheet{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:20;padding:16px;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+.sheet.open{display:flex}
+.sheet .card{width:100%;max-width:560px;max-height:80vh;overflow-y:auto}
+.sheet .search-wrap{position:sticky;top:0;background:var(--bg);padding:0 0 8px;z-index:1}
+.sheet .search-wrap input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--surface2);color:var(--ink)}
+.sheet .search-wrap input:focus{outline:none;border-color:var(--accent)}
+.sheet .site-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background .15s}
+.sheet .site-item:hover,.sheet .site-item:active{background:var(--accent-soft)}
+.sheet .site-item .ico{flex:0 0 24px;color:var(--accent)}
+.site-pick-btn{display:flex;align-items:center;gap:6px;width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface2);color:var(--ink);font-size:14px;cursor:pointer;text-align:left}
+.site-pick-btn:hover{border-color:var(--accent)}
+.site-pick-btn .ico{flex:0 0 20px;color:var(--muted)}
+.site-pick-btn .ico svg{width:16px;height:16px}
+.site-pick-btn .pick-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.site-pick-btn .pick-name.empty{color:var(--muted)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:30;max-width:calc(100% - 32px)}
+/* 운송 단계 진행 바 */
+.stage-bar{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.stage-bar .st{flex:1;min-width:0;text-align:center;padding:6px 4px;font-size:11px;font-weight:600;color:var(--muted);background:var(--surface2);border-right:1px solid var(--line);white-space:nowrap;position:relative;display:flex;align-items:center;justify-content:center;gap:2px}
+.stage-bar .ico svg{width:12px;height:12px}
+.stage-bar .st:first-child{border-radius:8px 0 0 8px}
+.stage-bar .st:last-child{border-radius:0 8px 8px 0;border-right:0}
+.stage-bar .st.done{background:var(--ok-soft);color:var(--ok)}
+.stage-bar .st.cur{background:var(--accent);color:var(--accent-ink)}
+.stage-bar .st.issue{background:var(--bad-soft);color:var(--bad)}
+/* 차량 선택 · 3D 적재함 */
+.veh-pick-btn{display:flex;align-items:center;gap:8px;width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px;color:var(--ink);cursor:pointer;text-align:left;margin-bottom:10px;transition:border-color .15s}
+.veh-pick-btn:hover{border-color:var(--accent)}
+.veh-pick-btn .vp-label{flex:1}
+.veh-pick-btn .vp-arrow{color:var(--ink2);font-size:11px}
+.veh-pick-btn.has-veh{border-color:var(--accent);background:var(--accent-soft)}
+.veh-pick-btn.has-veh .vp-sub{font-size:12px;color:var(--ink2);margin-top:2px}
+.veh-popup-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:900;align-items:center;justify-content:center}
+.veh-popup-bg.open{display:flex}
+.veh-popup{background:var(--surface);border-radius:14px;width:92%;max-width:420px;max-height:80vh;overflow:auto;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:20px}
+.veh-popup h3{margin:0 0 14px;font-size:16px;font-weight:700;color:var(--ink)}
+.veh-popup select{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px;color:var(--ink);appearance:auto;cursor:pointer;margin-bottom:12px}
+.veh-popup select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.veh-popup .veh-detail{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:14px;padding:10px 12px;background:var(--surface2);border-radius:8px}
+.veh-popup .veh-detail b{color:var(--ink);font-weight:600}
+.veh-popup .vp-actions{display:flex;gap:8px;justify-content:flex-end}
+.veh-popup .vp-actions button{padding:9px 20px;border-radius:8px;font-size:14px;border:none;cursor:pointer}
+.veh-popup .vp-actions .btn-cancel{background:var(--surface2);color:var(--ink2)}
+.veh-popup .vp-actions .btn-ok{background:var(--accent);color:#fff;font-weight:600}
+#cargo3d{width:100%;height:340px;border-radius:10px;background:var(--surface2);border:1px solid var(--line);position:relative;overflow:hidden}
+#cargo3d canvas{border-radius:10px;display:block}
+.cargo-info{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:13px}
+.cargo-info .ci{background:var(--surface2);border-radius:8px;padding:8px;text-align:center}
+.cargo-info .ci b{display:block;font-family:var(--f-num);font-size:16px}
+.cargo-info .ci.over b{color:var(--bad)}
+/* 지도 (시제품 = 가상) */
+.map-box{width:100%;height:220px;border-radius:10px;background:var(--surface2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.map-box canvas{width:100%;height:100%;border-radius:10px}
+.map-label{position:absolute;bottom:8px;left:8px;font-size:11px;background:var(--surface);padding:3px 8px;border-radius:6px;color:var(--muted)}
+/* 채팅 */
+.chat{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding:4px 0}
+.chat .msg{display:flex;flex-direction:column;gap:2px;max-width:82%}
+.chat .msg.me{align-self:flex-end;align-items:flex-end}
+.chat .msg .who{font-size:11px;font-weight:600;color:var(--muted)}
+.chat .msg .bubble{background:var(--surface2);border-radius:10px;padding:8px 12px;font-size:14px;line-height:1.45;word-break:break-word}
+.chat .msg.me .bubble{background:var(--accent);color:var(--accent-ink)}
+.chat .msg .time{font-size:10px;color:var(--muted)}
+.chat-input{display:flex;gap:6px}
+.chat-input input{flex:1}
+.chat-input button{flex-shrink:0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+[data-act]{-webkit-tap-highlight-color:rgba(74,138,138,.2);touch-action:manipulation}
+.item[data-act]{cursor:pointer}
+.ico{display:inline-flex;align-items:center;vertical-align:middle;flex-shrink:0}
+.ico svg{width:18px;height:18px;stroke-width:1.6}
+.seg .ico svg{width:15px;height:15px}
+nav.tabs .ico svg{width:15px;height:15px}
+.btn .ico svg{width:16px;height:16px}
+h2 .ico svg{width:18px;height:18px;color:var(--accent)}
+.stat .ico svg{width:16px;height:16px;color:var(--muted)}
+/* 업종 선택 오버레이 */
+.type-overlay{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px}
+.type-pick{max-width:420px;width:100%}
+.type-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.type-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 16px;border:2px solid var(--line);border-radius:14px;background:var(--surface);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.type-card:hover,.type-card:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.type-card .ico svg{width:32px;height:32px}
+.type-card b{font-size:16px}
+.type-desc{font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+/* 업종/역할 세그먼트 */
+.type-seg{min-width:0}
+.sub-seg{margin-top:-4px}
+.btn-icon{border:0;background:transparent;color:var(--muted);padding:6px;border-radius:8px;cursor:pointer;display:flex;align-items:center}
+.btn-icon:hover{background:var(--surface2);color:var(--ink)}
+.btn-icon .ico svg{width:18px;height:18px}
+/* 현재 업종 라벨 */
+.type-label{font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 10px;border-radius:999px;white-space:nowrap}
+/* 소셜 로그인 */
+.login-overlay{position:fixed;inset:0;background:var(--bg);z-index:1100;display:flex;align-items:center;justify-content:center}
+.login-box{width:min(380px,90vw);text-align:center}
+.login-box .logo{font-size:36px;margin-bottom:4px}
+.login-box .sub{color:var(--muted);font-size:14px;margin:0 0 28px}
+.login-btns{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.login-btn{display:flex;align-items:center;gap:12px;width:100%;padding:14px 20px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s,box-shadow .15s}
+.login-btn:hover{opacity:.88;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.login-btn svg{flex-shrink:0}
+.login-btn.kakao{background:#FEE500;color:#191919}
+.login-btn.naver{background:#03C75A;color:#fff}
+.login-btn.google{background:#fff;color:#333;border:1.5px solid var(--line)}
+.login-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--muted);font-size:12px}
+.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.login-skip{background:none;border:1px solid var(--line);border-radius:10px;padding:10px 20px;font-size:13px;color:var(--muted);cursor:pointer;width:100%;transition:background .15s}
+.login-skip:hover{background:var(--surface2)}
+.login-user{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink)}
+.login-user .avatar{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.login-user .avatar.kakao{background:#FEE500;color:#191919}
+.login-user .avatar.naver{background:#03C75A}
+.login-user .avatar.google{background:#4285F4}
+@media(max-width:560px){.split{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}.big{font-size:28px}form.f{grid-template-columns:1fr}.seg button{padding:6px 6px;font-size:12px}.type-cards{grid-template-columns:1fr!important}}
+</style>
+</head><body ontouchstart="">
+<header class="top">
+  <div class="wrap">
+    <div class="row1">
+      <div class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span><small>시제품 · 예시 데이터</small></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="type-label" id="curRoleLabel"></span>
+        <span class="login-user" id="loginBadge"></span>
+        <button class="btn-icon" id="btnHome" data-act="goHome" title="처음으로"><span class="ico"><i data-lucide="home"></i></span></button>
+        <button class="btn-icon" id="btnProducer" data-act="setType" data-v="producer" title="생산" style="display:none"><span class="ico"><i data-lucide="factory"></i></span></button>
+        <button class="btn-icon" id="btnAdmin" data-act="setType" data-v="operator" title="운영자" style="display:none"><span class="ico"><i data-lucide="settings"></i></span></button>
+        <button class="btn-icon" id="btnShare" data-act="setType" data-v="share" title="공유 링크"><span class="ico"><i data-lucide="link"></i></span></button>
+        <button class="btn-icon" id="btnLogout" data-act="logout" title="로그아웃" style="display:none"><span class="ico"><i data-lucide="log-out"></i></span></button>
+        <button class="btn-icon" data-act="reset" title="초기화"><span class="ico"><i data-lucide="rotate-ccw"></i></span></button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist"></nav>
+  </div>
+</header>
+<div id="loginOverlay" class="login-overlay" style="display:none">
+  <div class="login-box">
+    <div class="logo"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></div>
+    <p class="sub">건설 자재 운송 연결 서비스</p>
+    <div class="login-btns">
+      <button class="login-btn kakao" data-act="socialLogin" data-v="kakao">
+        <svg width="22" height="22" viewBox="0 0 22 22"><path d="M11 2C5.477 2 1 5.463 1 9.714c0 2.772 1.86 5.202 4.656 6.564-.152.566-.978 3.642-.998 3.78 0 0-.02.166.088.23.108.063.235.014.235.014.31-.043 3.588-2.342 4.154-2.74.586.084 1.19.128 1.806.128C16.523 17.69 21 14.227 21 9.714 21 5.463 16.523 2 11 2" fill="#191919"/></svg>
+        카카오 로그인
+      </button>
+      <button class="login-btn naver" data-act="socialLogin" data-v="naver">
+        <svg width="22" height="22" viewBox="0 0 22 22"><path d="M14.37 3v8.168L7.63 3H2v16h5.63v-8.168L14.37 19H20V3h-5.63z" fill="#fff"/></svg>
+        네이버 로그인
+      </button>
+      <button class="login-btn google" data-act="socialLogin" data-v="google">
+        <svg width="22" height="22" viewBox="0 0 22 22"><path d="M20.64 11.22c0-.636-.057-1.248-.164-1.834H11v3.468h5.405a4.619 4.619 0 01-2.004 3.032v2.52h3.244C19.447 16.722 20.64 14.2 20.64 11.22z" fill="#4285F4"/><path d="M11 21c2.709 0 4.98-.899 6.645-2.434l-3.244-2.52c-.899.602-2.049.957-3.401.957-2.616 0-4.831-1.766-5.624-4.141H2.038v2.602A9.997 9.997 0 0011 21z" fill="#34A853"/><path d="M5.376 12.862A6.012 6.012 0 015.063 11c0-.646.111-1.274.313-1.862V6.536H2.038A9.997 9.997 0 001 11c0 1.613.387 3.14 1.038 4.464l3.338-2.602z" fill="#FBBC05"/><path d="M11 4.997c1.474 0 2.797.507 3.837 1.502l2.879-2.879C15.976 1.989 13.705 1 11 1 7.09 1 3.71 3.24 2.038 6.536l3.338 2.602C6.169 6.763 8.384 4.997 11 4.997z" fill="#EA4335"/></svg>
+        Google 로그인
+      </button>
+    </div>
+    <div class="login-divider">시제품 둘러보기</div>
+    <button class="login-skip" data-act="socialLogin" data-v="guest">로그인 없이 체험하기</button>
+  </div>
+</div>
+<div id="typeOverlay" class="type-overlay" style="display:none">
+  <div class="type-pick">
+    <div class="logo" style="font-size:32px;text-align:center;margin-bottom:8px"><span class="wm us"><span class="w">운송</span><span class="B">B</span></span></div>
+    <p style="text-align:center;color:var(--muted);font-size:14px;margin:0 0 20px">건설 자재 운송 연결 서비스</p>
+    <h2 style="text-align:center;margin:0 0 16px;font-size:18px">어떻게 시작하시겠습니까?</h2>
+    <div class="type-cards" style="grid-template-columns:1fr 1fr">
+      <button class="type-card" data-act="pickType" data-v="orderer">
+        <span class="ico" style="color:var(--accent)"><i data-lucide="building-2"></i></span>
+        <b>화주</b>
+        <span class="type-desc">운송을 요청하고<br>현장에서 인수합니다</span>
+      </button>
+      <button class="type-card" data-act="pickType" data-v="producer">
+        <span class="ico" style="color:var(--accent)"><i data-lucide="factory"></i></span>
+        <b>생산</b>
+        <span class="type-desc">물건을 만들어<br>선주에게 넘깁니다</span>
+      </button>
+      <button class="type-card" data-act="pickType" data-v="driver">
+        <span class="ico" style="color:var(--accent)"><i data-lucide="truck"></i></span>
+        <b>선주</b>
+        <span class="type-desc">배차를 수락하고<br>화물을 운반합니다</span>
+      </button>
+      <button class="type-card" data-act="pickType" data-v="site">
+        <span class="ico" style="color:var(--accent)"><i data-lucide="map-pin"></i></span>
+        <b>현장</b>
+        <span class="type-desc">도착 예정을 확인하고<br>화물을 인수합니다</span>
+      </button>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:12px;margin:16px 0 0">시제품에서는 언제든 바꿀 수 있습니다</p>
+  </div>
+</div>
+<main><div class="wrap" id="app"></div></main>
+<div id="toast" hidden></div>
+<div id="sheet" class="sheet" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+<script>
+window.onerror=function(msg,u,line){var d=document.createElement('div');d.style.cssText='position:fixed;top:0;left:0;right:0;padding:10px 16px;background:#a14f3d;color:#fff;font:13px/1.4 sans-serif;z-index:9999';d.textContent='오류: '+msg+' (줄 '+line+')';document.body.appendChild(d)};
+const KEY='unsongbi_proto_v1';
+const TODAY='2026-11-13';
+const STAGES=['requested','accepted','loading','departed','arrived','unloaded','settled'];
+const STAGE_KO={requested:'요청',accepted:'배차',loading:'상차',departed:'출발',arrived:'도착',unloaded:'하차/인수',settled:'정산',cancelled:'취소',issue:'하자'};
+const USER_TYPES=[
+  {id:'shipper',name:'화주',roles:['orderer','producer','site']},
+  {id:'carrier',name:'선주',roles:['driver']}
+];
+const ROLES=[
+  {id:'orderer',name:'화주',type:'shipper',tabs:['home','request','tracking','history','billing','settings']},
+  {id:'producer',name:'생산',type:'shipper',tabs:['home','received','ship','tracking','invoice']},
+  {id:'site',name:'현장(도착)',type:'shipper',tabs:['home','info','incoming','receive','issues']},
+  {id:'driver',name:'선주',type:'carrier',tabs:['home','dispatch','driving','vehicle','profile','history']},
+  {id:'operator',name:'운영자',type:'admin',tabs:['home','rates','vehicles','settlements','all']},
+  {id:'share',name:'공유 링크',type:'share',tabs:['track']}
+];
+const TYPE_KO={shipper:'화주',carrier:'선주'};
+const TAB_KO={home:'홈',request:'운송 요청',tracking:'진행 현황',history:'운송 내역',billing:'정산',
+  received:'받은 요청',ship:'출하 등록',invoice:'납품서',
+  info:'현장 정보',incoming:'도착 예정',receive:'인수 확인',issues:'하자 신고',
+  dispatch:'배차 요청',driving:'운송 진행',vehicle:'내 차량',profile:'내 정보',
+  rates:'요금 설정',vehicles:'차량 규격',settlements:'정산 내역',all:'전체 현황',
+  track:'운송 추적',settings:'설정'};
+
+/* 차량 규격 */
+const VEHICLES=[
+  {id:'v01',ton:'다마스',type:'밴',name:'다마스 밴',L:1600,W:1100,H:1100,maxKg:450,src:'sendy.ai·sidgo.kr 종합',confirmed:false,note:'출처별 300~550kg 차이'},
+  {id:'v02',ton:'라보',type:'카고',name:'라보 오픈카고',L:1900,W:1300,H:350,maxKg:500,src:'sendy.ai·sidgo.kr 종합',confirmed:false,note:'개방형 적재함, 높이는 옆판 기준'},
+  {id:'v03',ton:'1톤',type:'카고',name:'포터2 카고 초장축 일반캡',L:3110,W:1630,H:355,maxKg:1000,src:'현대 공식 제원·car.ambitstock.com',confirmed:true},
+  {id:'v04',ton:'1톤',type:'카고',name:'포터2 카고 초장축 슈퍼캡',L:2860,W:1630,H:355,maxKg:1000,src:'현대 공식 제원·car.ambitstock.com',confirmed:true},
+  {id:'v05',ton:'1톤',type:'카고',name:'봉고3 카고 초장축 표준캡',L:3110,W:1630,H:355,maxKg:1000,src:'기아 공식 제원(kia.com)',confirmed:true},
+  {id:'v06',ton:'1톤',type:'카고',name:'봉고3 카고 초장축 킹캡',L:2860,W:1630,H:355,maxKg:1000,src:'기아 공식 제원(kia.com)',confirmed:true},
+  {id:'v07',ton:'1톤 장축',type:'카고',name:'포터2 카고 장축 일반캡 (4WD)',L:2785,W:1630,H:355,maxKg:1000,src:'현대 공식 제원',confirmed:true},
+  {id:'v08',ton:'1톤 장축',type:'카고',name:'봉고3 카고 장축 표준캡 (4WD)',L:2810,W:1630,H:355,maxKg:1000,src:'기아 제원·car.ambitstock.com',confirmed:true},
+  {id:'v09',ton:'1톤',type:'윙바디',name:'포터2 윙바디 초장축 슈퍼캡',L:2850,W:1690,H:1800,maxKg:1000,src:'현대 포터2 특장 제원(hyundai.com)',confirmed:true},
+  {id:'v10',ton:'1톤',type:'카고크레인',name:'포터2 카고크레인',L:2400,W:1630,H:355,maxKg:800,src:'확인 필요',confirmed:false,note:'크레인 장착으로 적재함 짧음'},
+  {id:'v11',ton:'2.5톤',type:'카고',name:'마이티 2.5톤 카고',L:4340,W:1960,H:380,maxKg:2500,src:'현대 마이티 2026 가격표(hyundai.com)',confirmed:true,note:'광폭 옵션 시 폭 2,060'},
+  {id:'v12',ton:'3.5톤',type:'카고',name:'마이티 3.5톤 카고',L:4850,W:2060,H:380,maxKg:3500,src:'현대 마이티 2025 가격표(hyundai.com)',confirmed:true,note:'트림별 폭 2,060~2,280'},
+  {id:'v13',ton:'4톤',type:'카고',name:'마이티 4톤 슈퍼캡 카고',L:5500,W:2280,H:400,maxKg:4000,src:'현대 마이티 특장 제원(carnoon.co.kr)',confirmed:true},
+  {id:'v14',ton:'5톤',type:'카고',name:'파비스 5톤 카고',L:6200,W:2340,H:400,maxKg:5000,src:'확인 필요',confirmed:false,note:'파비스 라인 중소형'},
+  {id:'v15',ton:'5톤',type:'윙바디',name:'파비스 5톤 윙바디',L:6200,W:2340,H:2400,maxKg:5000,src:'확인 필요',confirmed:false},
+  {id:'v16',ton:'8.5톤',type:'카고',name:'파비스 8.5톤 카고 (6x2 일반)',L:7400,W:2350,H:400,maxKg:8500,src:'현대 파비스 2025 제원(carnoon.co.kr)',confirmed:true},
+  {id:'v17',ton:'11톤',type:'카고',name:'파비스 11톤 카고 (6x2 고하중)',L:7600,W:2350,H:400,maxKg:11000,src:'현대 파비스 2025 제원(carnoon.co.kr)',confirmed:true},
+  {id:'v18',ton:'25톤',type:'카고',name:'엑시언트 25톤 카고',L:9200,W:2450,H:400,maxKg:25000,src:'확인 필요',confirmed:false}
+];
+
+/* 예시 데이터 */
+function seed(){
+  /* 화주의 '내 현장' 목록 — 출발지·도착지로 선택 */
+  const mySites=[
+    {id:'ms1',name:'시흥 정왕동 공장',type:'producer',addr:'경기 시흥시 정왕동 산단 5길 12',lat:37.340,lng:126.735,contact:'이생산',phone:'010-2222-0001',note:'상차장 2층',closed:false},
+    {id:'ms2',name:'안산 단원 공장',type:'producer',addr:'경기 안산시 단원구 산단로 88',lat:37.315,lng:126.790,contact:'최공장',phone:'010-2222-0002',note:'',closed:false},
+    {id:'ms3',name:'시흥 대야동 근생 현장',type:'site',addr:'경기 시흥시 대야동 123-4',lat:37.345,lng:126.810,contact:'김현장',phone:'010-1111-0001',note:'대형차 진입 불가(5톤까지)',closed:false},
+    {id:'ms4',name:'인천 송도 오피스텔 현장',type:'site',addr:'인천 연수구 송도동 45-6',lat:37.383,lng:126.660,contact:'박담당',phone:'010-1111-0002',note:'후문 반입',closed:false},
+    {id:'ms5',name:'광명 철산 공장',type:'producer',addr:'경기 광명시 철산동 산업로 22',lat:37.478,lng:126.862,contact:'한대표',phone:'010-2222-0003',note:'크레인 상차',closed:false},
+    {id:'ms6',name:'화성 남양 공장',type:'producer',addr:'경기 화성시 남양읍 남양로 110',lat:37.200,lng:126.870,contact:'정공장',phone:'010-2222-0004',note:'',closed:false},
+    {id:'ms7',name:'수원 영통 현장',type:'site',addr:'경기 수원시 영통구 봉영로 555',lat:37.255,lng:127.060,contact:'오현장',phone:'010-1111-0003',note:'지하주차장 반입',closed:false},
+    {id:'ms8',name:'평택 고덕 현장',type:'site',addr:'경기 평택시 고덕면 동고덕로 80',lat:36.990,lng:127.100,contact:'윤감독',phone:'010-1111-0004',note:'11톤 이상만',closed:true},
+    {id:'ms9',name:'김포 양촌 공장',type:'producer',addr:'경기 김포시 양촌읍 양촌로 56',lat:37.635,lng:126.720,contact:'배사장',phone:'010-2222-0005',note:'',closed:false},
+    {id:'ms10',name:'서울 강서 물류창고',type:'producer',addr:'서울 강서구 공항대로 340',lat:37.560,lng:126.810,contact:'신관리',phone:'010-2222-0006',note:'3층 창고',closed:false},
+    {id:'ms11',name:'의정부 가능 현장',type:'site',addr:'경기 의정부시 가능동 712',lat:37.744,lng:127.044,contact:'임소장',phone:'010-1111-0005',note:'',closed:true},
+    {id:'ms12',name:'부천 오정 공장',type:'producer',addr:'경기 부천시 오정구 삼작로 25',lat:37.515,lng:126.790,contact:'강팀장',phone:'010-2222-0007',note:'',closed:false},
+    {id:'ms13',name:'파주 탄현 현장',type:'site',addr:'경기 파주시 탄현면 법흥리 250',lat:37.750,lng:126.730,contact:'조반장',phone:'010-1111-0006',note:'비포장 500m',closed:false},
+    {id:'ms14',name:'용인 기흥 현장',type:'site',addr:'경기 용인시 기흥구 보정동 1200',lat:37.310,lng:127.110,contact:'문담당',phone:'010-1111-0007',note:'',closed:false}
+  ];
+  /* 현장 10곳 */
+  const sites=[
+    {id:'st1',name:'시흥 대야동 근생 신축',addr:'경기 시흥시 대야동 123-4',lat:37.345,lng:126.810,contact:'김현장',phone:'010-1111-0001',time:'08:00~17:00',equip:'지게차(3톤)',route:'정문 진입, 좌회전 후 하차장',notes:'대형차 진입 불가(5톤까지)'},
+    {id:'st2',name:'인천 송도 오피스텔 창호',addr:'인천 연수구 송도동 45-6',lat:37.383,lng:126.660,contact:'박담당',phone:'010-1111-0002',time:'07:00~18:00',equip:'타워크레인',route:'후문 반입, 엘리베이터 사용',notes:''},
+    {id:'st3',name:'수원 영통 지식산업센터',addr:'경기 수원시 영통구 봉영로 555',lat:37.255,lng:127.060,contact:'오현장',phone:'010-1111-0003',time:'08:00~18:00',equip:'화물 엘리베이터',route:'지하주차장 B2 반입구',notes:'지하 진입 높이 2.8m 제한'},
+    {id:'st4',name:'평택 고덕 물류센터 신축',addr:'경기 평택시 고덕면 동고덕로 80',lat:36.990,lng:127.100,contact:'윤감독',phone:'010-1111-0004',time:'06:00~20:00',equip:'25톤 크레인',route:'정문 직진 200m, 야적장',notes:'11톤 이상만 진입 가능'},
+    {id:'st5',name:'의정부 가능동 아파트 리모델링',addr:'경기 의정부시 가능동 712',lat:37.744,lng:127.044,contact:'임소장',phone:'010-1111-0005',time:'09:00~17:00',equip:'없음(인력 하차)',route:'정문 진입 후 105동 앞',notes:'주민 민원 주의, 주말 작업 불가'},
+    {id:'st6',name:'파주 탄현 전원주택 단지',addr:'경기 파주시 탄현면 법흥리 250',lat:37.750,lng:126.730,contact:'조반장',phone:'010-1111-0006',time:'07:00~17:00',equip:'미니 지게차',route:'마을 진입 후 비포장 500m 직진',notes:'비포장, 우천 시 진입 주의'},
+    {id:'st7',name:'용인 기흥 데이터센터',addr:'경기 용인시 기흥구 보정동 1200',lat:37.310,lng:127.110,contact:'문담당',phone:'010-1111-0007',time:'00:00~24:00',equip:'지게차(5톤)',route:'서편 화물 출입구',notes:'24시간 반입 가능, 사전 예약 필수'},
+    {id:'st8',name:'안양 만안 공공청사',addr:'경기 안양시 만안구 안양로 120',lat:37.395,lng:126.920,contact:'서주임',phone:'010-1111-0008',time:'08:00~16:00',equip:'없음',route:'후문 주차장 통해 반입',notes:'공사차량 주차 공간 협소'},
+    {id:'st9',name:'김포 한강 신도시 상가',addr:'경기 김포시 김포한강로 100',lat:37.640,lng:126.680,contact:'유과장',phone:'010-1111-0009',time:'07:00~18:00',equip:'타워크레인',route:'3공구 진입로, 안전모 필수',notes:''},
+    {id:'st10',name:'화성 동탄 학교 증축',addr:'경기 화성시 동탄면 동탄대로 350',lat:37.205,lng:127.060,contact:'장소장',phone:'010-1111-0010',time:'08:00~17:00',equip:'지게차(3톤)',route:'운동장 쪽 가설 출입구',notes:'수업 중 소음 최소화'}
+  ];
+  /* 발송업체(생산자) 10곳 */
+  const producers=[
+    {id:'pd1',name:'(주)한빛금속',addr:'경기 시흥시 정왕동 산단 5길',contact:'이생산',phone:'010-2222-0001'},
+    {id:'pd2',name:'우진스틸(주)',addr:'경기 안산시 단원구 산단로',contact:'최공장',phone:'010-2222-0002'},
+    {id:'pd3',name:'(주)광명철강',addr:'경기 광명시 철산동 산업로 22',contact:'한대표',phone:'010-2222-0003'},
+    {id:'pd4',name:'남양판넬(주)',addr:'경기 화성시 남양읍 남양로 110',contact:'정공장',phone:'010-2222-0004'},
+    {id:'pd5',name:'(주)김포메탈',addr:'경기 김포시 양촌읍 양촌로 56',contact:'배사장',phone:'010-2222-0005'},
+    {id:'pd6',name:'강서알루미늄(주)',addr:'서울 강서구 공항대로 340',contact:'신관리',phone:'010-2222-0006'},
+    {id:'pd7',name:'부천정밀(주)',addr:'경기 부천시 오정구 삼작로 25',contact:'강팀장',phone:'010-2222-0007'},
+    {id:'pd8',name:'(주)동화유리',addr:'경기 안산시 상록구 해안로 200',contact:'류과장',phone:'010-2222-0008'},
+    {id:'pd9',name:'태영건자재(주)',addr:'경기 시흥시 월곶동 서해로 55',contact:'권대리',phone:'010-2222-0009'},
+    {id:'pd10',name:'성진스텐(주)',addr:'경기 화성시 향남읍 발안로 70',contact:'손사장',phone:'010-2222-0010'}
+  ];
+  /* 선주 10명 */
+  const drivers=[
+    {id:'dr1',name:'박기사',phone:'010-3333-0001',vehicleId:'v2',plateNo:'서울 12가 3456',actualL:2850,actualW:1690,actualH:1800,
+     bizName:'박기사 운송',bizNo:'123-45-67890',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr2',name:'김운송',phone:'010-3333-0002',vehicleId:'v6',plateNo:'경기 34나 5678',actualL:6100,actualW:2300,actualH:400,
+     bizName:'김운송 화물',bizNo:'234-56-78901',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:null,verified:false},
+    {id:'dr3',name:'이철수',phone:'010-3333-0003',vehicleId:'v1',plateNo:'경기 56다 7890',actualL:2860,actualW:1630,actualH:355,
+     bizName:'이철수 화물',bizNo:'345-67-89012',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr4',name:'정대현',phone:'010-3333-0004',vehicleId:'v5',plateNo:'인천 78라 1234',actualL:5100,actualW:2280,actualH:400,
+     bizName:'정대현 운수',bizNo:'456-78-90123',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr5',name:'최만복',phone:'010-3333-0005',vehicleId:'v7',plateNo:'경기 90마 5678',actualL:6200,actualW:2340,actualH:2400,
+     bizName:'최만복 물류',bizNo:'567-89-01234',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr6',name:'한영호',phone:'010-3333-0006',vehicleId:'v8',plateNo:'서울 23바 9012',actualL:8500,actualW:2400,actualH:400,
+     bizName:'한영호 운송',bizNo:'678-90-12345',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr7',name:'오세진',phone:'010-3333-0007',vehicleId:'v4',plateNo:'경기 45사 3456',actualL:4300,actualW:2280,actualH:400,
+     bizName:'오세진 화물',bizNo:'789-01-23456',bizDoc:'사업자등록증.jpg',vehicleDoc:null,insuranceDoc:null,verified:false},
+    {id:'dr8',name:'윤상호',phone:'010-3333-0008',vehicleId:'v9',plateNo:'인천 67아 7890',actualL:9200,actualW:2450,actualH:400,
+     bizName:'윤상호 물류',bizNo:'890-12-34567',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr9',name:'강민재',phone:'010-3333-0009',vehicleId:'v3',plateNo:'서울 89자 1234',actualL:2400,actualW:1630,actualH:355,
+     bizName:'강민재 운수',bizNo:'901-23-45678',bizDoc:'사업자등록증.jpg',vehicleDoc:'차량등록증.jpg',insuranceDoc:'화물배상보험.jpg',verified:true},
+    {id:'dr10',name:'임동혁',phone:'010-3333-0010',vehicleId:'v2',plateNo:'경기 12차 5678',actualL:2850,actualW:1690,actualH:1800,
+     bizName:'임동혁 화물',bizNo:'012-34-56789',bizDoc:null,vehicleDoc:null,insuranceDoc:null,verified:false}
+  ];
+  /* 운송 건 15건 — 상태별로 섞음 */
+  const shipments=[
+    {id:'sh1',orderer:'화주A',producer:'pd1',site:'st1',driver:'dr1',vehicleId:'v2',
+     fromSite:'ms1',toSite:'ms3',loadTime:'10:00',unloadTime:'12:00',cargoType:'절곡 판넬',approxKg:900,
+     items:[{name:'절곡 판넬 6m',material:'EGI 1.6T',qty:20,L:6000,W:600,H:80,unitKg:45}],
+     status:'departed',requestedAt:'2026-11-13 08:30',acceptedAt:'2026-11-13 09:00',loadingAt:'2026-11-13 10:15',departedAt:'2026-11-13 10:45',
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:'11:30',
+     fare:350000,fareNote:'가정값',payer:'orderer',shareToken:'abc123',receiverPhone:'010-1111-0001',
+     gps:[{lat:37.345,lng:126.81,t:'10:45'},{lat:37.36,lng:126.85,t:'11:00'},{lat:37.37,lng:126.88,t:'11:15'}],
+     photos:{loading:'상차사진.jpg',unloading:null},signature:null,issue:null,
+     messages:[
+       {role:'orderer',name:'화주A',text:'판넬 6m 20개 오늘 오전 중으로 부탁드립니다.',time:'08:35'},
+       {role:'producer',name:'(주)한빛금속 이생산',text:'네, 10시 상차 시작하겠습니다.',time:'09:05'},
+       {role:'driver',name:'박기사',text:'10시 15분 상차 완료, 출발합니다.',time:'10:45'},
+       {role:'site',name:'시흥 대야동 김현장',text:'정문 열어두겠습니다. 도착하면 연락주세요.',time:'11:00'}]},
+    {id:'sh2',orderer:'화주A',producer:'pd2',site:'st2',driver:'dr2',vehicleId:'v6',
+     fromSite:'ms2',toSite:'ms4',loadTime:'15:00',unloadTime:'17:30',cargoType:'창호 프레임',approxKg:800,
+     items:[{name:'스텐 창호 프레임 4m',material:'STS 304',qty:40,L:4000,W:200,H:150,unitKg:12},{name:'유리 패킹',material:'-',qty:40,L:1200,W:800,H:50,unitKg:8}],
+     status:'settled',requestedAt:'2026-11-10 14:00',acceptedAt:'2026-11-10 14:30',loadingAt:'2026-11-10 15:00',departedAt:'2026-11-10 15:30',
+     arrivedAt:'2026-11-10 17:00',unloadedAt:'2026-11-10 17:45',settledAt:'2026-11-11 10:00',eta:'17:00',
+     fare:480000,fareNote:'가정값',payer:'producer',shareToken:'def456',receiverPhone:'010-1111-0002',
+     gps:[],photos:{loading:'상차사진2.jpg',unloading:'하차사진2.jpg'},signature:'서명완료',issue:null,
+     messages:[
+       {role:'producer',name:'우진스틸 최공장',text:'창호 프레임 40개 + 유리패킹 포장 완료',time:'15:00'},
+       {role:'driver',name:'김운송',text:'15시 30분 출발합니다. 송도 도착 예상 17시.',time:'15:30'},
+       {role:'site',name:'인천 송도 박담당',text:'인수 확인 완료. 수고하셨습니다.',time:'17:50'}]},
+    {id:'sh3',orderer:'화주B',producer:'pd1',site:'st1',driver:null,vehicleId:null,
+     fromSite:'ms1',toSite:'ms3',loadTime:'14:00',unloadTime:'16:00',cargoType:'C형강',approxKg:450,
+     items:[{name:'C형강 6m',material:'SS400',qty:50,L:6000,W:150,H:75,unitKg:9}],
+     status:'requested',requestedAt:'2026-11-13 11:00',acceptedAt:null,loadingAt:null,departedAt:null,
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:null,
+     fare:280000,fareNote:'가정값',payer:'site',shareToken:'ghi789',receiverPhone:'010-1111-0001',
+     gps:[],photos:{},signature:null,issue:null,messages:[]},
+    {id:'sh4',orderer:'화주C',producer:'pd3',site:'st4',driver:'dr6',vehicleId:'v8',
+     fromSite:'ms5',toSite:'ms8',loadTime:'07:00',unloadTime:'10:00',cargoType:'H빔',approxKg:9500,
+     items:[{name:'H빔 300×150 12m',material:'SS400',qty:8,L:12000,W:300,H:150,unitKg:1188}],
+     status:'arrived',requestedAt:'2026-11-13 06:00',acceptedAt:'2026-11-13 06:15',loadingAt:'2026-11-13 07:00',departedAt:'2026-11-13 07:30',
+     arrivedAt:'2026-11-13 09:45',unloadedAt:null,settledAt:null,eta:'09:30',
+     fare:850000,fareNote:'가정값',payer:'orderer',shareToken:'jkl012',receiverPhone:'010-1111-0004',
+     gps:[{lat:37.478,lng:126.862,t:'07:30'},{lat:37.30,lng:126.95,t:'08:30'},{lat:37.05,lng:127.05,t:'09:30'}],
+     photos:{loading:'hbeam_load.jpg',unloading:null},signature:null,issue:null,
+     messages:[
+       {role:'driver',name:'한영호',text:'광명 출발합니다. 평택까지 약 2시간 예상.',time:'07:30'},
+       {role:'site',name:'평택 고덕 윤감독',text:'크레인 대기 중입니다.',time:'09:00'}]},
+    {id:'sh5',orderer:'화주A',producer:'pd4',site:'st3',driver:'dr4',vehicleId:'v5',
+     fromSite:'ms6',toSite:'ms7',loadTime:'09:00',unloadTime:'11:00',cargoType:'샌드위치 판넬',approxKg:2800,
+     items:[{name:'샌드위치 판넬 50T 6m',material:'EGI 양면',qty:30,L:6000,W:1000,H:50,unitKg:93}],
+     status:'loading',requestedAt:'2026-11-13 07:00',acceptedAt:'2026-11-13 07:20',loadingAt:'2026-11-13 09:10',departedAt:null,
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:'10:30',
+     fare:420000,fareNote:'가정값',payer:'producer',shareToken:'mno345',receiverPhone:'010-1111-0003',
+     gps:[],photos:{},signature:null,issue:null,
+     messages:[
+       {role:'producer',name:'남양판넬 정공장',text:'30장 적재 시작합니다. 결속 포함 40분 예상.',time:'09:10'}]},
+    {id:'sh6',orderer:'화주D',producer:'pd5',site:'st6',driver:null,vehicleId:null,
+     fromSite:'ms9',toSite:'ms13',loadTime:'13:00',unloadTime:'15:00',cargoType:'데크플레이트',approxKg:600,
+     items:[{name:'데크플레이트 0.8T 6m',material:'아연도금',qty:40,L:6000,W:900,H:35,unitKg:15}],
+     status:'requested',requestedAt:'2026-11-13 10:30',acceptedAt:null,loadingAt:null,departedAt:null,
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:null,
+     fare:380000,fareNote:'가정값',payer:'orderer',shareToken:'pqr678',receiverPhone:'010-1111-0006',
+     gps:[],photos:{},signature:null,issue:null,messages:[]},
+    {id:'sh7',orderer:'화주B',producer:'pd8',site:'st2',driver:'dr5',vehicleId:'v7',
+     fromSite:'ms2',toSite:'ms4',loadTime:'08:00',unloadTime:'10:00',cargoType:'유리',approxKg:3200,
+     items:[{name:'강화유리 24mm 2400×1200',material:'강화유리',qty:60,L:2400,W:1200,H:24,unitKg:53}],
+     status:'departed',requestedAt:'2026-11-13 06:30',acceptedAt:'2026-11-13 06:45',loadingAt:'2026-11-13 08:00',departedAt:'2026-11-13 09:00',
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:'10:15',
+     fare:550000,fareNote:'가정값',payer:'site',shareToken:'stu901',receiverPhone:'010-1111-0002',
+     gps:[{lat:37.315,lng:126.790,t:'09:00'},{lat:37.350,lng:126.730,t:'09:30'}],
+     photos:{loading:'glass_load.jpg',unloading:null},signature:null,issue:null,
+     messages:[
+       {role:'producer',name:'동화유리 류과장',text:'A 캐비닛 적재 완료. 파손 주의 부탁드립니다.',time:'08:50'},
+       {role:'driver',name:'최만복',text:'윙바디 밀봉 완료. 출발합니다.',time:'09:00'}]},
+    {id:'sh8',orderer:'화주E',producer:'pd6',site:'st5',driver:'dr3',vehicleId:'v1',
+     fromSite:'ms10',toSite:'ms11',loadTime:'10:00',unloadTime:'12:00',cargoType:'알루미늄 창틀',approxKg:350,
+     items:[{name:'알루미늄 창틀 세트',material:'AL 6063',qty:15,L:2400,W:800,H:200,unitKg:23}],
+     status:'unloaded',requestedAt:'2026-11-12 16:00',acceptedAt:'2026-11-12 16:30',loadingAt:'2026-11-12 10:00',departedAt:'2026-11-12 10:30',
+     arrivedAt:'2026-11-12 11:40',unloadedAt:'2026-11-12 12:15',settledAt:null,eta:'11:30',
+     fare:250000,fareNote:'가정값',payer:'orderer',shareToken:'vwx234',receiverPhone:'010-1111-0005',
+     gps:[],photos:{loading:'altl_load.jpg',unloading:'altl_unload.jpg'},signature:'서명완료',issue:null,
+     messages:[
+       {role:'site',name:'의정부 가능동 임소장',text:'105동 앞 하차 부탁드립니다.',time:'11:00'},
+       {role:'driver',name:'이철수',text:'하차 완료했습니다. 서명 부탁드립니다.',time:'12:10'},
+       {role:'site',name:'의정부 가능동 임소장',text:'확인했습니다. 감사합니다.',time:'12:20'}]},
+    {id:'sh9',orderer:'화주C',producer:'pd7',site:'st7',driver:'dr4',vehicleId:'v5',
+     fromSite:'ms12',toSite:'ms14',loadTime:'22:00',unloadTime:'01:00',cargoType:'서버랙',approxKg:2100,
+     items:[{name:'서버랙 42U',material:'SECC',qty:6,L:800,W:1000,H:2000,unitKg:350}],
+     status:'accepted',requestedAt:'2026-11-13 09:00',acceptedAt:'2026-11-13 09:30',loadingAt:null,departedAt:null,
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:'00:30',
+     fare:520000,fareNote:'가정값',payer:'site',shareToken:'yza567',receiverPhone:'010-1111-0007',
+     gps:[],photos:{},signature:null,issue:null,
+     messages:[
+       {role:'driver',name:'정대현',text:'22시에 부천 출발하겠습니다.',time:'09:35'},
+       {role:'site',name:'용인 기흥 문담당',text:'서편 화물게이트 열어두겠습니다.',time:'09:40'}]},
+    {id:'sh10',orderer:'화주D',producer:'pd9',site:'st8',driver:'dr9',vehicleId:'v3',
+     fromSite:'ms1',toSite:'ms7',loadTime:'14:00',unloadTime:'16:00',cargoType:'각파이프',approxKg:500,
+     items:[{name:'각파이프 50×50 6m',material:'SS400',qty:80,L:6000,W:50,H:50,unitKg:6.3}],
+     status:'requested',requestedAt:'2026-11-13 12:00',acceptedAt:null,loadingAt:null,departedAt:null,
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:null,
+     fare:300000,fareNote:'가정값',payer:'producer',shareToken:'bcd890',receiverPhone:'010-1111-0003',
+     gps:[],photos:{},signature:null,issue:null,messages:[]},
+    {id:'sh11',orderer:'화주A',producer:'pd10',site:'st10',driver:'dr5',vehicleId:'v7',
+     fromSite:'ms6',toSite:'ms14',loadTime:'08:00',unloadTime:'10:00',cargoType:'스텐 난간',approxKg:1800,
+     items:[{name:'스텐 난간 세트 3m',material:'STS 304 HL',qty:24,L:3000,W:200,H:1100,unitKg:75}],
+     status:'settled',requestedAt:'2026-11-08 07:00',acceptedAt:'2026-11-08 07:20',loadingAt:'2026-11-08 08:00',departedAt:'2026-11-08 08:30',
+     arrivedAt:'2026-11-08 09:40',unloadedAt:'2026-11-08 10:20',settledAt:'2026-11-09 14:00',eta:'09:30',
+     fare:450000,fareNote:'가정값',payer:'orderer',shareToken:'efg123',receiverPhone:'010-1111-0010',
+     gps:[],photos:{loading:'railing_load.jpg',unloading:'railing_unload.jpg'},signature:'서명완료',issue:null,
+     messages:[]},
+    {id:'sh12',orderer:'화주E',producer:'pd3',site:'st9',driver:'dr8',vehicleId:'v9',
+     fromSite:'ms5',toSite:'ms9',loadTime:'06:00',unloadTime:'09:00',cargoType:'철근',approxKg:22000,
+     items:[{name:'철근 D25 12m',material:'SD400',qty:200,L:12000,W:25,H:25,unitKg:110}],
+     status:'departed',requestedAt:'2026-11-13 05:00',acceptedAt:'2026-11-13 05:10',loadingAt:'2026-11-13 06:00',departedAt:'2026-11-13 06:40',
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:'08:00',
+     fare:950000,fareNote:'가정값',payer:'orderer',shareToken:'hij456',receiverPhone:'010-1111-0009',
+     gps:[{lat:37.478,lng:126.862,t:'06:40'},{lat:37.550,lng:126.780,t:'07:20'}],
+     photos:{loading:'rebar_load.jpg',unloading:null},signature:null,issue:null,
+     messages:[
+       {role:'driver',name:'윤상호',text:'25톤 만차입니다. 김포 방면 출발.',time:'06:40'}]},
+    {id:'sh13',orderer:'화주B',producer:'pd4',site:'st1',driver:'dr1',vehicleId:'v2',
+     fromSite:'ms6',toSite:'ms3',loadTime:'14:00',unloadTime:'16:00',cargoType:'지붕판넬',approxKg:750,
+     items:[{name:'지붕판넬 0.5T 8m',material:'PVC 컬러',qty:15,L:8000,W:1000,H:50,unitKg:50}],
+     status:'unloaded',requestedAt:'2026-11-11 12:00',acceptedAt:'2026-11-11 12:20',loadingAt:'2026-11-11 14:00',departedAt:'2026-11-11 14:30',
+     arrivedAt:'2026-11-11 15:40',unloadedAt:'2026-11-11 16:10',settledAt:null,eta:'15:30',
+     fare:380000,fareNote:'가정값',payer:'producer',shareToken:'klm789',receiverPhone:'010-1111-0001',
+     gps:[],photos:{loading:'roof_load.jpg',unloading:'roof_unload.jpg'},signature:'서명완료',issue:'수량 1장 파손',
+     messages:[
+       {role:'site',name:'시흥 대야동 김현장',text:'1장 운반 중 파손됐습니다. 사진 첨부합니다.',time:'16:15'},
+       {role:'producer',name:'남양판넬 정공장',text:'확인했습니다. 내일 1장 재발송 하겠습니다.',time:'16:30'}]},
+    {id:'sh14',orderer:'화주C',producer:'pd6',site:'st3',driver:null,vehicleId:null,
+     fromSite:'ms10',toSite:'ms7',loadTime:'15:00',unloadTime:'17:00',cargoType:'커튼월 프레임',approxKg:400,
+     items:[{name:'커튼월 프레임 3m',material:'AL 6063',qty:20,L:3000,W:400,H:100,unitKg:20}],
+     status:'requested',requestedAt:'2026-11-13 11:30',acceptedAt:null,loadingAt:null,departedAt:null,
+     arrivedAt:null,unloadedAt:null,settledAt:null,eta:null,
+     fare:320000,fareNote:'가정값',payer:'site',shareToken:'nop012',receiverPhone:'010-1111-0003',
+     gps:[],photos:{},signature:null,issue:null,messages:[]},
+    {id:'sh15',orderer:'화주D',producer:'pd2',site:'st4',driver:'dr6',vehicleId:'v8',
+     fromSite:'ms2',toSite:'ms8',loadTime:'07:00',unloadTime:'10:00',cargoType:'데크플레이트+스터드',approxKg:8500,
+     items:[{name:'데크플레이트 1.0T 6m',material:'아연도금',qty:100,L:6000,W:900,H:35,unitKg:42},{name:'스터드볼트',material:'SS400',qty:500,L:150,W:19,H:19,unitKg:0.5}],
+     status:'settled',requestedAt:'2026-11-09 06:00',acceptedAt:'2026-11-09 06:10',loadingAt:'2026-11-09 07:00',departedAt:'2026-11-09 07:40',
+     arrivedAt:'2026-11-09 09:50',unloadedAt:'2026-11-09 10:30',settledAt:'2026-11-10 09:00',eta:'09:30',
+     fare:780000,fareNote:'가정값',payer:'orderer',shareToken:'qrs345',receiverPhone:'010-1111-0004',
+     gps:[],photos:{loading:'deck_load.jpg',unloading:'deck_unload.jpg'},signature:'서명완료',issue:null,
+     messages:[]}
+  ];
+  const rates={sub_orderer:55000,sub_producer:55000,sub_site:33000,sub_driver:0,
+    commission_type:'percent',commission_rate:3,commission_fixed:0,note:'가정값 — 이음B 설정에서 수정'};
+  const myProfile={name:'김화주',phone:'010-1111-0099',company:'(주)대한건설',bizNo:'110-81-12345',email:'kim@daehan.co.kr',addr:'서울 강남구 테헤란로 123',memo:''};
+  return {mySites,sites,producers,drivers,shipments,rates,vehicles:[...VEHICLES],myProfile};
+}
+function load(){try{var t=localStorage.getItem(KEY);return t?JSON.parse(t):null}catch(e){return null}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load()||seed();
+// 이전 버전 데이터 호환
+if(S&&S.shipments) S.shipments.forEach(s=>{if(!s.messages) s.messages=[]});
+if(S&&!S.mySites) S.mySites=seed().mySites;
+if(S&&S.mySites) S.mySites.forEach(m=>{if(!m.type) m.type=/공장|물류|메탈|스틸|알루미늄|정밀|유리|건자재|스텐/.test(m.name)?'producer':'site'});
+if(S&&!S.myProfile) S.myProfile=seed().myProfile;
+let UI={type:null,role:'orderer',tab:{orderer:'home',producer:'home',site:'home',driver:'home',operator:'home',share:'track'},sel:{},login:null};
+try{var _ui=JSON.parse(sessionStorage.getItem(KEY+'_ui'));if(_ui&&(_ui.type||_ui.login))UI=_ui}catch(e){}
+
+/* Lucide 아이콘 헬퍼 */
+function ico(name,cls){return '<i data-lucide="'+name+'"'+(cls?' class="ico '+cls+'"':' class="ico"')+' style="display:inline-flex"></i>'}
+function initIcons(){if(typeof lucide!=='undefined')lucide.createIcons({attrs:{'stroke-width':'1.6','stroke-linecap':'round','stroke-linejoin':'round'}});else if(!initIcons._n){initIcons._n=0;(function retry(){if(typeof lucide!=='undefined'){lucide.createIcons({attrs:{'stroke-width':'1.6','stroke-linecap':'round','stroke-linejoin':'round'}});return}if(++initIcons._n<30)setTimeout(retry,200)})()}}
+const ROLE_ICO={orderer:'clipboard-list',producer:'factory',site:'building-2',driver:'truck',operator:'settings',share:'link'};
+const TAB_ICO={home:'home',request:'plus-circle',tracking:'navigation',history:'clock',billing:'credit-card',received:'inbox',ship:'package',invoice:'file-text',info:'info',incoming:'truck',receive:'check-circle',issues:'alert-triangle',dispatch:'bell',driving:'navigation',vehicle:'truck',profile:'user',rates:'sliders',vehicles:'ruler',settlements:'receipt',all:'bar-chart-3',track:'map-pin',settings:'settings'};
+const STAGE_ICO={requested:'clock',accepted:'user-check',loading:'package',departed:'truck',arrived:'map-pin',unloaded:'clipboard-check',settled:'banknote'};
+
+const $=s=>document.querySelector(s);
+const h=s=>String(s!=null?s:'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const won=n=>Math.round(n).toLocaleString('ko-KR');
+const uid=()=>'id'+Date.now().toString(36)+Math.floor(Math.random()*1e4);
+const V=id=>(S.vehicles.find(v=>v.id===id)||VEHICLES.find(v=>v.id===id))||{};
+const DR=id=>S.drivers.find(d=>d.id===id)||{};
+const ST=id=>S.sites.find(s=>s.id===id)||{};
+const PD=id=>S.producers.find(p=>p.id===id)||{};
+const MS=id=>(S.mySites||[]).find(m=>m.id===id)||{};
+const SH=id=>S.shipments.find(s=>s.id===id);
+
+function stageBar(status){
+  const idx=STAGES.indexOf(status);
+  const isIssue=status==='issue'||status==='cancelled';
+  return '<div class="stage-bar">'+STAGES.map((s,i)=>{
+    let cls='';
+    if(isIssue&&s===status) cls='issue';
+    else if(i<idx) cls='done';
+    else if(i===idx) cls='cur';
+    return `<div class="st ${cls}">${ico(STAGE_ICO[s]||'circle')} ${STAGE_KO[s]}</div>`;
+  }).join('')+'</div>';
+}
+function stChip(s){
+  const m={requested:'warn',accepted:'acc',loading:'mark',departed:'mark',arrived:'acc',unloaded:'ok',settled:'ok',cancelled:'bad',issue:'bad'};
+  return `<span class="chip ${m[s]||''}">${STAGE_KO[s]||s}</span>`;
+}
+function itemsWeight(items){return items.reduce((s,it)=>s+it.qty*it.unitKg,0)}
+function itemsSummary(items){return items.map(it=>`${h(it.name)} ${it.qty}개`).join(', ')}
+
+/* ========== 채팅 ========== */
+const ROLE_KO={orderer:'화주',producer:'생산',site:'현장(도착)',driver:'선주',share:'공유 링크'};
+function chatBox(shipId,viewerRole){
+  const sh=SH(shipId);if(!sh)return '';
+  if(!sh.messages) sh.messages=[];
+  const isShare=viewerRole==='share';
+  const msgs=sh.messages.map(m=>{
+    const me=m.role===viewerRole;
+    return `<div class="msg${me?' me':''}"><div class="who">${h(m.name)} · ${h(ROLE_KO[m.role]||m.role)}</div><div class="bubble">${h(m.text)}</div><div class="time">${h(m.time)}</div></div>`;
+  }).join('');
+  return `<section class="card"><h2>${ico('message-circle')} 대화</h2>
+    <div class="chat" id="chatList">${msgs||'<div class="empty-s" style="font-size:13px">대화가 없습니다.</div>'}</div>
+    ${isShare?`<div class="chat-input"><input id="chatName" placeholder="이름" style="flex:0 0 80px" value="${h(UI.sel.shareName||'')}"><input id="chatMsg" placeholder="메시지"><button class="btn sm pri" data-act="chatSend" data-v="${sh.id}">${ico('send')} 보내기</button></div>`
+    :`<div class="chat-input"><input id="chatMsg" placeholder="메시지"><button class="btn sm pri" data-act="chatSend" data-v="${sh.id}">${ico('send')} 보내기</button></div>`}
+  </section>`;
+}
+
+/* ========== 화주 ========== */
+function typeBanner(){
+  var r=ROLES.find(x=>x.id===UI.role);if(!r)return '';
+  var desc={orderer:'운송을 요청하고 현장에서 인수합니다',producer:'물건을 생산해서 선주에게 넘깁니다',driver:'배차를 수락하고 화물을 운반합니다',site:'도착 예정을 확인하고 인수합니다'};
+  return `<section class="card" style="background:var(--accent-soft);border-color:var(--accent);padding:10px 16px">
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;flex-wrap:wrap"><span class="type-label">${h(r.name)}</span> <span style="color:var(--muted)">${desc[UI.role]||''}</span></div></section>`;
+}
+function vOrderer(t){
+  if(t==='home'){
+    const active=S.shipments.filter(s=>!['settled','cancelled'].includes(s.status));
+    const done=S.shipments.filter(s=>s.status==='settled');
+    return `
+    ${typeBanner()}
+    <section class="card"><h2>${ico('zap')} 빠른 운송 요청</h2>
+      <div class="actions"><button class="btn pri" data-act="tab" data-v="request">${ico('plus')} 새 운송 요청</button></div>
+    </section>
+    <section class="stats">
+      <div class="stat"><span class="lbl">${ico('activity')} 진행 중</span><b>${active.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('check-circle')} 완료</span><b>${done.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('wallet')} 이달 운임</span><b class="num">${won(S.shipments.reduce((s,x)=>s+x.fare,0))}<small>원</small></b></div>
+    </section>
+    ${active.length?`<section class="card"><h2>${ico('activity')} 진행 중 운송</h2><div class="list">${active.map(s=>`
+      <div class="item" data-act="detail" data-v="${s.id}"><div class="grow">
+        <div class="t">${h(s.cargoType||itemsSummary(s.items))}</div>
+        <div class="s">${h(MS(s.fromSite).name||PD(s.producer).name||s.producer)} → ${h(MS(s.toSite).name||ST(s.site).name||'')}</div>
+      </div>${stChip(s.status)}</div>`).join('')}</div></section>`:''}`;
+  }
+  if(t==='request') return requestForm();
+  if(t==='tracking') return trackingView();
+  if(t==='history') return historyView();
+  if(t==='billing') return billingView();
+  if(t==='settings'){
+    var p=S.myProfile;
+    return `
+    <section class="card"><h2>${ico('user')} 기본 정보</h2>
+      <form class="f" data-form="saveProfile">
+        <label>이름(담당자)<input name="name" value="${h(p.name)}"></label>
+        <label>전화번호<input name="phone" value="${h(p.phone)}" type="tel"></label>
+        <label>회사명<input name="company" value="${h(p.company)}"></label>
+        <label>사업자등록번호<input name="bizNo" value="${h(p.bizNo)}"></label>
+        <label>이메일<input name="email" value="${h(p.email)}" type="email"></label>
+        <label>주소<input name="addr" value="${h(p.addr)}"></label>
+        <label>메모<textarea name="memo" rows="2">${h(p.memo)}</textarea></label>
+        <div class="actions"><button class="btn pri" type="submit">${ico('save')} 저장</button></div>
+      </form>
+    </section>
+    <section class="card"><h2>${ico('map-pin')} 내 장소 목록</h2>
+      <p class="note">출발지·도착지로 선택할 수 있는 장소입니다. 현장 ${S.mySites.filter(m=>!m.closed&&(m.type||'site')==='site').length}곳 · 생산지 ${S.mySites.filter(m=>!m.closed&&m.type==='producer').length}곳${S.mySites.filter(m=>m.closed).length?' · 종료 '+S.mySites.filter(m=>m.closed).length+'곳':''}.</p>
+      <div class="list">${S.mySites.filter(m=>!m.closed).map(m=>`<div class="item" style="align-items:center"><div class="grow"><div class="t"><span style="display:inline-block;font-size:11px;padding:1px 6px;border-radius:8px;margin-right:4px;vertical-align:middle;background:${(m.type||'site')==='producer'?'var(--accent-soft)':'#e8e0f0'};color:${(m.type||'site')==='producer'?'var(--accent)':'#7c5ea0'}">${(m.type||'site')==='producer'?'생산지':'현장'}</span>${h(m.name)}</div><div class="s">${h(m.addr)} · ${h(m.contact)} ${h(m.phone)}</div></div><button class="btn sm" data-act="closeSite" data-v="${m.id}" style="flex-shrink:0;color:var(--muted);font-size:12px">${ico('x-circle')} 종료</button></div>`).join('')}</div>
+      ${S.mySites.some(m=>m.closed)?`<details style="margin-top:12px"><summary style="cursor:pointer;font-size:13px;color:var(--muted)">${ico('archive')} 종료된 현장 (${S.mySites.filter(m=>m.closed).length}곳)</summary><div class="list" style="margin-top:8px">${S.mySites.filter(m=>m.closed).map(m=>`<div class="item" style="align-items:center;opacity:.6"><div class="grow"><div class="t">${h(m.name)}</div><div class="s">${h(m.addr)} · ${h(m.contact)} ${h(m.phone)}</div></div><button class="btn sm pri" data-act="reopenSite" data-v="${m.id}" style="flex-shrink:0;font-size:12px">${ico('rotate-ccw')} 다시 활성</button></div>`).join('')}</div></details>`:''}
+      <div class="actions" style="margin-top:8px"><button class="btn sm" data-act="toast" data-v="현장 추가 (서버 버전)">${ico('plus')} 현장 추가</button></div>
+    </section>`;
+  }
+}
+
+function requestForm(){
+  var vOpts=S.vehicles.map(v=>`<option value="${v.id}">${v.ton} ${v.type} — ${h(v.name)}${v.confirmed?'':' (확인 필요)'}</option>`).join('');
+  var fromMs=MS(UI.sel._fromSite||'');
+  var toMs=MS(UI.sel._toSite||'');
+  return `
+  <section class="card"><h2>${ico('send')} 운송 요청</h2>
+    <form class="f" data-form="newShip">
+      <input type="hidden" name="fromSite" value="${h(UI.sel._fromSite||'')}">
+      <input type="hidden" name="toSite" value="${h(UI.sel._toSite||'')}">
+      <label>출발지<button type="button" class="site-pick-btn" data-act="openSitePicker" data-v="from">${fromMs.id&&(fromMs.type||'site')==='producer'?ico('factory'):ico('map-pin')}<span class="pick-name${fromMs.id?'':' empty'}">${fromMs.id?h(fromMs.name):'장소 선택'}</span>${ico('search')}</button></label>
+      <label>도착지<button type="button" class="site-pick-btn" data-act="openSitePicker" data-v="to">${toMs.id&&(toMs.type||'site')==='producer'?ico('factory'):ico('map-pin')}<span class="pick-name${toMs.id?'':' empty'}">${toMs.id?h(toMs.name):'장소 선택'}</span>${ico('search')}</button></label>
+      <label>상차 시간<input name="loadTime" type="time" required></label>
+      <label>하차 시간<input name="unloadTime" type="time" required></label>
+      <input type="hidden" name="vehicleId" id="vehHidden" value="${h(UI.sel._selVeh||'')}">
+      <label class="full">물건 형태<input name="cargoType" placeholder="예: 절곡 판넬, C형강, 창호 프레임" required></label>
+      <label>대략적 무게(kg)<input name="approxKg" type="number" min="1" placeholder="예: 900" required></label>
+      <label>결제 주체<select name="payer"><option value="orderer">화주 부담</option><option value="producer">생산자 부담</option><option value="site">현장 부담</option></select></label>
+      <label class="full">받는 사람 전화번호<input name="receiverPhone" type="tel" placeholder="010-0000-0000"></label>
+      <label class="full">요청사항<textarea name="notes" rows="2" placeholder="납기, 특이사항 등"></textarea></label>
+      <div class="actions full"><button class="btn pri" type="submit">${ico('send')} 운송 요청</button></div>
+    </form>
+  </section>
+  <section class="card"><h2>${ico('truck')} 차량 선택하기</h2>
+    ${function(){
+      var v=V(UI.sel._selVeh);
+      if(v) return '<button class="veh-pick-btn has-veh" data-act="openVehPopup"><div class="vp-label"><div>'+h(v.type)+' — '+h(v.name)+'</div><div class="vp-sub">적재함 '+won(v.L)+'×'+won(v.W)+'×'+won(v.H)+' mm · 최대 '+won(v.maxKg)+'kg'+(v.confirmed?'':' · 확인 필요')+'</div></div><span class="vp-arrow">변경 ▼</span></button>';
+      return '<button class="veh-pick-btn" data-act="openVehPopup"><span class="vp-label">차량을 선택하세요</span><span class="vp-arrow">▼</span></button>';
+    }()}
+    <div id="cargo3d"></div>
+    <div class="cargo-info" id="cargoInfo"></div>
+    <p class="note" id="cargoNote">${UI.sel._selVeh?'':'차량을 선택하면 적재함 크기를 확인합니다.'}</p>
+  </section>`;
+}
+
+function trackingView(){
+  const active=S.shipments.filter(s=>!['settled','cancelled'].includes(s.status));
+  if(!active.length) return '<section class="card"><div class="empty-s">진행 중인 운송이 없습니다.</div></section>';
+  const sh=SH(UI.sel.trackId)||active[0];
+  var from=MS(sh.fromSite),to=MS(sh.toSite);
+  return `
+  <section class="card" style="padding-bottom:8px"><h2>${ico('map-pin')} 실시간 위치</h2>
+    <div class="map-box"><canvas id="mapCanvas"></canvas><div class="map-label">시제품 · 가상 경로</div></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:13px">
+      <span style="color:var(--muted)">${ico('link')} 공유 링크: https://unsong.bid/track/${h(sh.shareToken)}</span>
+    </div>
+  </section>
+  <section class="card"><h2>${h(sh.cargoType||itemsSummary(sh.items))} <span class="lbl">${h(sh.id)}</span></h2>
+    ${stageBar(sh.status)}
+    <div class="split">
+      <div><span class="lbl">출발지</span><div>${h(from.name||sh.fromSite||PD(sh.producer).name||sh.producer)}</div><div class="s">${h(from.addr||'')}</div></div>
+      <div><span class="lbl">도착지</span><div>${h(to.name||sh.toSite||ST(sh.site).name||'')}</div><div class="s">${h(to.addr||'')}</div></div>
+    </div>
+    <div class="split">
+      <div><span class="lbl">상차 시간</span><div>${h(sh.loadTime||'-')}</div></div>
+      <div><span class="lbl">하차 시간</span><div>${h(sh.unloadTime||'-')}</div></div>
+    </div>
+    <div><span class="lbl">물건</span> ${h(sh.cargoType||'')} · 약 ${won(sh.approxKg||0)}kg</div>
+    ${sh.driver?`<div><span class="lbl">기사</span> ${h(DR(sh.driver).name||'')} · ${h(DR(sh.driver).plateNo||'')}${sh.eta?' · 도착 예정 '+h(sh.eta):''}</div>`:'<div class="chip warn">배차 대기</div>'}
+    <div><span class="lbl">운임</span> <span class="num">${won(sh.fare)}원</span> <span class="chip warn">${h(sh.fareNote)}</span> · ${h({orderer:'화주',producer:'생산자',site:'현장'}[sh.payer])} 부담</div>
+    ${sh.receiverPhone?`<div><span class="lbl">받는 사람</span> ${h(sh.receiverPhone)}</div>`:''}
+  </section>
+  ${chatBox(sh.id,UI.role)}
+  ${active.length>1?`<section class="card"><h2>${ico('list')} 다른 운송 건</h2><div class="list">${active.filter(s=>s.id!==sh.id).map(s=>`
+    <div class="item" data-act="selTrack" data-v="${s.id}"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))}</div><div class="s">${h(MS(s.fromSite).name||PD(s.producer).name||s.producer)} → ${h(MS(s.toSite).name||ST(s.site).name||'')}</div></div>${stChip(s.status)}</div>`).join('')}</div></section>`:''}`;
+}
+
+function historyView(){
+  var mode=UI.sel._histMode||'all';
+  var all=[...S.shipments].sort((a,b)=>(b.requestedAt||'').localeCompare(a.requestedAt||''));
+  function shipItem(s){
+    return `<div class="item" data-act="detail" data-v="${s.id}"><div class="grow">
+      <div class="t">${h(s.cargoType||itemsSummary(s.items))}</div>
+      <div class="s">${h(MS(s.fromSite).name||PD(s.producer).name||s.producer)} → ${h(MS(s.toSite).name||ST(s.site).name||'')} · ${h((s.requestedAt||'').slice(0,10))}</div>
+    </div><div style="text-align:right">${stChip(s.status)}<div class="num" style="font-size:13px">${won(s.fare)}원</div></div></div>`;
+  }
+  var segHtml=`<div class="seg" style="margin:0 0 12px">
+    <button class="${mode==='all'?'active':''}" data-act="histMode" data-v="all">전체</button>
+    <button class="${mode==='bySite'?'active':''}" data-act="histMode" data-v="bySite">${ico('map-pin')} 현장별</button>
+  </div>`;
+  if(mode==='all'){
+    return `<section class="card"><h2>${ico('clock')} 운송 내역</h2>${segHtml}
+      <div class="list">${all.map(shipItem).join('')}</div>
+      ${!all.length?'<div class="empty-s">운송 내역이 없습니다.</div>':''}</section>`;
+  }
+  var groups={};
+  all.forEach(function(s){
+    var toId=s.toSite||s.site||'_none';
+    var toName=MS(s.toSite).name||ST(s.site).name||'(지정 안 됨)';
+    if(!groups[toId]) groups[toId]={name:toName,ms:MS(s.toSite),items:[],totalFare:0};
+    groups[toId].items.push(s);
+    groups[toId].totalFare+=s.fare||0;
+  });
+  var fromGroups={};
+  all.forEach(function(s){
+    var fId=s.fromSite||s.producer||'_none';
+    var fName=MS(s.fromSite).name||PD(s.producer).name||'(지정 안 됨)';
+    if(!fromGroups[fId]) fromGroups[fId]={name:fName,ms:MS(s.fromSite),items:[],totalFare:0};
+    fromGroups[fId].items.push(s);
+    fromGroups[fId].totalFare+=s.fare||0;
+  });
+  var siteFilter=UI.sel._histSiteFilter||'to';
+  var useGroups=siteFilter==='from'?fromGroups:groups;
+  var gKeys=Object.keys(useGroups).sort((a,b)=>useGroups[b].items.length-useGroups[a].items.length);
+  var subSeg=`<div style="display:flex;gap:6px;margin-bottom:8px">
+    <button class="btn sm${siteFilter==='to'?' pri':''}" data-act="histSiteFilter" data-v="to">${ico('map-pin')} 도착지별</button>
+    <button class="btn sm${siteFilter==='from'?' pri':''}" data-act="histSiteFilter" data-v="from">${ico('factory')} 출발지별</button>
+  </div>`;
+  var body=gKeys.map(function(gk){
+    var g=useGroups[gk];
+    var active=g.items.filter(s=>!['settled','cancelled'].includes(s.status)).length;
+    var done=g.items.filter(s=>s.status==='settled').length;
+    var msType=(g.ms&&g.ms.type)||'site';
+    var typeChip=g.ms&&g.ms.id?`<span style="display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;margin-left:4px;vertical-align:middle;background:${msType==='producer'?'var(--accent-soft)':'#e8e0f0'};color:${msType==='producer'?'var(--accent)':'#7c5ea0'}">${msType==='producer'?'생산지':'현장'}</span>`:'';
+    return `<details open style="margin-bottom:8px">
+      <summary style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)">
+        <span style="flex:1;font-weight:600;font-size:14px">${h(g.name)}${typeChip}</span>
+        <span style="font-size:12px;color:var(--muted)">${active?'진행 '+active+' · ':''}${g.items.length}건 · ${won(g.totalFare)}원</span>
+      </summary>
+      <div class="list" style="margin-top:4px">${g.items.map(shipItem).join('')}</div>
+    </details>`;
+  }).join('');
+  return `<section class="card"><h2>${ico('clock')} 운송 내역</h2>${segHtml}${subSeg}
+    ${body}${!gKeys.length?'<div class="empty-s">운송 내역이 없습니다.</div>':''}</section>`;
+}
+
+function billingView(){
+  const total=S.shipments.filter(s=>s.payer==='orderer').reduce((a,s)=>a+s.fare,0);
+  const comm=Math.round(total*S.rates.commission_rate/100);
+  return `
+  <section class="card"><h2>${ico('credit-card')} 이달 정산</h2>
+    <div class="big">${won(total+comm)}<small>원</small></div>
+    <div style="font-size:14px"><span class="lbl">운임</span> ${won(total)}원 + <span class="lbl">수수료 ${S.rates.commission_rate}%</span> ${won(comm)}원</div>
+    <div class="chip warn">가정값 — 이음B 설정에서 수정</div>
+  </section>
+  <section class="card"><h2>${ico('bookmark')} 구독</h2>
+    <div style="font-size:14px">화주 월 구독료: <b class="num">${won(S.rates.sub_orderer)}원</b> <span class="chip warn">가정값</span></div>
+  </section>`;
+}
+
+/* ========== 생산자 ========== */
+function vProducer(t){
+  if(t==='home'){
+    const recv=S.shipments.filter(s=>s.status==='requested');
+    const active=S.shipments.filter(s=>['accepted','loading'].includes(s.status));
+    return `
+    ${typeBanner()}
+    <section class="stats">
+      <div class="stat"><span class="lbl">${ico('inbox')} 새 요청</span><b>${recv.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('package')} 출하 대기</span><b>${active.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('truck')} 이달 출하</span><b>${S.shipments.filter(s=>s.loadingAt).length}</b></div>
+    </section>
+    ${recv.length?`<section class="card"><h2>${ico('inbox')} 받은 요청</h2><div class="list">${recv.map(s=>`
+      <div class="item"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))}</div><div class="s">→ ${h(MS(s.toSite).name||ST(s.site).name||'')} · 약 ${won(s.approxKg||itemsWeight(s.items))}kg</div></div>
+      <button class="btn sm pri" data-act="accept" data-v="${s.id}">${ico('check')} 접수</button></div>`).join('')}</div></section>`:''}
+    ${active.length?`<section class="card"><h2>${ico('package')} 출하 준비</h2><div class="list">${active.map(s=>`
+      <div class="item"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))}</div></div>${stChip(s.status)}</div>`).join('')}</div></section>`:''}`;
+  }
+  if(t==='received'){
+    return `<section class="card"><h2>${ico('list')} 받은 요청 전체</h2><div class="list">${S.shipments.map(s=>`
+      <div class="item"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))}</div>
+      <div class="s">${h(MS(s.fromSite).name||s.orderer)} → ${h(MS(s.toSite).name||ST(s.site).name||'')} · ${h((s.requestedAt||'').slice(0,10))}</div></div>
+      ${stChip(s.status)}${s.status==='requested'?`<button class="btn sm pri" data-act="accept" data-v="${s.id}">${ico('check')} 접수</button>`:''}</div>`).join('')}</div></section>`;
+  }
+  if(t==='ship'){
+    const ready=S.shipments.filter(s=>s.status==='accepted');
+    return `<section class="card"><h2>${ico('clipboard-list')} 출하 등록</h2>
+      ${ready.length?`<div class="list">${ready.map(s=>`<div class="item"><div class="grow">
+        <div class="t">${h(s.cargoType||itemsSummary(s.items))}</div><div class="s">약 ${won(s.approxKg||itemsWeight(s.items))}kg · ${h(MS(s.toSite).name||ST(s.site).name||'')}</div></div>
+        <button class="btn sm pri" data-act="startLoad" data-v="${s.id}">${ico('loader')} 상차 시작</button></div>`).join('')}</div>`:'<div class="empty-s">출하 대기 건이 없습니다.</div>'}
+      <p class="note">상차 사진은 서버 버전에서 촬영합니다.</p>
+    </section>`;
+  }
+  if(t==='tracking') return trackingView();
+  if(t==='invoice'){
+    const done=S.shipments.filter(s=>['unloaded','settled'].includes(s.status));
+    return `<section class="card"><h2>${ico('file-text')} 납품서 발행</h2>
+      ${done.length?`<div class="list">${done.map(s=>`<div class="item"><div class="grow">
+        <div class="t">${h(s.cargoType||itemsSummary(s.items))}</div><div class="s">${h(MS(s.toSite).name||ST(s.site).name||'')} · ${h((s.unloadedAt||'').slice(0,10))}</div></div>
+        <button class="btn sm" data-act="toast" data-v="납품서 발행 (서버 버전)">${ico('file-text')} 납품서</button></div>`).join('')}</div>`:'<div class="empty-s">완료된 운송이 없습니다.</div>'}
+    </section>`;
+  }
+}
+
+/* ========== 현장 ========== */
+function vSite(t){
+  const mySite=S.sites[0];
+  if(t==='home'){
+    const incoming=S.shipments.filter(s=>['departed','arrived'].includes(s.status));
+    const toReceive=S.shipments.filter(s=>s.status==='arrived');
+    return `
+    ${typeBanner()}
+    <section class="stats">
+      <div class="stat"><span class="lbl">${ico('navigation')} 도착 예정</span><b>${incoming.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('clipboard-check')} 인수 대기</span><b>${toReceive.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('check-circle')} 이달 인수</span><b>${S.shipments.filter(s=>s.unloadedAt).length}</b></div>
+    </section>
+    ${incoming.length?`<section class="card"><h2>${ico('navigation')} 도착 예정</h2><div class="list">${incoming.map(s=>`
+      <div class="item"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))}</div>
+      <div class="s">${h(MS(s.fromSite).name||PD(s.producer).name||s.producer)} · ${h(DR(s.driver).name||'배차 대기')}${s.eta?' · 예정 '+h(s.eta):''}</div></div>${stChip(s.status)}</div>`).join('')}</div></section>`:''}`;
+  }
+  if(t==='info'){
+    return `<section class="card"><h2>${ico('building-2')} ${h(mySite.name)}</h2>
+      <form class="f">
+        <label>주소<input value="${h(mySite.addr)}" readonly></label>
+        <label>반입 시간<input value="${h(mySite.time)}" readonly></label>
+        <label>하차 장비<input value="${h(mySite.equip)}" readonly></label>
+        <label>담당자<input value="${h(mySite.contact)} ${h(mySite.phone)}" readonly></label>
+        <label class="full">출입 경로<input value="${h(mySite.route)}" readonly></label>
+        <label class="full">주의사항<textarea readonly rows="2">${h(mySite.notes)}</textarea></label>
+      </form>
+      <p class="note">서버 버전에서 수정합니다.</p>
+    </section>`;
+  }
+  if(t==='incoming') return trackingView();
+  if(t==='receive'){
+    const arr=S.shipments.filter(s=>s.status==='arrived'||s.status==='unloaded');
+    return `<section class="card"><h2>${ico('check-circle')} 인수 확인</h2>
+      ${arr.length?`<div class="list">${arr.map(s=>`<div class="item"><div class="grow">
+        <div class="t">${h(s.cargoType||itemsSummary(s.items))}</div><div class="s">${h(MS(s.fromSite).name||PD(s.producer).name||'')} · ${h(DR(s.driver).name||'')}</div></div>
+        ${s.status==='arrived'?`<button class="btn sm pri" data-act="confirmRecv" data-v="${s.id}">${ico('check-circle')} 인수 확인</button>`:s.signature?'<span class="chip ok">인수 완료</span>':''}
+      </div>`).join('')}</div>`:'<div class="empty-s">인수할 운송이 없습니다.</div>'}
+      <p class="note">인수 사진·서명은 서버 버전에서 처리합니다.</p>
+    </section>`;
+  }
+  if(t==='issues'){
+    const issues=S.shipments.filter(s=>s.issue);
+    return `<section class="card"><h2>${ico('alert-triangle')} 하자/부족 신고</h2>
+      ${issues.length?`<div class="list">${issues.map(s=>`<div class="item"><div class="grow"><div class="t">${itemsSummary(s.items)}</div><div class="s">${h(s.issue)}</div></div><span class="chip bad">신고됨</span></div>`).join('')}</div>`:'<div class="empty-s">신고 내역이 없습니다.</div>'}
+      <div class="actions"><button class="btn" data-act="toast" data-v="하자 신고 양식 (서버 버전)">${ico('plus-circle')} 새 신고</button></div>
+    </section>`;
+  }
+}
+
+/* ========== 선주 ========== */
+function vDriver(t){
+  const me=S.drivers[0];
+  const myV=V(me.vehicleId);
+  if(t==='home'){
+    const waiting=S.shipments.filter(s=>s.status==='requested'&&!s.driver);
+    const mine=S.shipments.filter(s=>s.driver===me.id&&!['settled','cancelled'].includes(s.status));
+    return `
+    ${typeBanner()}
+    ${!me.verified?`<section class="card" style="background:var(--warn-soft);border-color:var(--warn)">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;flex-wrap:wrap">${ico('alert-triangle')} <b>서류 확인 중</b> <span style="color:var(--muted)">사업자등록증·차량등록증 확인이 끝나면 배차를 받을 수 있습니다.</span></div>
+      <div class="actions"><button class="btn sm" data-act="tab" data-v="profile">${ico('user')} 내 정보 확인</button></div>
+    </section>`:`<section class="card" style="background:var(--ok-soft);border-color:var(--ok);padding:10px 16px">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px">${ico('check-circle')} <b>인증 완료</b> <span style="color:var(--muted)">운송 요청을 받을 수 있습니다.</span></div>
+    </section>`}
+    <section class="stats">
+      <div class="stat"><span class="lbl">${ico('bell')} 올라온 건</span><b>${waiting.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('navigation')} 진행 중</span><b>${mine.length}</b></div>
+      <div class="stat"><span class="lbl">${ico('truck')} 내 차량</span><b>${myV?h(myV.ton+' '+myV.type):'-'}</b></div>
+    </section>
+    ${waiting.length?`<section class="card"><h2>${ico('bell')} 올라온 운송 요청</h2><div class="list">${waiting.slice(0,3).map(s=>{
+      var from=MS(s.fromSite),to=MS(s.toSite);
+      return `<div class="item" data-act="tab" data-v="dispatch"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))} · 약 ${won(s.approxKg||0)}kg</div>
+      <div class="s">${h(from.name||'')} → ${h(to.name||'')} · 운임 ${won(s.fare)}원</div></div>${ico('chevron-right')}</div>`}).join('')}</div>
+      ${waiting.length>3?`<div class="actions"><button class="btn sm" data-act="tab" data-v="dispatch">전체 ${waiting.length}건 보기</button></div>`:''}</section>`:''}
+    ${mine.length?`<section class="card"><h2>${ico('navigation')} 진행 중</h2><div class="list">${mine.map(s=>`
+      <div class="item"><div class="grow"><div class="t">${h(s.cargoType||itemsSummary(s.items))}</div>
+      <div class="s">${h(MS(s.fromSite).name||PD(s.producer).name||'')} → ${h(MS(s.toSite).name||ST(s.site).name||'')}</div></div>
+      ${stChip(s.status)}${nextAction(s)}</div>`).join('')}</div></section>`:''}`;
+  }
+  if(t==='dispatch'){
+    const waiting=S.shipments.filter(s=>s.status==='requested'&&!s.driver);
+    return `<section class="card"><h2>${ico('bell')} 올라온 운송 요청 <span class="chip acc">${waiting.length}건</span></h2>
+      <p class="note">운송 요청이 올라오면 여기에 표시됩니다. 원하는 건을 골라 수락하세요.</p>
+      ${!me.verified?'<div class="warn-box">서류 확인이 완료되지 않아 수락할 수 없습니다. 내 정보에서 서류를 제출해 주세요.</div>':''}
+      ${waiting.length?waiting.map(s=>{
+        var from=MS(s.fromSite),to=MS(s.toSite);var veh=s.vehicleId?V(s.vehicleId):null;
+        return `<div class="card" style="gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div class="t">${h(s.cargoType||itemsSummary(s.items))} · 약 ${won(s.approxKg||0)}kg</div><span class="chip warn">대기</span></div>
+          <div class="split">
+            <div><span class="lbl">출발지</span><div>${h(from.name||PD(s.producer).addr||'')}</div><div class="s">${h(from.addr||'')}</div></div>
+            <div><span class="lbl">도착지</span><div>${h(to.name||ST(s.site).name||'')}</div><div class="s">${h(to.addr||'')}</div></div>
+          </div>
+          <div class="split">
+            <div><span class="lbl">상차</span> ${h(s.loadTime||'-')}</div>
+            <div><span class="lbl">하차</span> ${h(s.unloadTime||'-')}</div>
+          </div>
+          ${veh?`<div><span class="lbl">요청 차량</span> ${veh.ton} ${veh.type}</div>`:''}
+          <div><span class="lbl">운임</span> <b class="num">${won(s.fare)}원</b> <span class="chip warn">${h(s.fareNote)}</span></div>
+          <div style="border-top:1px solid var(--line);padding-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--muted)">도착 예정 <input type="time" id="eta_${s.id}" style="width:110px"></label>
+            <button class="btn sm pri" data-act="driverAccept" data-v="${s.id}" ${!me.verified?'disabled':''}>${ico('check')} 내가 가겠습니다</button>
+          </div>
+        </div>`}).join(''):'<div class="empty-s">올라온 운송 요청이 없습니다.</div>'}
+    </section>`;
+  }
+  if(t==='driving'){
+    const mine=S.shipments.filter(s=>s.driver===me.id&&!['settled','cancelled','requested'].includes(s.status));
+    return `<section class="card"><h2>${ico('navigation')} 운송 진행</h2>
+      ${mine.length?mine.map(s=>{var from=MS(s.fromSite),to=MS(s.toSite);return `<div class="card" style="gap:10px">
+        ${stageBar(s.status)}
+        <div class="t">${h(s.cargoType||itemsSummary(s.items))} · 약 ${won(s.approxKg||0)}kg</div>
+        <div class="s">${h(from.name||PD(s.producer).name||'')} → ${h(to.name||ST(s.site).name||'')}</div>
+        ${s.eta?`<div><span class="lbl">도착 예정</span> ${h(s.eta)}</div>`:''}
+        <div class="actions">${nextAction(s)}</div>
+        ${s.status==='departed'&&s.receiverPhone?`<div class="note" style="margin-top:4px">${ico('message-square')} 받는 사람(${h(s.receiverPhone)})에게 추적 링크 문자가 전송되었습니다.</div>`:''}
+      </div>`}).join(''):'<div class="empty-s">진행 중인 운송이 없습니다.</div>'}
+      <p class="note">GPS 위치 전송은 서버 버전(앱)에서 자동으로 합니다.</p>
+    </section>`;
+  }
+  if(t==='vehicle'){
+    return `<section class="card"><h2>${ico('truck')} 내 차량</h2>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:14px">
+        <div><span class="lbl">차량번호</span> ${h(me.plateNo)}</div>
+        <div><span class="lbl">차종</span> ${myV?h(myV.ton+' '+myV.type+' — '+myV.name):'-'}</div>
+        <div><span class="lbl">적재함</span> ${won(me.actualL)}×${won(me.actualW)}×${won(me.actualH)} mm</div>
+        <div><span class="lbl">최대적재량</span> ${myV?won(myV.maxKg)+'kg':'확인 필요'}</div>
+      </div>
+      <div class="actions" style="margin-top:10px"><button class="btn sm" data-act="tab" data-v="profile">${ico('edit-3')} 차량 정보 수정</button></div>
+    </section>
+    <section class="card"><h2>${ico('box')} 적재함 3D</h2><div id="cargo3d"></div></section>`;
+  }
+  if(t==='profile'){
+    return `
+    <section class="card"><h2>${ico('user')} 기본 정보</h2>
+      <form class="f" data-form="saveDriver">
+        <label>이름<input name="name" value="${h(me.name)}"></label>
+        <label>전화번호<input name="phone" value="${h(me.phone)}" type="tel"></label>
+        <label>상호(사업자명)<input name="bizName" value="${h(me.bizName||'')}"></label>
+        <label>사업자등록번호<input name="bizNo" value="${h(me.bizNo||'')}"></label>
+        <div class="actions"><button class="btn pri" type="submit">${ico('save')} 저장</button></div>
+      </form>
+    </section>
+    <section class="card"><h2>${ico('truck')} 차량 정보</h2>
+      <form class="f" data-form="saveVehicle">
+        <label>차량번호<input name="plateNo" value="${h(me.plateNo)}"></label>
+        <label>차종<select name="vehicleId">${S.vehicles.map(v=>`<option value="${v.id}" ${v.id===me.vehicleId?'selected':''}>${v.ton} ${v.type} — ${h(v.name)}${v.confirmed?'':' (확인 필요)'}</option>`).join('')}</select></label>
+        <label>적재함 길이(mm)<input name="actualL" type="number" value="${me.actualL}"></label>
+        <label>적재함 폭(mm)<input name="actualW" type="number" value="${me.actualW}"></label>
+        <label>적재함 높이(mm)<input name="actualH" type="number" value="${me.actualH}"></label>
+        <label>최대적재량<input value="${myV?won(myV.maxKg)+'kg':'확인 필요'}" readonly></label>
+        <div class="actions"><button class="btn pri" type="submit">${ico('save')} 저장</button></div>
+      </form>
+      <p class="note">실제 적재함 치수를 정확히 입력하면 화주가 적재 가능 여부를 확인할 수 있습니다.</p>
+    </section>
+    <section class="card"><h2>${ico('file-text')} 제출 서류</h2>
+      <div class="list">
+        <div class="item"><div class="grow"><div class="t">사업자등록증</div><div class="s">${me.bizDoc?h(me.bizDoc):'미제출'}</div></div>${me.bizDoc?'<span class="chip ok">제출됨</span>':'<span class="chip bad">미제출</span>'}</div>
+        <div class="item"><div class="grow"><div class="t">차량등록증</div><div class="s">${me.vehicleDoc?h(me.vehicleDoc):'미제출'}</div></div>${me.vehicleDoc?'<span class="chip ok">제출됨</span>':'<span class="chip bad">미제출</span>'}</div>
+        <div class="item"><div class="grow"><div class="t">화물배상책임보험</div><div class="s">${me.insuranceDoc?h(me.insuranceDoc):'미제출'}</div></div>${me.insuranceDoc?'<span class="chip ok">제출됨</span>':'<span class="chip bad">미제출</span>'}</div>
+        <div class="item"><div class="grow"><div class="t">화물운송종사자격증</div><div class="s">선택 제출</div></div><span class="chip">선택</span></div>
+      </div>
+      <div style="margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:13px;color:var(--muted)">
+        ${me.verified?`${ico('check-circle')} <b style="color:var(--ok)">인증 완료</b> — 서류 확인이 끝났습니다. 운송 요청을 받을 수 있습니다.`
+        :`${ico('clock')} <b style="color:var(--warn)">확인 중</b> — 제출한 서류를 확인하고 있습니다. 확인이 끝나면 알림을 보내드립니다.`}
+      </div>
+      <div class="actions" style="margin-top:8px"><button class="btn" data-act="toast" data-v="서류 업로드 (서버 버전)">${ico('upload')} 서류 제출</button></div>
+      <p class="note">사업자등록증·차량등록증·화물배상책임보험은 필수입니다. 서류가 확인되면 배차를 받을 수 있습니다.</p>
+    </section>`;
+  }
+  if(t==='history') return historyView();
+}
+
+function nextAction(s){
+  const m={accepted:'상차 시작',loading:'출발',departed:'도착',arrived:'하차 완료'};
+  const ic={accepted:'loader',loading:'truck',departed:'map-pin',arrived:'clipboard-check'};
+  const a={accepted:'startLoad',loading:'depart',departed:'arrive',arrived:'unload'};
+  if(!m[s.status]) return '';
+  return `<button class="btn sm pri" data-act="${a[s.status]}" data-v="${s.id}">${ico(ic[s.status])} ${m[s.status]}</button>`;
+}
+
+/* ========== 운영자 ========== */
+function vOperator(t){
+  if(t==='home'){
+    const total=S.shipments.length;const active=S.shipments.filter(s=>!['settled','cancelled'].includes(s.status)).length;
+    const totalFare=S.shipments.reduce((a,s)=>a+s.fare,0);
+    const comm=Math.round(totalFare*S.rates.commission_rate/100);
+    return `
+    <section class="stats">
+      <div class="stat"><span class="lbl">${ico('bar-chart-3')} 전체 운송</span><b>${total}</b></div>
+      <div class="stat"><span class="lbl">${ico('activity')} 진행 중</span><b>${active}</b></div>
+      <div class="stat"><span class="lbl">${ico('receipt')} 수수료 합계</span><b class="num">${won(comm)}<small>원</small></b></div>
+    </section>
+    <section class="card"><h2>${ico('credit-card')} 요금 현황 <span class="chip warn">가정값</span></h2>
+      <div style="font-size:14px;display:flex;flex-direction:column;gap:4px">
+        <div>화주 월 구독: <b class="num">${won(S.rates.sub_orderer)}원</b></div>
+        <div>생산자 월 구독: <b class="num">${won(S.rates.sub_producer)}원</b></div>
+        <div>현장 월 구독: <b class="num">${won(S.rates.sub_site)}원</b></div>
+        <div>기사 구독: <b>무료</b></div>
+        <div>수수료: <b>${S.rates.commission_rate}%</b> (운임의)</div>
+      </div>
+    </section>`;
+  }
+  if(t==='rates'){
+    return `<section class="card"><h2>${ico('sliders')} 요금 설정 <span class="chip warn">가정값 — 이음B에서 수정</span></h2>
+      <form class="f">
+        <label>화주 월 구독(원)<input type="number" value="${S.rates.sub_orderer}" data-key="sub_orderer"></label>
+        <label>생산자 월 구독(원)<input type="number" value="${S.rates.sub_producer}" data-key="sub_producer"></label>
+        <label>현장 월 구독(원)<input type="number" value="${S.rates.sub_site}" data-key="sub_site"></label>
+        <label>기사 구독(원)<input type="number" value="${S.rates.sub_driver}" data-key="sub_driver"></label>
+        <label>수수료 종류<select data-key="commission_type"><option ${S.rates.commission_type==='percent'?'selected':''} value="percent">운임의 %</option><option ${S.rates.commission_type==='fixed'?'selected':''} value="fixed">건당 정액</option></select></label>
+        <label>수수료율(%)/정액(원)<input type="number" value="${S.rates.commission_type==='percent'?S.rates.commission_rate:S.rates.commission_fixed}" data-key="comm_val"></label>
+        <div class="actions full"><button class="btn pri" data-act="saveRates">${ico('save')} 저장 (시제품 로컬)</button></div>
+      </form>
+      <p class="warn-box">실제 서비스에서는 이음B 관리자 화면에서 수정합니다. 여기서 바꾼 값은 시제품 안에서만 적용됩니다.</p>
+    </section>`;
+  }
+  if(t==='vehicles'){
+    return `<section class="card"><h2>${ico('ruler')} 차량 규격 관리</h2>
+      <div class="tbl"><table><thead><tr><th>차량</th><th>톤수</th><th>차종</th><th>길이</th><th>폭</th><th>높이</th><th>적재량</th><th>출처</th><th>확인</th></tr></thead><tbody>
+      ${S.vehicles.map(v=>`<tr><td>${h(v.name)}</td><td>${h(v.ton)}</td><td>${h(v.type)}</td><td>${won(v.L)}</td><td>${won(v.W)}</td><td>${won(v.H)}</td><td>${won(v.maxKg)}kg</td><td style="font-family:var(--f-body);font-size:12px">${h(v.src)}</td><td>${v.confirmed?'<span class="chip ok">확인</span>':'<span class="chip warn">확인 필요</span>'}</td></tr>`).join('')}
+      </tbody></table></div>
+      <p class="note">확인되지 않은 값은 제조사 카탈로그로 확인 후 수정합니다.</p>
+    </section>`;
+  }
+  if(t==='settlements'){
+    return `<section class="card"><h2>${ico('receipt')} 정산 내역</h2>
+      <div class="tbl"><table><thead><tr><th>운송</th><th>운임</th><th>수수료</th><th>결제 주체</th><th>상태</th></tr></thead><tbody>
+      ${S.shipments.map(s=>{const comm=Math.round(s.fare*S.rates.commission_rate/100);
+        return `<tr><td style="font-family:var(--f-body)">${itemsSummary(s.items).slice(0,20)}</td><td>${won(s.fare)}</td><td>${won(comm)}</td><td>${{orderer:'화주',producer:'생산자',site:'현장'}[s.payer]}</td><td>${STAGE_KO[s.status]}</td></tr>`}).join('')}
+      </tbody></table></div>
+    </section>`;
+  }
+  if(t==='all') return historyView();
+}
+
+/* ========== 공유 링크 (받는 사람 — 문자 링크로 접속) ========== */
+function vShare(){
+  const sh=S.shipments.find(s=>s.shareToken)||S.shipments[0];
+  if(!sh) return '<section class="card"><div class="empty-s">공유할 운송 건이 없습니다.</div></section>';
+  var from=MS(sh.fromSite),to=MS(sh.toSite);
+  var dr=sh.driver?DR(sh.driver):{};
+  var veh=sh.vehicleId?V(sh.vehicleId):{};
+  return `
+  <section class="card" style="border:2px solid var(--accent);padding:14px 16px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="background:var(--accent);color:#fff;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:600">운송 추적</span><span class="s">앱 설치 없이 확인</span></div>
+    <h2 style="margin:0 0 6px">${h(sh.cargoType||itemsSummary(sh.items))}</h2>
+    ${stageBar(sh.status)}
+    <div class="split" style="margin-top:8px">
+      <div><span class="lbl">출발지</span><div>${h(from.name||PD(sh.producer).name||sh.producer)}</div><div class="s">${h(from.addr||'')}</div></div>
+      <div><span class="lbl">도착지</span><div>${h(to.name||ST(sh.site).name||'')}</div><div class="s">${h(to.addr||'')}</div></div>
+    </div>
+    <div class="split">
+      <div><span class="lbl">상차</span> ${h(sh.loadTime||'-')}</div>
+      <div><span class="lbl">하차</span> ${h(sh.unloadTime||'-')}</div>
+    </div>
+    <div><span class="lbl">물건</span> ${h(sh.cargoType||'')} · 약 ${won(sh.approxKg||0)}kg</div>
+    ${sh.driver?`<div style="margin-top:6px;padding:8px 12px;background:var(--accent-soft);border-radius:8px">
+      <div><span class="lbl">기사</span> <b>${h(dr.name||'')}</b> · ${h(dr.plateNo||'')}</div>
+      <div><span class="lbl">차량</span> ${h(veh.ton||'')} ${h(veh.type||'')}${sh.eta?' · <b>도착 예정 '+h(sh.eta)+'</b>':''}</div>
+    </div>`:'<div class="chip warn" style="margin-top:6px">아직 기사가 배정되지 않았습니다</div>'}
+  </section>
+  <section class="card"><h2>${ico('map-pin')} 실시간 위치</h2>
+    <div class="map-box"><canvas id="mapCanvas"></canvas><div class="map-label">시제품 · 가상 경로</div></div>
+  </section>
+  ${chatBox(sh.id,'share')}
+  <p class="note" style="text-align:center">이 링크는 운송 완료 후 만료됩니다. · 로그인 없이 확인 가능</p>`;
+}
+
+/* ========== 3D 적재함 (Canvas 2D 등각 뷰어 — CDN 없이 작동) ========== */
+let cargo3dScene;
+function render3D(containerId,vehicleId,items){
+  var el=document.getElementById(containerId);if(!el)return;
+  el.innerHTML='';
+  var veh=V(vehicleId);if(!veh||!veh.id)return;
+  var cvs=document.createElement('canvas');
+  cvs.style.cssText='width:100%;height:100%;border-radius:10px;cursor:grab;touch-action:none';
+  el.appendChild(cvs);
+  var ctx=cvs.getContext('2d');
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+
+  var theta=-0.52, phi=0.45, zm=1;
+  var drag=false, lx=0, ly=0, pinch=0;
+  var L=veh.L, W=veh.W, H=veh.H||400;
+  var ton=parseFloat(veh.ton)||1;
+  var wR=Math.min(520,Math.max(260,200+ton*14));
+  var fH=100,tgap=50+L*0.015;
+  var cabL=Math.min(W*0.85,Math.max(1000,L*0.35+ton*20));
+  var cabH=Math.max(H+300,1600);var cabW=W*0.9;var tireW=wR*0.35;
+  var fullTL=L+tgap+cabL;var fullTH=Math.max(H,cabH)+fH+wR*2;
+  var maxD=Math.max(fullTL,W*1.3,fullTH);
+  var dimOff=maxD*0.08;
+  var vcx=-(tgap+cabL)/2, vcy=-(fH+wR)/3;
+
+  function sz(){var r=el.getBoundingClientRect();cvs.width=r.width*dpr;cvs.height=r.height*dpr}
+
+  function pj(x,y,z){
+    x-=vcx;y-=vcy;
+    var ct=Math.cos(theta),st=Math.sin(theta),cp=Math.cos(phi),sp=Math.sin(phi);
+    var rx=x*ct-z*st, rz=x*st+z*ct;
+    var ry=y*cp-rz*sp, rz2=y*sp+rz*cp;
+    var cw=cvs.width/dpr, ch=cvs.height/dpr;
+    var sc=zm*Math.min(cw,ch)/(maxD*2.8);
+    return {x:cw/2+rx*sc, y:ch/2-ry*sc, d:rz2}
+  }
+
+  function ln(x1,y1,z1,x2,y2,z2,col,w){
+    var a=pj(x1,y1,z1),b=pj(x2,y2,z2);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+    ctx.strokeStyle=col;ctx.lineWidth=w||1;ctx.stroke()
+  }
+
+  function face(pts,fill,alpha){
+    if(pts.length<3)return;
+    ctx.globalAlpha=alpha||1;ctx.beginPath();
+    pts.forEach(function(p,i){i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)});
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.globalAlpha=1
+  }
+
+  function box(cx,cy,cz,sx,sy,sz,fill,stroke,alpha){
+    var hx=sx/2,hy=sy/2,hz=sz/2;
+    var c=[
+      pj(cx-hx,cy-hy,cz-hz),pj(cx+hx,cy-hy,cz-hz),
+      pj(cx+hx,cy+hy,cz-hz),pj(cx-hx,cy+hy,cz-hz),
+      pj(cx-hx,cy-hy,cz+hz),pj(cx+hx,cy-hy,cz+hz),
+      pj(cx+hx,cy+hy,cz+hz),pj(cx-hx,cy+hy,cz+hz)
+    ];
+    var faces=[[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[0,3,7,4],[1,2,6,5]];
+    var sf=faces.map(function(f){return{i:f,z:(c[f[0]].d+c[f[1]].d+c[f[2]].d+c[f[3]].d)/4}}).sort(function(a,b){return a.z-b.z});
+    if(fill){sf.forEach(function(fc){face([c[fc.i[0]],c[fc.i[1]],c[fc.i[2]],c[fc.i[3]]],fill,alpha||0.65)})}
+    var edges=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+    edges.forEach(function(e){
+      ctx.beginPath();ctx.moveTo(c[e[0]].x,c[e[0]].y);ctx.lineTo(c[e[1]].x,c[e[1]].y);
+      ctx.strokeStyle=stroke||'#1f2933';ctx.lineWidth=1;ctx.stroke()
+    })
+  }
+
+  function arrow(ax,ay,bx,by,col){
+    var dx=bx-ax,dy=by-ay,len=Math.sqrt(dx*dx+dy*dy);
+    if(len<6)return;
+    var ux=dx/len,uy=dy/len,sz=5;
+    ctx.beginPath();
+    ctx.moveTo(bx,by);ctx.lineTo(bx-ux*sz+uy*sz*0.4,by-uy*sz-ux*sz*0.4);
+    ctx.moveTo(bx,by);ctx.lineTo(bx-ux*sz-uy*sz*0.4,by-uy*sz+ux*sz*0.4);
+    ctx.moveTo(ax,ay);ctx.lineTo(ax+ux*sz-uy*sz*0.4,ay+uy*sz+ux*sz*0.4);
+    ctx.moveTo(ax,ay);ctx.lineTo(ax+ux*sz+uy*sz*0.4,ay+uy*sz-ux*sz*0.4);
+    ctx.strokeStyle=col;ctx.lineWidth=1.2;ctx.stroke()
+  }
+
+  function dim(x1,y1,z1,x2,y2,z2,label,col){
+    var a=pj(x1,y1,z1),b=pj(x2,y2,z2);
+    var c=col||'#a14f3d';
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+    ctx.strokeStyle=c;ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([]);
+    arrow(a.x,a.y,b.x,b.y,c);
+    var mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    var dark=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim().startsWith('#1');
+    ctx.font='bold 11px sans-serif';
+    var tw=ctx.measureText(label).width;
+    ctx.fillStyle=dark?'rgba(30,41,38,0.85)':'rgba(255,255,255,0.85)';
+    ctx.fillRect(mx-tw/2-4,my-8,tw+8,16);
+    ctx.fillStyle=c;ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(label,mx,my)
+  }
+
+  function draw(){
+    sz();
+    var cw=cvs.width/dpr, ch=cvs.height/dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var dark=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim().startsWith('#1');
+    ctx.fillStyle=dark?'#1e2926':'#e6f2f0';
+    ctx.fillRect(0,0,cw,ch);
+
+    var gridC=dark?'rgba(74,138,138,0.15)':'rgba(74,138,138,0.12)';
+    var step=Math.max(200,Math.round(maxD/10/100)*100);
+    var gxMin=-L/2-tgap-cabL-200,gxMax=L/2+200;
+    for(var gx=gxMin;gx<=gxMax;gx+=step){ln(gx,0,-W/2,gx,0,W/2,gridC,0.5)}
+    for(var gz=-W/2;gz<=W/2;gz+=step){ln(gxMin,0,gz,gxMax,0,gz,gridC,0.5)}
+
+    var wheelCY=-fH;
+    var cabCx=-L/2-tgap-cabL/2;
+    var frameFr=-L/2-tgap-cabL*0.7,frameRr=L/2+L*0.04;
+
+    box((frameFr+frameRr)/2,-fH/2,0,frameRr-frameFr,fH,W*0.45,
+      dark?'#2a3530':'#5a6a65',dark?'#3a4540':'#4a5a55',0.7);
+
+    box(cabCx,cabH/2,0,cabL,cabH,cabW,
+      dark?'#2d4845':'#c5d8d3',dark?'#3a5a55':'#8a9e98',0.75);
+
+    var wsFr=-L/2-tgap-cabL;
+    face([pj(wsFr,cabH*0.3,cabW*0.42),pj(wsFr,cabH*0.88,cabW*0.35),
+          pj(wsFr,cabH*0.88,-cabW*0.35),pj(wsFr,cabH*0.3,-cabW*0.42)],
+      dark?'rgba(100,160,180,0.25)':'rgba(180,220,240,0.45)',1);
+
+    var dw=function(wx,wy,wz){
+      var c=pj(wx,wy,wz),t=pj(wx,wy+wR,wz);
+      var pr=Math.max(6,Math.abs(c.y-t.y));
+      ctx.beginPath();ctx.arc(c.x,c.y,pr,0,Math.PI*2);
+      ctx.fillStyle='#2a2a2a';ctx.fill();
+      ctx.strokeStyle=dark?'#555':'#444';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.beginPath();ctx.arc(c.x,c.y,pr*0.5,0,Math.PI*2);
+      ctx.fillStyle=dark?'#555':'#999';ctx.fill();
+      ctx.strokeStyle=dark?'#444':'#777';ctx.lineWidth=1;ctx.stroke();
+      ctx.beginPath();ctx.arc(c.x,c.y,pr*0.15,0,Math.PI*2);
+      ctx.fillStyle=dark?'#333':'#666';ctx.fill()
+    };
+    var fAx=cabCx,rAx=L*0.15,tw2=tireW;
+    dw(fAx,wheelCY,W/2+tw2);dw(fAx,wheelCY,-W/2-tw2);
+    dw(rAx,wheelCY,W/2+tw2);dw(rAx,wheelCY,-W/2-tw2);
+    if(ton>4){dw(rAx,wheelCY,W/2+tw2*2.8);dw(rAx,wheelCY,-W/2-tw2*2.8)}
+    if(ton>10){var rAx2=rAx-wR*2.2;
+      dw(rAx2,wheelCY,W/2+tw2);dw(rAx2,wheelCY,-W/2-tw2);
+      dw(rAx2,wheelCY,W/2+tw2*2.8);dw(rAx2,wheelCY,-W/2-tw2*2.8)}
+
+    box(0,H/2,0,L,H,W,null,dark?'rgba(106,184,168,0.45)':'rgba(74,138,138,0.4)');
+
+    face([pj(-L/2,0,-W/2),pj(L/2,0,-W/2),pj(L/2,0,W/2),pj(-L/2,0,W/2)],
+      dark?'rgba(74,138,138,0.08)':'rgba(74,138,138,0.06)',1);
+
+    var totalKg=0,overL=false,overH=false,overW=false;
+    if(items&&items.length){
+      var xOff=-L/2+50;
+      var colors=['#b5774c','#7f9a7e','#6e8193'];
+      items.forEach(function(it,i){
+        var iL=it.L||500,iW=it.W||200,iH=it.H||100;
+        totalKg+=it.qty*(it.unitKg||0);
+        if(iL>L)overL=true;
+        if(iW>W)overW=true;
+        var stackH=Math.ceil(it.qty/Math.max(1,Math.floor(W/iW)));
+        if(stackH*iH>(veh.H||9999))overH=true;
+        box(xOff+iL/2,iH/2,0,iL,iH,iW,colors[i%3],'#1f2933',0.65);
+
+        var cp=pj(xOff+iL/2,iH+30,0);
+        ctx.font='10px sans-serif';ctx.fillStyle=dark?'#dde5e0':'#1f2933';
+        ctx.textAlign='center';ctx.textBaseline='bottom';
+        ctx.fillText(it.name||'품목'+(i+1),cp.x,cp.y);
+        xOff+=iL+100
+      })
+    }
+    var overKg=totalKg>veh.maxKg;
+
+    dim(-L/2,0,W/2+dimOff,L/2,0,W/2+dimOff,won(L)+'mm','#a14f3d');
+    dim(-L/2-dimOff,0,W/2,-L/2-dimOff,0,-W/2,won(W)+'mm','#a14f3d');
+    if(H>100) dim(L/2+dimOff,0,-W/2+dimOff*0.3,L/2+dimOff,H,-W/2+dimOff*0.3,won(H)+'mm','#a14f3d');
+
+    ctx.font='11px sans-serif';ctx.fillStyle=dark?'#8a9e96':'#7b8794';
+    ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText('드래그: 회전 · 휠/핀치: 확대·축소',cw/2,ch-6);
+
+    var infoEl=document.getElementById('cargoInfo');
+    if(infoEl){
+      infoEl.innerHTML=
+        '<div class="ci '+(overL?'over':'')+'"><span class="lbl">길이</span><b>'+won(L)+'mm</b></div>'+
+        '<div class="ci '+(overW?'over':'')+'"><span class="lbl">폭</span><b>'+won(W)+'mm</b></div>'+
+        '<div class="ci"><span class="lbl">높이</span><b>'+(H>100?won(H)+'mm':'확인 필요')+'</b></div>'+
+        '<div class="ci '+(overKg?'over':'')+'"><span class="lbl">적재량</span><b>'+won(veh.maxKg)+'kg</b></div>'+
+        '<div class="ci"><span class="lbl">화물 무게</span><b>'+won(totalKg)+'kg</b></div>'+
+        '<div class="ci">'+(overL||overH||overW||overKg?'<b style="color:var(--bad)">초과!</b>':'<b style="color:var(--ok)">적재 가능</b>')+'</div>'
+    }
+  }
+
+  cvs.addEventListener('mousedown',function(e){drag=true;lx=e.clientX;ly=e.clientY;cvs.style.cursor='grabbing'});
+  window.addEventListener('mousemove',function(e){
+    if(!drag)return;
+    theta+=(e.clientX-lx)*0.008;
+    phi=Math.max(-1.2,Math.min(1.2,phi+(e.clientY-ly)*0.008));
+    lx=e.clientX;ly=e.clientY;draw()
+  });
+  window.addEventListener('mouseup',function(){drag=false;cvs.style.cursor='grab'});
+
+  cvs.addEventListener('wheel',function(e){
+    e.preventDefault();
+    zm=Math.max(0.3,Math.min(5,zm*(1-e.deltaY*0.001)));draw()
+  },{passive:false});
+
+  cvs.addEventListener('touchstart',function(e){
+    if(e.touches.length===1){drag=true;lx=e.touches[0].clientX;ly=e.touches[0].clientY}
+    else if(e.touches.length===2){pinch=Math.hypot(e.touches[1].clientX-e.touches[0].clientX,e.touches[1].clientY-e.touches[0].clientY)}
+  });
+  cvs.addEventListener('touchmove',function(e){
+    e.preventDefault();
+    if(e.touches.length===1&&drag){
+      theta+=(e.touches[0].clientX-lx)*0.008;
+      phi=Math.max(-1.2,Math.min(1.2,phi+(e.touches[0].clientY-ly)*0.008));
+      lx=e.touches[0].clientX;ly=e.touches[0].clientY;draw()
+    }else if(e.touches.length===2){
+      var d=Math.hypot(e.touches[1].clientX-e.touches[0].clientX,e.touches[1].clientY-e.touches[0].clientY);
+      if(pinch>0){zm=Math.max(0.3,Math.min(5,zm*(d/pinch)));pinch=d;draw()}
+    }
+  },{passive:false});
+  cvs.addEventListener('touchend',function(){drag=false;pinch=0});
+
+  draw();
+  cargo3dScene={draw:draw,el:el}
+}
+
+/* 가상 지도 (캔버스) */
+function drawMap(canvasId,gps,from,to){
+  const c=document.getElementById(canvasId);if(!c)return;
+  const ctx=c.getContext('2d');
+  const w=c.parentElement.clientWidth,hh=c.parentElement.clientHeight||220;
+  c.width=w*2;c.height=hh*2;c.style.width=w+'px';c.style.height=hh+'px';
+  ctx.scale(2,2);
+  const isDark=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim().startsWith('#1');
+  ctx.fillStyle=isDark?'#1e2926':'#e6f2f0';
+  ctx.fillRect(0,0,w,hh);
+
+  // 한반도 대략 경계
+  const pts=[[126.5,37.7],[127.0,37.6],[127.5,37.3],[128.0,36.5],[129.0,35.5],[128.8,35.1],[127.5,34.8],[126.5,35.0],[126.3,35.5],[126.5,36.5],[126.5,37.7]];
+  const minLng=125.5,maxLng=129.5,minLat=34.5,maxLat=38.0;
+  const tx=lng=>(lng-minLng)/(maxLng-minLng)*w;
+  const ty=lat=>hh-(lat-minLat)/(maxLat-minLat)*hh;
+
+  ctx.beginPath();
+  pts.forEach((p,i)=>{i?ctx.lineTo(tx(p[0]),ty(p[1])):ctx.moveTo(tx(p[0]),ty(p[1]))});
+  ctx.closePath();
+  ctx.fillStyle=isDark?'#253530':'#d5e8e0';ctx.fill();
+  ctx.strokeStyle=isDark?'#3a5048':'#8ab8a8';ctx.lineWidth=1.5;ctx.stroke();
+
+  // 경로
+  if(gps&&gps.length>1){
+    ctx.beginPath();ctx.strokeStyle='#4a8a8a';ctx.lineWidth=2;ctx.setLineDash([6,4]);
+    gps.forEach((p,i)=>{i?ctx.lineTo(tx(p.lng),ty(p.lat)):ctx.moveTo(tx(p.lng),ty(p.lat))});
+    ctx.stroke();ctx.setLineDash([]);
+    // 현재 위치
+    const last=gps[gps.length-1];
+    ctx.beginPath();ctx.arc(tx(last.lng),ty(last.lat),6,0,Math.PI*2);
+    ctx.fillStyle='#4a8a8a';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  }
+  // 출발/도착 마커
+  if(from){ctx.beginPath();ctx.arc(tx(from.lng),ty(from.lat),5,0,Math.PI*2);ctx.fillStyle='#5f7c60';ctx.fill()}
+  if(to){ctx.beginPath();ctx.arc(tx(to.lng),ty(to.lat),5,0,Math.PI*2);ctx.fillStyle='#a14f3d';ctx.fill()}
+}
+
+/* ========== 렌더 ========== */
+const TABS_FOR={
+  orderer:['home','request','tracking','history','billing'],
+  producer:['home','received','ship','tracking','invoice'],
+  site:['home','info','incoming','receive','issues'],
+  driver:['home','dispatch','driving','vehicle','history'],
+  operator:['home','rates','vehicles','settlements','all'],
+  share:['track']
+};
+
+function render(){
+  // 로그인 오버레이
+  var loginOv=$('#loginOverlay');
+  if(!UI.login){loginOv.style.display='flex';$('#typeOverlay').style.display='none';requestAnimationFrame(initIcons);bindActions();return}
+  loginOv.style.display='none';
+
+  // 업종 선택 오버레이
+  var overlay=$('#typeOverlay');
+  if(!UI.type){overlay.style.display='flex';requestAnimationFrame(initIcons);bindActions();return}
+  overlay.style.display='none';
+
+  // 현재 역할 라벨 표시
+  var roleLabel=$('#curRoleLabel');
+  if(roleLabel){
+    var rObj=ROLES.find(x=>x.id===UI.role);
+    roleLabel.textContent=rObj?rObj.name:(ROLE_KO[UI.role]||'');
+  }
+
+  // 로그인 배지
+  var loginBadge=$('#loginBadge');
+  var logoutBtn=$('#btnLogout');
+  if(loginBadge&&UI.login){
+    var pv=UI.login.provider||'guest';
+    var pvLabel={kakao:'K',naver:'N',google:'G',guest:'?'};
+    loginBadge.innerHTML=pv!=='guest'?`<span class="avatar ${pv}">${pvLabel[pv]||'?'}</span>${h(UI.login.name)}`:'';
+    if(logoutBtn) logoutBtn.style.display=(pv!=='guest')?'flex':'none';
+  } else {
+    if(loginBadge) loginBadge.innerHTML='';
+    if(logoutBtn) logoutBtn.style.display='none';
+  }
+
+  // 생산자·운영자 단추 표시
+  var prodBtn=$('#btnProducer');
+  if(prodBtn) prodBtn.style.display=(UI.role==='producer')?'none':'flex';
+  var adminBtn=$('#btnAdmin');
+  if(adminBtn) adminBtn.style.display=(UI.role==='operator')?'none':'flex';
+
+  // 탭
+  var tabs=TABS_FOR[UI.role]||[];
+  var curTab=UI.tab[UI.role]||tabs[0];
+  $('#tabs').innerHTML=tabs.map(t=>`<button data-act="tab" data-v="${t}" aria-selected="${curTab===t}">${ico(TAB_ICO[t]||'circle')} ${TAB_KO[t]||t}</button>`).join('');
+
+  // 본문
+  var html='';
+  try{
+    if(UI.role==='orderer') html=vOrderer(curTab)||'';
+    else if(UI.role==='producer') html=vProducer(curTab)||'';
+    else if(UI.role==='site') html=vSite(curTab)||'';
+    else if(UI.role==='driver') html=vDriver(curTab)||'';
+    else if(UI.role==='operator') html=vOperator(curTab)||'';
+    else if(UI.role==='share') html=vShare()||'';
+  }catch(e){html=`<section class="card"><h2>오류</h2><p>${h(e.message)}</p></section>`}
+  $('#app').innerHTML=html;
+
+  // 차량 선택 팝업 (body에 한 번만)
+  if(!document.getElementById('vehPopupBg')){
+    var pop=document.createElement('div');pop.id='vehPopupBg';pop.className='veh-popup-bg';
+    pop.innerHTML='<div class="veh-popup"><h3>차량 선택</h3><select id="vehSel"></select><div id="vehPopDetail"></div><div class="vp-actions"><button class="btn-cancel" id="vehPopCancel">취소</button><button class="btn-ok" id="vehPopOk">선택</button></div></div>';
+    document.body.appendChild(pop);
+    pop.addEventListener('click',function(e){if(e.target===pop)closeVehPopup()});
+  }
+
+  // 3D
+  requestAnimationFrame(()=>{
+    if(document.getElementById('cargo3d')){
+      if(curTab==='request'){
+        var vid=UI.sel._selVeh||'';
+        if(vid) render3D('cargo3d',vid,[]);
+      } else if(UI.role==='driver'&&curTab==='vehicle'){
+        render3D('cargo3d',S.drivers[0].vehicleId,[]);
+      }
+    }
+    // 지도
+    if(document.getElementById('mapCanvas')){
+      var sh=UI.role==='share'?(S.shipments.find(s=>s.shareToken)||S.shipments[0]):(SH(UI.sel.trackId)||S.shipments.find(s=>!['settled','cancelled'].includes(s.status))||S.shipments[0]);
+      if(sh){
+        var mf=MS(sh.fromSite),mt=MS(sh.toSite);
+        var fromPt=mf.lat?{lat:mf.lat,lng:mf.lng}:{lat:37.34,lng:126.81};
+        var toPt=mt.lat?{lat:mt.lat,lng:mt.lng}:(ST(sh.site).lat?{lat:ST(sh.site).lat,lng:ST(sh.site).lng}:null);
+        drawMap('mapCanvas',sh.gps,fromPt,toPt);
+      }
+    }
+  });
+  requestAnimationFrame(()=>{var cl=document.getElementById('chatList');if(cl)cl.scrollTop=cl.scrollHeight});
+  requestAnimationFrame(initIcons);
+  try{sessionStorage.setItem(KEY+'_ui',JSON.stringify(UI))}catch(e){}
+  bindActions();
+}
+function bindActions(){
+  var all=document.querySelectorAll('[data-act]');
+  for(var i=0;i<all.length;i++){
+    all[i].onclick=handleAction;
+  }
+}
+
+/* 이벤트 */
+function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;setTimeout(()=>t.hidden=true,2500)}
+function handleAction(e){
+  const b=e.target.closest('[data-act]');if(!b)return;
+  if(e.type==='touchend'){e.preventDefault()}
+  const act=b.dataset.act,v=b.dataset.v;
+  if(act==='socialLogin'){
+    var providerNames={kakao:'카카오',naver:'네이버',google:'Google',guest:'체험'};
+    var mockNames={kakao:'김운송',naver:'박화주',google:'Lee Transport',guest:'체험 사용자'};
+    UI.login={provider:v,name:mockNames[v]||'사용자',loggedAt:new Date().toISOString()};
+    if(v!=='guest') toast(providerNames[v]+' 로그인 완료 (시제품)');
+    save();render();return;
+  }
+  if(act==='logout'){
+    UI.login=null;UI.type=null;save();render();return;
+  }
+  if(act==='pickType'){
+    var rObj=ROLES.find(function(x){return x.id===v});
+    UI.type=rObj?rObj.type:'shipper';
+    UI.role=v;
+    pushUI();render();return}
+  if(act==='setType'){
+    if(v==='operator'){UI.type='admin';UI.role='operator';pushUI();render();return}
+    if(v==='share'){UI.type='share';UI.role='share';pushUI();render();return}
+    var rObj2=ROLES.find(function(x){return x.id===v});
+    if(rObj2){UI.type=rObj2.type;UI.role=v}
+    pushUI();render();return}
+  if(act==='goHome'){UI.type=null;UI.role='orderer';pushUI();render();return}
+  if(act==='role'){UI.role=v;render();return}
+  if(act==='tab'){UI.tab[UI.role]=v;render();return}
+  if(act==='selTrack'){UI.sel.trackId=v;UI.tab[UI.role]='tracking';render();return}
+  if(act==='detail'){UI.sel.trackId=v;UI.tab[UI.role]='tracking';render();return}
+  if(act==='histMode'){UI.sel._histMode=v;render();return}
+  if(act==='histSiteFilter'){UI.sel._histSiteFilter=v;render();return}
+  if(act==='openVehPopup'){openVehPopup();return}
+  if(act==='pickVeh'){return}
+  if(act==='toast'){toast(v);return}
+  if(act==='reset'){if(confirm('예시 데이터를 초기화할까요?')){localStorage.removeItem(KEY);sessionStorage.removeItem(KEY+'_ui');S=seed();UI={type:null,role:'orderer',tab:{orderer:'home',producer:'home',site:'home',driver:'home',operator:'home',share:'track'},sel:{},login:null};save();render();toast('초기화 완료')}return}
+  // 현장 선택 시트
+  if(act==='openSitePicker'){openSitePicker(v);return}
+  if(act==='siteFilter'){applySiteFilter(v);return}
+  if(act==='pickSite'){pickSiteFromSheet(v);return}
+  if(act==='closeSheet'){closeSiteSheet();return}
+
+  // 현장 종료·활성화
+  if(act==='closeSite'){var ms=MS(v);if(ms&&confirm(h(ms.name)+' 현장을 종료할까요?\n목록에서 숨겨지며, 설정에서 다시 활성화할 수 있습니다.')){ms.closed=true;save();render();toast('종료됨: '+ms.name)}return}
+  if(act==='reopenSite'){var ms=MS(v);if(ms){ms.closed=false;save();render();toast('다시 활성: '+ms.name)}return}
+
+  // 채팅 보내기
+  if(act==='chatSend'){
+    const msgEl=document.getElementById('chatMsg');
+    const nameEl=document.getElementById('chatName');
+    const txt=msgEl?msgEl.value.trim():'';
+    if(!txt)return;
+    const sh=SH(v);if(!sh)return;
+    if(!sh.messages) sh.messages=[];
+    const isShare=UI.role==='share';
+    let senderName='',senderRole=UI.role;
+    if(isShare){
+      senderName=(nameEl?nameEl.value.trim():'')||'공유 링크 방문자';
+      senderRole='share';
+      UI.sel.shareName=senderName;
+    } else if(UI.role==='orderer') senderName='화주(나)';
+    else if(UI.role==='producer') senderName=(S.producers[0]||{}).name||'생산';
+    else if(UI.role==='site') senderName=(S.sites[0]||{}).name||'현장(도착)';
+    else if(UI.role==='driver') senderName=(S.drivers[0]||{}).name||'기사';
+    else senderName=UI.role;
+    sh.messages.push({role:senderRole,name:senderName,text:txt,time:new Date().toTimeString().slice(0,5)});
+    save();render();
+    requestAnimationFrame(()=>{const cl=document.getElementById('chatList');if(cl)cl.scrollTop=cl.scrollHeight});
+    return;
+  }
+  // 생산자: 접수
+  if(act==='accept'){const sh=SH(v);if(sh){sh.status='accepted';sh.acceptedAt=new Date().toISOString().slice(0,16).replace('T',' ');save();render();toast('접수 완료')}return}
+  // 생산자: 상차 시작
+  if(act==='startLoad'){const sh=SH(v);if(sh){sh.status='loading';sh.loadingAt=new Date().toISOString().slice(0,16).replace('T',' ');save();render();toast('상차 시작')}return}
+  // 기사: 배차 수락 (도착 예정 시간 포함)
+  if(act==='driverAccept'){const sh=SH(v);if(sh){
+    var etaEl=document.getElementById('eta_'+v);
+    sh.driver=S.drivers[0].id;sh.vehicleId=S.drivers[0].vehicleId;
+    sh.status='accepted';sh.acceptedAt=new Date().toISOString().slice(0,16).replace('T',' ');
+    if(etaEl&&etaEl.value) sh.eta=etaEl.value;
+    save();render();toast('배차 수락'+(sh.eta?' · 도착 예정 '+sh.eta:''))}return}
+  // 기사: 출발 → 알림 + 받는 사람에게 문자(추적 링크)
+  if(act==='depart'){const sh=SH(v);if(sh){sh.status='departed';sh.departedAt=new Date().toISOString().slice(0,16).replace('T',' ');
+    sh.gps=[{lat:37.34,lng:126.81,t:'now'}];save();render();
+    var msg='출발했습니다.';
+    if(sh.receiverPhone) msg+=' 받는 사람('+sh.receiverPhone+')에게 추적 링크 문자 전송 (시제품)';
+    toast(msg)}return}
+  // 기사: 도착
+  if(act==='arrive'){const sh=SH(v);if(sh){sh.status='arrived';sh.arrivedAt=new Date().toISOString().slice(0,16).replace('T',' ');save();render();toast('도착')}return}
+  // 기사: 하차
+  if(act==='unload'){const sh=SH(v);if(sh){sh.status='unloaded';sh.unloadedAt=new Date().toISOString().slice(0,16).replace('T',' ');save();render();toast('하차 완료')}return}
+  // 현장: 인수 확인
+  if(act==='confirmRecv'){const sh=SH(v);if(sh){sh.signature='확인완료';sh.status='unloaded';save();render();toast('인수 확인')}return}
+  // 운영자: 요금 저장
+  if(act==='saveRates'){
+    document.querySelectorAll('[data-key]').forEach(el=>{
+      const k=el.dataset.key;
+      if(k==='comm_val'){
+        if(S.rates.commission_type==='percent') S.rates.commission_rate=Number(el.value);
+        else S.rates.commission_fixed=Number(el.value);
+      } else if(S.rates[k]!==undefined) S.rates[k]=Number(el.value)||el.value;
+    });
+    save();render();toast('저장 완료');return}
+}
+/* 현장 선택 시트 */
+var _sitePickTarget=null;
+var _sitePickFilter='all';
+function openSitePicker(dir){
+  _sitePickTarget=dir;
+  _sitePickFilter='all';
+  var el=$('#sheet');
+  el.hidden=false;
+  el.innerHTML=`<div class="card" style="padding:16px;gap:12px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <h2 style="margin:0">${ico('map-pin')} ${dir==='from'?'출발지':'도착지'} 선택</h2>
+      <button class="btn-icon" data-act="closeSheet">${ico('x')}</button>
+    </div>
+    <div class="seg" id="siteFilterSeg" style="margin:0">
+      <button class="active" data-act="siteFilter" data-v="all">전체</button>
+      <button data-act="siteFilter" data-v="site">${ico('map-pin')} 현장</button>
+      <button data-act="siteFilter" data-v="producer">${ico('factory')} 생산지</button>
+    </div>
+    <div class="search-wrap"><input id="siteSearch" placeholder="이름 · 주소 검색" autocomplete="off"></div>
+    <div id="sitePickList" class="list" style="gap:4px">${sitePickItems('')}</div>
+    <div class="actions"><button class="btn" data-act="addMySite" style="width:100%">${ico('plus')} 새 장소 추가</button></div>
+  </div>`;
+  el.classList.add('open');
+  el.onclick=function(ev){if(ev.target===el)closeSiteSheet()};
+  bindActions();initIcons();
+  var inp=$('#siteSearch');
+  if(inp){inp.focus();inp.oninput=function(){$('#sitePickList').innerHTML=sitePickItems(inp.value);bindActions();initIcons()}}
+}
+function applySiteFilter(type){
+  _sitePickFilter=type;
+  var seg=$('#siteFilterSeg');
+  if(seg){[].forEach.call(seg.querySelectorAll('button'),function(b){b.classList.toggle('active',b.getAttribute('data-v')===type)})}
+  var q='';var inp=$('#siteSearch');if(inp)q=inp.value;
+  $('#sitePickList').innerHTML=sitePickItems(q);bindActions();initIcons();
+}
+function sitePickItems(q){
+  var list=S.mySites.filter(m=>!m.closed);
+  if(_sitePickFilter&&_sitePickFilter!=='all') list=list.filter(m=>(m.type||'site')===_sitePickFilter);
+  if(q){var lq=q.toLowerCase();list=list.filter(m=>(m.name+' '+m.addr+' '+(m.contact||'')).toLowerCase().indexOf(lq)>=0)}
+  if(!list.length) return '<div class="empty-s">검색 결과가 없습니다.</div>';
+  return list.map(m=>`<div class="site-item" data-act="pickSite" data-v="${m.id}">
+    <span class="ico">${(m.type||'site')==='producer'?ico('factory'):ico('map-pin')}</span>
+    <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px"><span style="display:inline-block;font-size:11px;padding:1px 6px;border-radius:8px;margin-right:4px;vertical-align:middle;background:${(m.type||'site')==='producer'?'var(--accent-soft)':'#e8e0f0'};color:${(m.type||'site')==='producer'?'var(--accent)':'#7c5ea0'}">${(m.type||'site')==='producer'?'생산지':'현장'}</span>${h(m.name)}</div><div style="font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h(m.addr)}${m.contact?' · '+h(m.contact)+' '+h(m.phone||''):''}</div></div>
+  </div>`).join('');
+}
+function pickSiteFromSheet(id){
+  if(_sitePickTarget==='from') UI.sel._fromSite=id;
+  else UI.sel._toSite=id;
+  closeSiteSheet();
+  render();
+}
+function closeSiteSheet(){
+  var el=$('#sheet');el.classList.remove('open');el.hidden=true;el.innerHTML='';_sitePickTarget=null;
+}
+
+document.addEventListener('click',handleAction);
+var _touchStart=null;
+document.addEventListener('touchstart',function(e){
+  if(e.touches.length===1) _touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+  else _touchStart=null;
+},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(!_touchStart)return;
+  var ch=e.changedTouches[0];if(!ch)return;
+  var dx=ch.clientX-_touchStart.x,dy=ch.clientY-_touchStart.y;
+  if(dx*dx+dy*dy>20*20)return;
+  handleAction(e);
+});
+
+// 폼 제출
+document.addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=e.target;
+  if(form.dataset.form==='newShip'){
+    const fd=new FormData(form);
+    if(!fd.get('fromSite')){toast('출발지를 선택하세요');return}
+    if(!fd.get('toSite')){toast('도착지를 선택하세요');return}
+    if(!fd.get('vehicleId')){toast('차량을 선택하세요');return}
+    const sh={
+      id:uid(),orderer:'화주(나)',
+      fromSite:fd.get('fromSite'),toSite:fd.get('toSite'),
+      producer:null,site:null,driver:null,
+      vehicleId:fd.get('vehicleId'),
+      loadTime:fd.get('loadTime')||'',unloadTime:fd.get('unloadTime')||'',
+      cargoType:fd.get('cargoType')||'',approxKg:Number(fd.get('approxKg'))||0,
+      items:[{name:fd.get('cargoType')||'물건',material:'-',qty:1,L:0,W:0,H:0,unitKg:Number(fd.get('approxKg'))||0}],
+      status:'requested',requestedAt:new Date().toISOString().slice(0,16).replace('T',' '),
+      acceptedAt:null,loadingAt:null,departedAt:null,arrivedAt:null,unloadedAt:null,settledAt:null,eta:null,
+      fare:350000,fareNote:'가정값',payer:fd.get('payer'),shareToken:Math.random().toString(36).slice(2,8),
+      receiverPhone:fd.get('receiverPhone')||'',
+      gps:[],photos:{},signature:null,issue:null,messages:[]
+    };
+    S.shipments.push(sh);save();
+    UI.tab.orderer='tracking';UI.sel.trackId=sh.id;
+    render();toast('운송 요청 완료');
+  }
+  if(form.dataset.form==='saveProfile'){
+    var fd=new FormData(form);
+    ['name','phone','company','bizNo','email','addr','memo'].forEach(k=>{S.myProfile[k]=fd.get(k)||''});
+    save();render();toast('화주 정보 저장됨');
+  }
+  if(form.dataset.form==='saveDriver'){
+    var fd=new FormData(form);var me=S.drivers[0];
+    me.name=fd.get('name')||me.name;me.phone=fd.get('phone')||me.phone;
+    me.bizName=fd.get('bizName')||'';me.bizNo=fd.get('bizNo')||'';
+    save();render();toast('기본 정보 저장됨');
+  }
+  if(form.dataset.form==='saveVehicle'){
+    var fd=new FormData(form);var me=S.drivers[0];
+    me.plateNo=fd.get('plateNo')||me.plateNo;me.vehicleId=fd.get('vehicleId')||me.vehicleId;
+    me.actualL=Number(fd.get('actualL'))||me.actualL;me.actualW=Number(fd.get('actualW'))||me.actualW;
+    me.actualH=Number(fd.get('actualH'))||me.actualH;
+    save();render();toast('차량 정보 저장됨');
+  }
+});
+
+// 채팅 Enter 키
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.id==='chatMsg'){
+    const btn=document.querySelector('[data-act="chatSend"]');
+    if(btn)btn.click();
+  }
+});
+
+/* 차량 선택 팝업 */
+var _vehPopTmp=null;
+function openVehPopup(){
+  var bg=$('#vehPopupBg');if(!bg)return;
+  var sel=$('#vehSel');if(!sel)return;
+  var cur=UI.sel._selVeh||'';
+  var opts='<option value="">차량을 선택하세요</option>';
+  var groups={};S.vehicles.forEach(function(v){(groups[v.ton]=groups[v.ton]||[]).push(v)});
+  Object.keys(groups).forEach(function(ton){
+    opts+='<optgroup label="'+h(ton)+'">';
+    groups[ton].forEach(function(v){opts+='<option value="'+v.id+'"'+(v.id===cur?' selected':'')+'>'+h(v.type)+' — '+h(v.name)+(v.confirmed?'':' (확인 필요)')+'</option>'});
+    opts+='</optgroup>';
+  });
+  sel.innerHTML=opts;
+  _vehPopTmp=cur;
+  updateVehPopDetail(cur);
+  bg.classList.add('open');
+  sel.onchange=function(){_vehPopTmp=sel.value;updateVehPopDetail(sel.value)};
+  $('#vehPopCancel').onclick=closeVehPopup;
+  $('#vehPopOk').onclick=function(){
+    var v=_vehPopTmp||'';
+    UI.sel._selVeh=v;save();
+    var hid=$('#vehHidden');if(hid)hid.value=v;
+    closeVehPopup();
+    render();
+    setTimeout(function(){
+      var form=document.querySelector('[data-form="newShip"]');
+      var items=[{L:500,W:200,H:100,qty:1,unitKg:10}];
+      if(form){var fd=new FormData(form);items=[{L:Number(fd.get('itemL'))||500,W:Number(fd.get('itemW'))||200,H:Number(fd.get('itemH'))||100,qty:Number(fd.get('qty'))||1,unitKg:Number(fd.get('unitKg'))||10}]}
+      render3D('cargo3d',v,items);
+    },60);
+  };
+}
+function updateVehPopDetail(vid){
+  var box=$('#vehPopDetail');if(!box)return;
+  var v=V(vid);
+  if(!v){box.innerHTML='';return}
+  box.innerHTML='<div class="veh-detail"><b>'+h(v.name)+'</b><br>적재함 '+won(v.L)+' × '+won(v.W)+' × '+won(v.H)+' mm<br>최대적재량 '+won(v.maxKg)+' kg'+(v.confirmed?'':' · <span style="color:var(--warn)">확인 필요</span>')+(v.note?'<br>'+h(v.note):'')+'</div>';
+}
+function closeVehPopup(){var bg=$('#vehPopupBg');if(bg)bg.classList.remove('open')}
+
+// 뒤로가기(popstate) 지원 — 역할을 바꿀 때 히스토리에 쌓음
+var _skipPush=false;
+function pushUI(){
+  if(_skipPush){_skipPush=false;return}
+  try{history.pushState({type:UI.type,role:UI.role},'');}catch(e){}
+}
+window.addEventListener('popstate',function(e){
+  if(e.state&&e.state.role){
+    UI.type=e.state.type;UI.role=e.state.role;
+    _skipPush=true;render();
+  } else {
+    UI.type=null;UI.role='orderer';
+    _skipPush=true;render();
+  }
+});
+// 처음 상태 기록
+try{history.replaceState({type:UI.type,role:UI.role},'');}catch(e){}
+
+render();
+</script>
+</body></html>

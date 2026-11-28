@@ -43,7 +43,7 @@ export async function handleLogin(request, env) {
 
     const sb = createClient(env.SUPABASE_URL, serviceKey, { auth: { persistSession: false } });
 
-    // eeum_uid로 운송B 회원 찾기 또는 만들기
+    // eeum_uid로 운쏭B 회원 찾기 또는 만들기
     let { data: profile } = await sb.from('profiles')
       .select('id, eeum_uid, email, name, role, status')
       .eq('eeum_uid', payload.uid)
@@ -115,9 +115,9 @@ export async function handleLogin(request, env) {
 }
 
 function loginFail(msg) {
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>운송B</title></head>
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>운쏭B</title></head>
 <body style="font-family:Pretendard,sans-serif;text-align:center;padding:60px 20px">
 <h2>로그인 실패</h2><p>${msg}</p>
-<p><a href="https://unsong.bid/">운송B 첫 화면</a></p></body></html>`;
+<p><a href="https://unsong.bid/">운쏭B 첫 화면</a></p></body></html>`;
   return new Response(html, { status: 401, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 }

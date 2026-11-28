@@ -1,4 +1,4 @@
-/* 운송B 공통 — tokens.css 뒤에 */
+/* 운쏭B 공통 — tokens.css 뒤에 */
 :root {
   /* tokens.css에서 오는 값: --us, --us-ink, --us-soft, --us-line, --us-tag, --us-tag-ink, --us-btn */
   --us-panel: var(--us);

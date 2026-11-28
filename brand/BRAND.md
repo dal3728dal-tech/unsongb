@@ -1,6 +1,6 @@
 # 이음B 디자인 기준 (원본)
 
-이 폴더(`D:\OneDrive\AI PROJECT\yeongyeolb\brand`)가 이음B·공간B·절곡B·노무B·운송B가 같이 쓰는 디자인의 **원본**이다.
+이 폴더(`D:\OneDrive\AI PROJECT\yeongyeolb\brand`)가 이음B·공간B·절곡B·노무B·운쏭B가 같이 쓰는 디자인의 **원본**이다.
 각 서비스 폴더의 `brand\`는 복사본이다. 고칠 때는 여기만 고치고 `node sync-brand.cjs`로 복사한다.
 
 ## 구조
@@ -11,7 +11,7 @@
 │   ├─ 3D 판넬 발주   (/app, 판넬 절곡도)
 │   └─ 스텐창호 발주  (/window, Bar 절곡도)
 ├─ 노무B  (D:\OneDrive\AI PROJECT\nomub)     nomu.bid      건설 노무 관리·매칭
-└─ 운송B  (D:\OneDrive\AI PROJECT\unsongb)   (도메인 미정) 자재 운송 연결 — 2026-11-19 추가, 준비 중
+└─ 운쏭B  (D:\OneDrive\AI PROJECT\unsongb)   (도메인 미정) 자재 운송 연결 — 2026-11-19 추가, 준비 중
 ```
 
 ## 컨셉
@@ -28,7 +28,7 @@
 | └ 3D 판넬 발주 | | `#3f86cf` | | `#eaf2fb` | 파랑 |
 | └ 스텐창호 발주 | | `#4f8a6a` | | `#e9f3ec` | 초록 |
 | 노무B | `#7a5a22` | `#a07a35` | `#7a5a22` | `#f6efe0` | 안전모 황토 |
-| 운송B | `#2d5f6f` | `#4a8a8a` | `#2d5f6f` | `#e6f2f0` | 청록, 단추 `#3a7575` |
+| 운쏭B | `#2d5f6f` | `#4a8a8a` | `#2d5f6f` | `#e6f2f0` | 청록, 단추 `#3a7575` |
 
 - 바탕 `#fbfaf7`(따뜻한 흰색), 본문 `#1f2933`, 설명 `#667085`, 선 `#e6e3dc`.
 - 이름의 **B**는 모든 서비스에서 같은 그라데이션: `#7f9a7e → #b5774c → #6e8193` (세 서비스 색을 섞은 것 = 연결).
@@ -36,13 +36,13 @@
 
 ## 이름 표기
 - `노무B`처럼 앞 글자(서비스 색) + `B`(그라데이션). HTML: `<span class="wm nm"><span class="w">노무</span><span class="B">B</span></span>`
-  (클래스: 연결 `yb`, 공간 `gg`, 절곡 `bb`, 노무 `nm`, 운송 `us`)
+  (클래스: 연결 `yb`, 공간 `gg`, 절곡 `bb`, 노무 `nm`, 운쏭 `us`)
 - 진한 단추 위에서는 `.on-dark` 안에 넣으면 밝은 그라데이션으로 바뀜.
 
 ## 아이콘
 - **선 아이콘만**: 24×24, 선 굵기 1.6, 끝 둥글게, 채우기 없음, 색은 `currentColor`. **이모지 쓰지 않음.**
 - 서비스 마크: 둥근 네모(모서리 12~13px) 옅은 바탕 + 대표색 선 아이콘.
-  - 이음B `icons/yeongyeolb.svg` 다리 · 공간B `icons/gonggan.svg` 소파 · 절곡B `icons/bending.svg` 절곡기 · 노무B `icons/nomu.svg` 안전모 + 이어진 두 점 · 운송B `icons/unsong.svg` 화물차
+  - 이음B `icons/yeongyeolb.svg` 다리 · 공간B `icons/gonggan.svg` 소파 · 절곡B `icons/bending.svg` 절곡기 · 노무B `icons/nomu.svg` 안전모 + 이어진 두 점 · 운쏭B `icons/unsong.svg` 화물차
   - 3D 판넬 발주 `icons/panel-3d.svg` 상자 · 스텐창호 발주 `icons/sus-window.svg` 창틀
 - 이름+마크 그림: `logo/*.svg`
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* 운송B 빌드 — node build.cjs → public/ */
+/* 운쏭B 빌드 — node build.cjs → public/ */
 const fs = require('fs');
 const path = require('path');
 

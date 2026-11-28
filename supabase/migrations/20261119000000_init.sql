@@ -1,4 +1,4 @@
--- 운송B 초기 DB
+-- 운쏭B 초기 DB
 -- profiles: 회원 (가입 트리거가 auth.users에서 자동 생성)
 create table public.profiles (
   id uuid primary key references auth.users on delete cascade,
